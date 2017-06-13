@@ -148,7 +148,7 @@ export enum ModalSize {
     FullWidth = 'fullwidth' as any,
 }
 
-export class ModalOptions {
+export interface ModalOptions {
     parameters?: Object;
     size?: ModalSize;
     clean?: boolean;
