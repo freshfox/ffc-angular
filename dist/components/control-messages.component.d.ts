@@ -4,5 +4,5 @@ export declare class ControlMessagesComponent {
     private validatoinMessageProvider;
     control: FormControl;
     constructor(validatoinMessageProvider: ValidationMessageProvider);
-    readonly errorMessage: string;
+    readonly errorMessage: any;
 }

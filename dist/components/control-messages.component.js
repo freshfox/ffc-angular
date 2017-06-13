@@ -41,7 +41,8 @@ ControlMessagesComponent = __decorate([
         selector: 'ff-control-messages',
         template: "<div class=\"control-message\" *ngIf=\"errorMessage !== null\">{{errorMessage}}</div>"
     }),
-    __metadata("design:paramtypes", [core_module_1.ValidationMessageProvider])
+    __metadata("design:paramtypes", [typeof (_a = typeof core_module_1.ValidationMessageProvider !== "undefined" && core_module_1.ValidationMessageProvider) === "function" && _a || Object])
 ], ControlMessagesComponent);
 exports.ControlMessagesComponent = ControlMessagesComponent;
+var _a;
 //# sourceMappingURL=control-messages.component.js.map
