@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7,29 +8,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { ComponentFactoryResolver, Injectable, ReflectiveInjector } from "@angular/core";
-import { ConfirmComponent } from "../components/confirm.component";
-import { ReplaySubject } from "rxjs/ReplaySubject";
-import { ModalSize } from "../components/modal.component";
-let ModalService = class ModalService {
-    constructor(componentFactoryResolver) {
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var confirm_component_1 = require("../components/confirm.component");
+var ReplaySubject_1 = require("rxjs/ReplaySubject");
+var modal_component_1 = require("../components/modal.component");
+var ModalService = (function () {
+    function ModalService(componentFactoryResolver) {
         this.componentFactoryResolver = componentFactoryResolver;
         this.activeInstances = 0;
     }
-    hideCurrentModal() {
+    ModalService.prototype.hideCurrentModal = function () {
         this.placeholder.hide();
-    }
-    registerViewContainerRef(vcRef) {
+    };
+    ModalService.prototype.registerViewContainerRef = function (vcRef) {
         this.vcRef = vcRef;
-    }
-    registerPlaceholder(placeholder) {
+    };
+    ModalService.prototype.registerPlaceholder = function (placeholder) {
         this.placeholder = placeholder;
-    }
-    registerInjector(injector) {
+    };
+    ModalService.prototype.registerInjector = function (injector) {
         this.injector = injector;
-    }
-    createConfirmRequest(title, message, onCancel, onConfirm) {
-        this.create(ConfirmComponent, {
+    };
+    ModalService.prototype.createConfirmRequest = function (title, message, onCancel, onConfirm) {
+        this.create(confirm_component_1.ConfirmComponent, {
             parameters: {
                 title: title,
                 message: message,
@@ -37,22 +39,22 @@ let ModalService = class ModalService {
                 onConfirm: onConfirm
             }
         });
-    }
-    create(component, options) {
+    };
+    ModalService.prototype.create = function (component, options) {
         options = Object.assign({}, {
-            size: ModalSize.Regular,
+            size: modal_component_1.ModalSize.Regular,
             padding: false,
             clean: false,
             showCloseButton: true
         }, options);
-        let factory = this.componentFactoryResolver.resolveComponentFactory(component);
+        var factory = this.componentFactoryResolver.resolveComponentFactory(component);
         return this.createFromFactory(factory, options);
-    }
-    createFromFactory(componentFactory, options) {
+    };
+    ModalService.prototype.createFromFactory = function (componentFactory, options) {
         this.placeholder.show();
-        let componentRef$ = new ReplaySubject();
-        const childInjector = ReflectiveInjector.resolveAndCreate([], this.injector);
-        let componentRef = this.vcRef.createComponent(componentFactory, 0, childInjector);
+        var componentRef$ = new ReplaySubject_1.ReplaySubject();
+        var childInjector = core_1.ReflectiveInjector.resolveAndCreate([], this.injector);
+        var componentRef = this.vcRef.createComponent(componentFactory, 0, childInjector);
         // pass the @Input parameters to the instance
         Object.assign(componentRef.instance, options.parameters);
         this.placeholder.padding = options.padding;
@@ -63,11 +65,12 @@ let ModalService = class ModalService {
         componentRef$.next(componentRef);
         componentRef$.complete();
         return componentRef$.asObservable();
-    }
-};
+    };
+    return ModalService;
+}());
 ModalService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [ComponentFactoryResolver])
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [core_1.ComponentFactoryResolver])
 ], ModalService);
-export { ModalService };
+exports.ModalService = ModalService;
 //# sourceMappingURL=modal.service.js.map

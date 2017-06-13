@@ -1,11 +1,16 @@
-export * from './button.component';
-export * from './confirm.component';
-export * from './control-messages.component';
-export * from './icon.component';
-export * from './icon.component';
-export * from './input.component';
-export * from './material.module';
-export * from './modal.component';
-export * from './select.component';
-export * from './spinner.component';
+"use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(require("./button.component"));
+__export(require("./confirm.component"));
+__export(require("./control-messages.component"));
+__export(require("./icon.component"));
+__export(require("./icon.component"));
+__export(require("./input.component"));
+__export(require("./material.module"));
+__export(require("./modal.component"));
+__export(require("./select.component"));
+__export(require("./spinner.component"));
 //# sourceMappingURL=index.js.map

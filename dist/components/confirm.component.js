@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7,54 +8,43 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Component, Input, Output } from "@angular/core";
-let ConfirmComponent = class ConfirmComponent {
-    constructor() {
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var ConfirmComponent = (function () {
+    function ConfirmComponent() {
     }
-    ngOnInit() {
-    }
-    confirm() {
+    ConfirmComponent.prototype.ngOnInit = function () {
+    };
+    ConfirmComponent.prototype.confirm = function () {
         this.onConfirm();
-    }
-    cancel() {
+    };
+    ConfirmComponent.prototype.cancel = function () {
         this.onCancel();
-    }
-};
+    };
+    return ConfirmComponent;
+}());
 __decorate([
-    Input(),
+    core_1.Input(),
     __metadata("design:type", String)
 ], ConfirmComponent.prototype, "title", void 0);
 __decorate([
-    Input(),
+    core_1.Input(),
     __metadata("design:type", String)
 ], ConfirmComponent.prototype, "message", void 0);
 __decorate([
-    Output(),
+    core_1.Output(),
     __metadata("design:type", Function)
 ], ConfirmComponent.prototype, "onCancel", void 0);
 __decorate([
-    Output(),
+    core_1.Output(),
     __metadata("design:type", Function)
 ], ConfirmComponent.prototype, "onConfirm", void 0);
 ConfirmComponent = __decorate([
-    Component({
+    core_1.Component({
         selector: 'ff-confirm',
-        template: `
-        <div class="modal-header" *ngIf="title">
-            {{ title }}
-        </div>
-
-        <div class="modal-inner">
-            <p class="nmb">{{ message }}</p>
-        </div>
-
-        <div class="modal-footer">
-            <button ff-button class="button--secondary" (click)="cancel()">{{ 'general.cancel' | translate }}</button>
-            <button ff-button (click)="confirm()">{{ 'general.delete' | translate }}</button>
-        </div>
-    `
+        template: "\n        <div class=\"modal-header\" *ngIf=\"title\">\n            {{ title }}\n        </div>\n\n        <div class=\"modal-inner\">\n            <p class=\"nmb\">{{ message }}</p>\n        </div>\n\n        <div class=\"modal-footer\">\n            <button ff-button class=\"button--secondary\" (click)=\"cancel()\">{{ 'general.cancel' | translate }}</button>\n            <button ff-button (click)=\"confirm()\">{{ 'general.delete' | translate }}</button>\n        </div>\n    "
     }),
     __metadata("design:paramtypes", [])
 ], ConfirmComponent);
-export { ConfirmComponent };
+exports.ConfirmComponent = ConfirmComponent;
 //# sourceMappingURL=confirm.component.js.map
