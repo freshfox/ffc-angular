@@ -1,0 +1,30 @@
+import { AfterViewInit, ElementRef, EventEmitter, OnChanges, OnDestroy, OnInit } from "@angular/core";
+import 'chosen-js';
+export declare class SelectComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
+    private el;
+    options: any;
+    valueKey: string;
+    nameKey: string;
+    class: string;
+    disabled: any;
+    selectedValue: any;
+    selectedValueChange: EventEmitter<any>;
+    label: string;
+    enableSearchField: boolean;
+    disabledSet: boolean;
+    private select;
+    private $select;
+    private initialValue;
+    private isFocused;
+    private isOpen;
+    constructor(el: ElementRef);
+    ngOnInit(): void;
+    ngOnChanges(): void;
+    ngAfterViewInit(): void;
+    private updateValue();
+    ngOnDestroy(): void;
+    getValue(option: any): any;
+    private getValueForIndex(index);
+    getName(option: any): any;
+    onChange(): void;
+}
