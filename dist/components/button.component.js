@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,34 +7,33 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var Ladda = require("ladda");
-var ButtonComponent = (function () {
-    function ButtonComponent(el) {
+import { Component, ElementRef, Input } from "@angular/core";
+import * as Ladda from 'ladda';
+let ButtonComponent = class ButtonComponent {
+    constructor(el) {
         this.el = el;
         this.disabled = false;
     }
-    ButtonComponent.prototype.ngAfterViewInit = function () {
+    ngAfterViewInit() {
         if (typeof this.loading !== 'undefined') {
             this.laddaButton = Ladda.create(this.el.nativeElement);
             this.updateLoadingState(this.loading);
         }
-    };
-    ButtonComponent.prototype.ngOnChanges = function (changes) {
-        for (var propName in changes) {
+    }
+    ngOnChanges(changes) {
+        for (let propName in changes) {
             if (propName === 'loading') {
-                var changedProp = changes[propName];
+                let changedProp = changes[propName];
                 this.updateLoadingState(changedProp.currentValue);
             }
         }
-    };
-    ButtonComponent.prototype.ngOnDestroy = function () {
+    }
+    ngOnDestroy() {
         if (this.laddaButton) {
             this.laddaButton.remove();
         }
-    };
-    ButtonComponent.prototype.updateLoadingState = function (newLoadingState) {
+    }
+    updateLoadingState(newLoadingState) {
         if (this.laddaButton) {
             if (newLoadingState) {
                 this.laddaButton.start();
@@ -44,36 +42,41 @@ var ButtonComponent = (function () {
                 this.laddaButton.stop();
             }
         }
-    };
-    return ButtonComponent;
-}());
+    }
+};
 __decorate([
-    core_1.Input(),
+    Input(),
     __metadata("design:type", Object)
 ], ButtonComponent.prototype, "loading", void 0);
 __decorate([
-    core_1.Input(),
+    Input(),
     __metadata("design:type", Object)
 ], ButtonComponent.prototype, "class", void 0);
 __decorate([
-    core_1.Input(),
+    Input(),
     __metadata("design:type", String)
 ], ButtonComponent.prototype, "icon", void 0);
 __decorate([
-    core_1.Input(),
+    Input(),
     __metadata("design:type", Boolean)
 ], ButtonComponent.prototype, "disabled", void 0);
 ButtonComponent = __decorate([
-    core_1.Component({
+    Component({
         selector: '[ff-button]',
-        template: "\n        <div class=\"ff-button__inner\">\n            <ff-icon *ngIf=\"icon\" [name]=\"icon\"></ff-icon>\n            <span class=\"ladda-label\">\n                <ng-content></ng-content>\n            </span>\n        </div>",
+        template: `
+        <div class="ff-button__inner">
+            <ff-icon *ngIf="icon" [name]="icon"></ff-icon>
+            <span class="ladda-label">
+                <ng-content></ng-content>
+            </span>
+        </div>`,
         host: {
             '[class]': '"ff-button" + class',
             'data-style': 'zoom-in',
             '[attr.disabled]': 'disabled ? true : null',
         }
     }),
-    __metadata("design:paramtypes", [core_1.ElementRef])
+    __metadata("design:paramtypes", [ElementRef])
 ], ButtonComponent);
-exports.ButtonComponent = ButtonComponent;
+export { ButtonComponent };
 //# sourceMappingURL=button.component.js.map

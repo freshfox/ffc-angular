@@ -1,8 +1,8 @@
 import { FormControl } from "@angular/forms";
-import { ValidationMessageProvider } from "../core.module";
+import { ValidationMessageProvider } from "../index";
 export declare class ControlMessagesComponent {
     private validatoinMessageProvider;
     control: FormControl;
     constructor(validatoinMessageProvider: ValidationMessageProvider);
-    readonly errorMessage: any;
+    readonly errorMessage: string;
 }

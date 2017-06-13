@@ -31,7 +31,7 @@ export declare enum ModalSize {
     Large,
     FullWidth,
 }
-export declare class ModalOptions {
+export interface ModalOptions {
     parameters?: Object;
     size?: ModalSize;
     clean?: boolean;

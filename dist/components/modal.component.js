@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,12 +7,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var animations_1 = require("@angular/animations");
-var modal_service_1 = require("../services/modal.service");
-var ModalPlaceholderComponent = (function () {
-    function ModalPlaceholderComponent(modalService, injector) {
+import { Component, Injector, ViewChild, ViewContainerRef } from "@angular/core";
+import { animate, state, style, transition, trigger } from "@angular/animations";
+import { ModalService } from "../services/modal.service";
+let ModalPlaceholderComponent = class ModalPlaceholderComponent {
+    constructor(modalService, injector) {
         this.modalService = modalService;
         this.injector = injector;
         this.isShown = false;
@@ -22,118 +20,130 @@ var ModalPlaceholderComponent = (function () {
         this.clean = false;
         this.showCloseButton = true;
     }
-    Object.defineProperty(ModalPlaceholderComponent.prototype, "state", {
-        get: function () {
-            return this.isShown ? 'shown' : 'hidden';
-        },
-        enumerable: true,
-        configurable: true
-    });
-    ModalPlaceholderComponent.prototype.ngOnInit = function () {
+    get state() {
+        return this.isShown ? 'shown' : 'hidden';
+    }
+    ngOnInit() {
         this.modalService.registerInjector(this.injector);
         this.modalService.registerPlaceholder(this);
-    };
-    ModalPlaceholderComponent.prototype.ngAfterViewInit = function () {
+    }
+    ngAfterViewInit() {
         this.modalService.registerViewContainerRef(this.viewContainerRef);
-    };
-    ModalPlaceholderComponent.prototype.registerComponentRef = function (componentRef) {
+    }
+    registerComponentRef(componentRef) {
         this.componentRef = componentRef;
-    };
-    ModalPlaceholderComponent.prototype.isLarge = function () {
+    }
+    isLarge() {
         return this.modalSize == ModalSize.Large;
-    };
-    ModalPlaceholderComponent.prototype.isFullWidth = function () {
+    }
+    isFullWidth() {
         return this.modalSize == ModalSize.FullWidth;
-    };
-    ModalPlaceholderComponent.prototype.isClean = function () {
+    }
+    isClean() {
         return this.clean;
-    };
-    ModalPlaceholderComponent.prototype.onBackdropClicked = function () {
+    }
+    onBackdropClicked() {
         this.hide();
-    };
-    ModalPlaceholderComponent.prototype.show = function () {
+    }
+    show() {
         this.isShown = true;
-        var body = document.querySelector('body');
+        let body = document.querySelector('body');
         body.className += ' no-scroll';
-    };
-    ModalPlaceholderComponent.prototype.hide = function () {
+    }
+    hide() {
         this.isShown = false;
         this.unlockBodyScroll();
-    };
-    ModalPlaceholderComponent.prototype.modalAnimationDone = function (event) {
+    }
+    modalAnimationDone(event) {
         if (event.toState === 'hidden' && this.componentRef) {
             this.componentRef.destroy();
         }
-    };
-    ModalPlaceholderComponent.prototype.unlockBodyScroll = function () {
+    }
+    unlockBodyScroll() {
         this.removeClass(document.querySelector('body'), 'no-scroll');
-    };
-    ModalPlaceholderComponent.prototype.removeClass = function (element, clazz) {
-        var newClassName = "";
-        var i;
-        var classes = element.className.split(" ");
+    }
+    removeClass(element, clazz) {
+        let newClassName = "";
+        let i;
+        let classes = element.className.split(" ");
         for (i = 0; i < classes.length; i++) {
             if (classes[i] !== clazz) {
                 newClassName += classes[i] + " ";
             }
         }
         element.className = newClassName;
-    };
-    return ModalPlaceholderComponent;
-}());
+    }
+};
 __decorate([
-    core_1.ViewChild("modalplaceholder", { read: core_1.ViewContainerRef }),
+    ViewChild("modalplaceholder", { read: ViewContainerRef }),
     __metadata("design:type", Object)
 ], ModalPlaceholderComponent.prototype, "viewContainerRef", void 0);
 ModalPlaceholderComponent = __decorate([
-    core_1.Component({
+    Component({
         selector: "ff-modal-placeholder",
-        template: "\n        <div class=\"modal-outer\" [@modalOuter]=\"state\">\n            <div [@modal]=\"state\" (@modal.done)=\"modalAnimationDone($event)\" tabindex=\"1\" class=\"modal\"\n                 [class.modal--no-padding]=\"!padding\"\n                 [class.modal--large]=\"isLarge()\"\n                 [class.modal--full-width]=\"isFullWidth()\"\n                 [class.modal--clean]=\"isClean()\">\n                <div class=\"modal-dialog\">\n                    <div class=\"modal-dialog__inner\">\n                        <ng-template #modalplaceholder></ng-template>\n                        <nvry-button *ngIf=\"showCloseButton && !clean\" class=\"button--clear modal__close-button-inside\"\n                                     (click)=\"hide()\">\n                            <nvry-icon name=\"cross\"></nvry-icon>\n                        </nvry-button>\n                    </div>\n                </div>\n            </div>\n            <div [@backdrop]=\"state\" class=\"modal-backdrop\" (click)=\"onBackdropClicked()\"></div>\n            <button ff-button *ngIf=\"showCloseButton && clean\" class=\"modal__close-button\" [@closeButton]=\"state\"\n                         (click)=\"hide()\">\n                <ff-icon name=\"cross\"></ff-icon>\n            </button>\n        </div>\n    ",
+        template: `
+        <div class="modal-outer" [@modalOuter]="state">
+            <div [@modal]="state" (@modal.done)="modalAnimationDone($event)" tabindex="1" class="modal"
+                 [class.modal--no-padding]="!padding"
+                 [class.modal--large]="isLarge()"
+                 [class.modal--full-width]="isFullWidth()"
+                 [class.modal--clean]="isClean()">
+                <div class="modal-dialog">
+                    <div class="modal-dialog__inner">
+                        <ng-template #modalplaceholder></ng-template>
+                        <nvry-button *ngIf="showCloseButton && !clean" class="button--clear modal__close-button-inside"
+                                     (click)="hide()">
+                            <nvry-icon name="cross"></nvry-icon>
+                        </nvry-button>
+                    </div>
+                </div>
+            </div>
+            <div [@backdrop]="state" class="modal-backdrop" (click)="onBackdropClicked()"></div>
+            <button ff-button *ngIf="showCloseButton && clean" class="modal__close-button" [@closeButton]="state"
+                         (click)="hide()">
+                <ff-icon name="cross"></ff-icon>
+            </button>
+        </div>
+    `,
         animations: [
-            animations_1.trigger('modalOuter', [
-                animations_1.state('shown', animations_1.style({ display: 'flex' })),
-                animations_1.state('hidden', animations_1.style({ display: 'none' })),
-                animations_1.transition('hidden <=> shown', [
-                    animations_1.animate('0.2s ease')
+            trigger('modalOuter', [
+                state('shown', style({ display: 'flex' })),
+                state('hidden', style({ display: 'none' })),
+                transition('hidden <=> shown', [
+                    animate('0.2s ease')
                 ])
             ]),
-            animations_1.trigger('modal', [
-                animations_1.state('shown', animations_1.style({ transform: 'scale3d(1, 1, 1)', opacity: 1, display: 'block' })),
-                animations_1.state('hidden', animations_1.style({ transform: 'scale3d(0.7, 0.7, 0.7)', opacity: 0 })),
-                animations_1.transition('hidden <=> shown', [
-                    animations_1.animate('0.2s ease')
+            trigger('modal', [
+                state('shown', style({ transform: 'scale3d(1, 1, 1)', opacity: 1, display: 'block' })),
+                state('hidden', style({ transform: 'scale3d(0.7, 0.7, 0.7)', opacity: 0 })),
+                transition('hidden <=> shown', [
+                    animate('0.2s ease')
                 ])
             ]),
-            animations_1.trigger('backdrop', [
-                animations_1.state('shown', animations_1.style({ opacity: 1, display: 'block' })),
-                animations_1.state('hidden', animations_1.style({ opacity: 0, display: 'none' })),
-                animations_1.transition('hidden <=> shown', [
-                    animations_1.animate('0.2s ease')
+            trigger('backdrop', [
+                state('shown', style({ opacity: 1, display: 'block' })),
+                state('hidden', style({ opacity: 0, display: 'none' })),
+                transition('hidden <=> shown', [
+                    animate('0.2s ease')
                 ])
             ]),
-            animations_1.trigger('closeButton', [
-                animations_1.state('shown', animations_1.style({ opacity: 1, display: 'block' })),
-                animations_1.state('hidden', animations_1.style({ opacity: 0, display: 'none' })),
-                animations_1.transition('hidden <=> shown', [
-                    animations_1.animate('0.1s ease')
+            trigger('closeButton', [
+                state('shown', style({ opacity: 1, display: 'block' })),
+                state('hidden', style({ opacity: 0, display: 'none' })),
+                transition('hidden <=> shown', [
+                    animate('0.1s ease')
                 ])
             ])
         ],
         host: { 'class': 'modal-placeholder' }
     }),
-    __metadata("design:paramtypes", [modal_service_1.ModalService, core_1.Injector])
+    __metadata("design:paramtypes", [ModalService, Injector])
 ], ModalPlaceholderComponent);
-exports.ModalPlaceholderComponent = ModalPlaceholderComponent;
-var ModalSize;
+export { ModalPlaceholderComponent };
+export var ModalSize;
 (function (ModalSize) {
     ModalSize[ModalSize["Regular"] = 'regular'] = "Regular";
     ModalSize[ModalSize["Large"] = 'large'] = "Large";
     ModalSize[ModalSize["FullWidth"] = 'fullwidth'] = "FullWidth";
-})(ModalSize = exports.ModalSize || (exports.ModalSize = {}));
-var ModalOptions = (function () {
-    function ModalOptions() {
-    }
-    return ModalOptions;
-}());
-exports.ModalOptions = ModalOptions;
+})(ModalSize || (ModalSize = {}));
 //# sourceMappingURL=modal.component.js.map

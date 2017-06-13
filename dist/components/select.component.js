@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,31 +7,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var $ = require("jquery");
+import { Component, ElementRef, EventEmitter, Input, Output } from "@angular/core";
+import * as $ from 'jquery';
 window['jQuery'] = window['$'] = $;
-require("chosen-js");
-var SelectComponent = (function () {
-    function SelectComponent(el) {
+import 'chosen-js';
+let SelectComponent = class SelectComponent {
+    constructor(el) {
         this.el = el;
         this.valueKey = 'id';
         this.nameKey = 'name';
-        this.selectedValueChange = new core_1.EventEmitter();
+        this.selectedValueChange = new EventEmitter();
         this.enableSearchField = true;
         this.disabledSet = false;
         this.isFocused = false;
         this.isOpen = false;
     }
-    Object.defineProperty(SelectComponent.prototype, "disabled", {
-        set: function (value) {
-            this.disabledSet = true;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    SelectComponent.prototype.ngOnInit = function () {
-        var _this = this;
+    set disabled(value) {
+        this.disabledSet = true;
+    }
+    ngOnInit() {
         var emit = false;
         if (this.selectedValue) {
             this.initialValue = this.selectedValue;
@@ -41,117 +34,122 @@ var SelectComponent = (function () {
             this.initialValue = this.getValueForIndex(0);
             emit = true;
         }
-        setTimeout(function () {
-            _this.selectedValue = _this.initialValue;
+        setTimeout(() => {
+            this.selectedValue = this.initialValue;
             if (emit) {
-                _this.selectedValueChange.emit(_this.initialValue);
+                this.selectedValueChange.emit(this.initialValue);
             }
         }, 1);
-    };
-    SelectComponent.prototype.ngOnChanges = function () {
+    }
+    ngOnChanges() {
         this.updateValue();
-    };
-    SelectComponent.prototype.ngAfterViewInit = function () {
-        var _this = this;
+    }
+    ngAfterViewInit() {
         this.select = this.el.nativeElement.querySelector('select');
         this.$select = $(this.select).chosen({
             no_results_text: 'Keine Ergebnisse für',
             disable_search: !this.enableSearchField
         });
-        this.$select.change(function (e, params) {
-            var value = params.selected;
+        this.$select.change((e, params) => {
+            let value = params.selected;
             if (value === '') {
                 value = null;
             }
-            _this.selectedValue = value;
-            _this.onChange();
+            this.selectedValue = value;
+            this.onChange();
         });
         this.updateValue();
         this.$select.on('chosen:showing_dropdown chosen:hiding_dropdown', function (e) {
-            var chosen_container = $(e.target).next('.chosen-container'), classState = e.type == 'chosen:showing_dropdown' && dropdownExceedsBottomViewport();
+            let chosen_container = $(e.target).next('.chosen-container'), classState = e.type == 'chosen:showing_dropdown' && dropdownExceedsBottomViewport();
             function dropdownExceedsBottomViewport() {
-                var dropdown = chosen_container.find('.chosen-drop'), dropdown_top = dropdown.offset().top - document.documentElement.scrollTop, dropdown_height = dropdown.height(), viewport_height = document.documentElement.clientHeight;
+                let dropdown = chosen_container.find('.chosen-drop'), dropdown_top = dropdown.offset().top - document.documentElement.scrollTop, dropdown_height = dropdown.height(), viewport_height = document.documentElement.clientHeight;
                 return dropdown_top + dropdown_height > viewport_height;
             }
             chosen_container.toggleClass('chosen-drop-up', classState);
         });
-        var $chosenSingle = this.$select.find('.chosen-search-input');
-        $chosenSingle.on('focus', function () {
-            _this.isFocused = true;
+        let $chosenSingle = this.$select.find('.chosen-search-input');
+        $chosenSingle.on('focus', () => {
+            this.isFocused = true;
         });
-        $chosenSingle.on('blur', function () {
-            _this.isFocused = false;
+        $chosenSingle.on('blur', () => {
+            this.isFocused = false;
         });
-    };
-    SelectComponent.prototype.updateValue = function () {
+    }
+    updateValue() {
         if (this.$select) {
             this.$select.val(this.selectedValue).trigger('chosen:updated');
         }
-    };
-    SelectComponent.prototype.ngOnDestroy = function () {
+    }
+    ngOnDestroy() {
         this.$select.chosen('destroy');
-    };
-    SelectComponent.prototype.getValue = function (option) {
-        var value = option[this.valueKey];
+    }
+    getValue(option) {
+        let value = option[this.valueKey];
         return (value === undefined || value === null) ? '' : value;
-    };
-    SelectComponent.prototype.getValueForIndex = function (index) {
+    }
+    getValueForIndex(index) {
         return this.getValue(this.options[index]);
-    };
-    SelectComponent.prototype.getName = function (option) {
+    }
+    getName(option) {
         return option[this.nameKey] || this.getValue(option);
-    };
-    SelectComponent.prototype.onChange = function () {
+    }
+    onChange() {
         this.selectedValueChange.emit(this.selectedValue);
-    };
-    return SelectComponent;
-}());
+    }
+};
 __decorate([
-    core_1.Input(),
+    Input(),
     __metadata("design:type", Object)
 ], SelectComponent.prototype, "options", void 0);
 __decorate([
-    core_1.Input(),
+    Input(),
     __metadata("design:type", String)
 ], SelectComponent.prototype, "valueKey", void 0);
 __decorate([
-    core_1.Input(),
+    Input(),
     __metadata("design:type", String)
 ], SelectComponent.prototype, "nameKey", void 0);
 __decorate([
-    core_1.Input(),
+    Input(),
     __metadata("design:type", String)
 ], SelectComponent.prototype, "class", void 0);
 __decorate([
-    core_1.Input(),
+    Input(),
     __metadata("design:type", Object),
     __metadata("design:paramtypes", [Object])
 ], SelectComponent.prototype, "disabled", null);
 __decorate([
-    core_1.Input(),
+    Input(),
     __metadata("design:type", Object)
 ], SelectComponent.prototype, "selectedValue", void 0);
 __decorate([
-    core_1.Output(),
+    Output(),
     __metadata("design:type", Object)
 ], SelectComponent.prototype, "selectedValueChange", void 0);
 __decorate([
-    core_1.Input(),
+    Input(),
     __metadata("design:type", String)
 ], SelectComponent.prototype, "label", void 0);
 __decorate([
-    core_1.Input(),
+    Input(),
     __metadata("design:type", Boolean)
 ], SelectComponent.prototype, "enableSearchField", void 0);
 SelectComponent = __decorate([
-    core_1.Component({
+    Component({
         selector: 'ff-select',
-        template: "\n        <label *ngIf=\"label\">{{ label }}</label>\n        <select #s class=\"{{ class }}\" [disabled]=\"disabledSet\">\n            <option\n                    *ngFor=\"let option of options\"\n                    [attr.value]=\"getValue(option)\">{{ getName(option) }}\n            </option>\n        </select>",
+        template: `
+        <label *ngIf="label">{{ label }}</label>
+        <select #s class="{{ class }}" [disabled]="disabledSet">
+            <option
+                    *ngFor="let option of options"
+                    [attr.value]="getValue(option)">{{ getName(option) }}
+            </option>
+        </select>`,
         host: {
             '[class.ff-focused]': 'isFocused',
         }
     }),
-    __metadata("design:paramtypes", [core_1.ElementRef])
+    __metadata("design:paramtypes", [ElementRef])
 ], SelectComponent);
-exports.SelectComponent = SelectComponent;
+export { SelectComponent };
 //# sourceMappingURL=select.component.js.map

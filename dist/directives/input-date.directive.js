@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,27 +7,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var forms_1 = require("@angular/forms");
-var pikaday_1 = require("pikaday");
-var moment = require("moment");
-exports.DATEPICKER_VALUE_ACCESSOR = {
-    provide: forms_1.NG_VALUE_ACCESSOR,
-    useExisting: core_1.forwardRef(function () { return DatePickerDirective; }),
+import { ElementRef, Directive, forwardRef } from "@angular/core";
+import { NG_VALUE_ACCESSOR } from "@angular/forms";
+import Pikaday from 'pikaday';
+import * as moment from 'moment';
+export const DATEPICKER_VALUE_ACCESSOR = {
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => DatePickerDirective),
     multi: true
 };
-var DatePickerDirective = (function () {
-    function DatePickerDirective(el) {
+let DatePickerDirective = class DatePickerDirective {
+    constructor(el) {
         this.el = el;
-        this.onChangeCallback = function () {
+        this.onChangeCallback = () => {
         };
         this.format = 'DD.MM.YYYY';
-        this.onTouched = function () {
+        this.onTouched = () => {
         };
     }
-    DatePickerDirective.prototype.ngOnInit = function () {
-        this.picker = new pikaday_1.default({
+    ngOnInit() {
+        this.picker = new Pikaday({
             field: this.el.nativeElement,
             format: this.format,
             i18n: {
@@ -38,40 +36,39 @@ var DatePickerDirective = (function () {
             }
         });
         document.removeEventListener('keydown', this.picker._onKeyChange);
-    };
-    DatePickerDirective.prototype.ngOnDestroy = function () {
+    }
+    ngOnDestroy() {
         this.picker.destroy();
-    };
-    DatePickerDirective.prototype.writeValue = function (value) {
+    }
+    writeValue(value) {
         if (value == undefined) {
             value = new Date();
         }
         this.picker.setDate(value);
         this.onChange();
-    };
-    DatePickerDirective.prototype.onChange = function () {
-        var val = this.el.nativeElement.value;
-        var momentInstance = moment(val, this.format);
+    }
+    onChange() {
+        let val = this.el.nativeElement.value;
+        let momentInstance = moment(val, this.format);
         if (momentInstance.isValid()) {
             val = momentInstance.format('YYYY-MM-DD');
         }
         this.onChangeCallback(val);
-    };
-    DatePickerDirective.prototype.registerOnChange = function (fn) {
+    }
+    registerOnChange(fn) {
         this.onChangeCallback = fn;
-    };
-    DatePickerDirective.prototype.registerOnTouched = function (fn) {
+    }
+    registerOnTouched(fn) {
         this.onTouched = fn;
-    };
-    return DatePickerDirective;
-}());
+    }
+};
 DatePickerDirective = __decorate([
-    core_1.Directive({
+    Directive({
         selector: 'input[ff-datepicker]',
-        providers: [exports.DATEPICKER_VALUE_ACCESSOR],
+        providers: [DATEPICKER_VALUE_ACCESSOR],
         host: { '(change)': 'onChange()', '(blur)': 'onTouched()' },
     }),
-    __metadata("design:paramtypes", [core_1.ElementRef])
+    __metadata("design:paramtypes", [ElementRef])
 ], DatePickerDirective);
-exports.DatePickerDirective = DatePickerDirective;
+export { DatePickerDirective };
 //# sourceMappingURL=input-date.directive.js.map

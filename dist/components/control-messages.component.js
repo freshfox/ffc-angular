@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,41 +7,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var forms_1 = require("@angular/forms");
-var core_module_1 = require("../core.module");
-var ControlMessagesComponent = (function () {
-    function ControlMessagesComponent(validatoinMessageProvider) {
+import { Component, Input } from "@angular/core";
+import { FormControl } from "@angular/forms";
+import { ValidationMessageProvider } from "../index";
+let ControlMessagesComponent = class ControlMessagesComponent {
+    constructor(validatoinMessageProvider) {
         this.validatoinMessageProvider = validatoinMessageProvider;
     }
-    Object.defineProperty(ControlMessagesComponent.prototype, "errorMessage", {
-        get: function () {
-            if (this.control) {
-                for (var propertyName in this.control.errors) {
-                    if (this.control.errors.hasOwnProperty(propertyName) && this.control.touched) {
-                        return this.validatoinMessageProvider.getValidationMessage(propertyName, this.control.errors[propertyName]);
-                    }
+    get errorMessage() {
+        if (this.control) {
+            for (let propertyName in this.control.errors) {
+                if (this.control.errors.hasOwnProperty(propertyName) && this.control.touched) {
+                    return this.validatoinMessageProvider.getValidationMessage(propertyName, this.control.errors[propertyName]);
                 }
             }
-            return null;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return ControlMessagesComponent;
-}());
+        }
+        return null;
+    }
+};
 __decorate([
-    core_1.Input(),
-    __metadata("design:type", forms_1.FormControl)
+    Input(),
+    __metadata("design:type", FormControl)
 ], ControlMessagesComponent.prototype, "control", void 0);
 ControlMessagesComponent = __decorate([
-    core_1.Component({
+    Component({
         selector: 'ff-control-messages',
-        template: "<div class=\"control-message\" *ngIf=\"errorMessage !== null\">{{errorMessage}}</div>"
+        template: `<div class="control-message" *ngIf="errorMessage !== null">{{errorMessage}}</div>`
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof core_module_1.ValidationMessageProvider !== "undefined" && core_module_1.ValidationMessageProvider) === "function" && _a || Object])
+    __metadata("design:paramtypes", [ValidationMessageProvider])
 ], ControlMessagesComponent);
-exports.ControlMessagesComponent = ControlMessagesComponent;
-var _a;
+export { ControlMessagesComponent };
 //# sourceMappingURL=control-messages.component.js.map
