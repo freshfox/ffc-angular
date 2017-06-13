@@ -1,4 +1,3 @@
-import {ModalOptions, ModalPlaceholderComponent, ModalSize} from "../components/modal.module";
 import {
     ComponentFactory,
     ComponentFactoryResolver,
@@ -11,6 +10,7 @@ import {
 import {ConfirmComponent} from "../components/confirm.component";
 import {Observable} from "rxjs/Observable";
 import {ReplaySubject} from "rxjs/ReplaySubject";
+import {ModalOptions, ModalPlaceholderComponent, ModalSize} from "../components/modal.component";
 
 @Injectable()
 export class ModalService {
