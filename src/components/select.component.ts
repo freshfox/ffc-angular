@@ -9,7 +9,7 @@ import {
     OnInit,
     Output
 } from "@angular/core";
-import * as $ from 'jquery';
+import $ from 'jquery';
 window['jQuery'] = window['$'] = $;
 import 'chosen-js'
 
