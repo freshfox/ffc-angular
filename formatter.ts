@@ -1,8 +1,8 @@
-import {TranslateService} from "@ngx-translate/core";
-import {Injectable} from "@angular/core";
+import {TranslateService} from '@ngx-translate/core';
+import {Injectable} from '@angular/core';
 const numbro = require('numbro');
 
-let numbroDELang = {
+const numbroDELang = {
 	langLocaleCode: 'de',
 	cultureCode: 'de',
 	delimiters: {
@@ -46,7 +46,7 @@ export class Formatter {
 		format += alwaysShowDecimals ? '.' : '[.]';
 
 		// If we don't want to force decimals, make them optional.
-		if(!alwaysShowDecimals) {
+		if (!alwaysShowDecimals) {
 			format += '[';
 		}
 
@@ -56,7 +56,7 @@ export class Formatter {
 		}
 
 		// If we don't want to force decimals, make them optional.
-		if(!alwaysShowDecimals) {
+		if (!alwaysShowDecimals) {
 			format += ']';
 		}
 
