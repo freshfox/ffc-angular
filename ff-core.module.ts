@@ -15,6 +15,7 @@ import {NumberPipe} from './pipes/number.pipe';
 import {SafePipe} from './pipes/safe.pipe';
 import {ModalPlaceholderComponent, ModalService} from './services/modal.service';
 import {Formatter} from './formatter';
+import {AlertBarComponent} from './components/alert-bar.component';
 
 export * from './components/button.component';
 export * from './components/confirm.component';
@@ -47,6 +48,7 @@ export {NumberPipe} from './pipes/number.pipe';
 		DecimalDirective,
 		NumberPipe,
 		SafePipe,
+		AlertBarComponent
 	],
 	exports: [
 		IconComponent,
@@ -59,6 +61,7 @@ export {NumberPipe} from './pipes/number.pipe';
 		ModalPlaceholderComponent,
 		NumberPipe,
 		SafePipe,
+		AlertBarComponent,
 	],
 	entryComponents: [
 		ConfirmComponent
