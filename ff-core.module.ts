@@ -16,6 +16,9 @@ import {SafePipe} from './pipes/safe.pipe';
 import {ModalPlaceholderComponent, ModalService} from './services/modal.service';
 import {Formatter} from './formatter';
 import {AlertBarComponent} from './components/alert-bar.component';
+import {DropdownComponent} from './components/dropdown.component';
+import {TableComponent} from './components/table/table.component';
+import {TableHeaderCellComponent} from './components/table/table-header-cell.component';
 
 export * from './components/button.component';
 export * from './components/confirm.component';
@@ -48,7 +51,10 @@ export {NumberPipe} from './pipes/number.pipe';
 		DecimalDirective,
 		NumberPipe,
 		SafePipe,
-		AlertBarComponent
+		AlertBarComponent,
+		DropdownComponent,
+		TableComponent,
+		TableHeaderCellComponent
 	],
 	exports: [
 		IconComponent,
@@ -62,6 +68,8 @@ export {NumberPipe} from './pipes/number.pipe';
 		NumberPipe,
 		SafePipe,
 		AlertBarComponent,
+		DropdownComponent,
+		TableComponent
 	],
 	entryComponents: [
 		ConfirmComponent

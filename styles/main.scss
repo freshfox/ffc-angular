@@ -23,6 +23,9 @@ $colorSuccess: #7ece65 !default;
 $colorWarning: #febb08 !default;
 $colorError: #f87979 !default;
 
+$colorSpacerLines: $colorGrayLight !default;
+
+
 /**
  * Default Metrics
  */
@@ -40,6 +43,22 @@ $textColor: #2d3339 !default;
 $fontWeightRegular: 400 !default;
 $fontWeightBold: 600 !default;
 $fontWeightLight: 300 !default;
+
+/**
+ * Tables
+ */
+$tableClickableHoverBackground: $colorLightAccent !default;
+$tableColorSpacerLines: $colorGrayLight !default;
+$tableHeadingBackgroundColor: $colorLightAccent !default;
+$tableTextColor: $textColor !default;
+$tableIconFillColor: $colorGrayMedium !default;
+
+/**
+ * Dropdowns
+ */
+$dropdownTargetWidth: 36px !default;
+$dropdownTargetHeight: 25px !default;
+$dropdownTargetSizeFormField: 39px !default;
 
 /**
  * Buttons
@@ -66,9 +85,15 @@ $checkboxSize: 17px !default;
 /**
  * Modals
  */
+$modalBackgroundColor: white !default;
 $modalWidthDefault: 600px !default;
 $modalWidthLarge: 750px !default;
 $modalSidePadding: 24px !default;
+$modalCloseButtonColor: $colorPrimary !default;
+$modalHeaderDangerBackgroundColor: $colorError !default;
+$modalHeaderBackgroundColor: $colorPrimary !default;
+$modalFooterBackgroundColor: $colorGrayUltraLighter !default;
+$modalFooterTopBorderColor: $colorSpacerLines !default;
 
 
 @import 'mixins';
@@ -79,3 +104,6 @@ $modalSidePadding: 24px !default;
 @import 'components/selects';
 @import 'components/spinners';
 @import 'components/modals';
+@import 'components/tabs';
+@import 'components/dropdowns';
+@import 'components/tables';

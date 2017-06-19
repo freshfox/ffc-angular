@@ -1,7 +1,7 @@
 .modal-footer {
 	text-align: right;
-	background: $colorGrayUltraLighter;
-	border-top: 1px solid $colorGrayLight;
+	background: $modalFooterBackgroundColor;
+	border-top: 1px solid $modalFooterTopBorderColor;
 	padding: 20px $modalSidePadding;
 	margin-top: 20px;
 
@@ -15,14 +15,14 @@
 }
 
 .modal-header {
-	background: $colorPrimary;
+	background: $modalHeaderBackgroundColor;
 	color: #fff;
 	font-size: 20px;
 	padding: 20px $modalSidePadding;
 	margin-bottom: 20px;
 
 	&.modal-header--danger {
-		background: $colorError;
+		background: $modalHeaderDangerBackgroundColor;
 	}
 }
 
@@ -32,7 +32,7 @@
 	top: 0;
 	width: 100%;
 	height: 100%;
-	background-color: rgba(2, 15, 24, 0.5);
+	background-color: rgba(2, 15, 24, 0.6);
 	z-index: 800;
 }
 
@@ -82,7 +82,7 @@
 		}
 
 		.icon {
-			fill: $colorPrimary;
+			fill: $modalCloseButtonColor;
 			width: 20px;
 			height: 20px;
 			margin: 0;
@@ -127,7 +127,7 @@
 		$modalDialogPadding: 32px $modalSidePadding;
 		width: $modalWidthDefault;
 		margin: 0 auto;
-		background-color: white;
+		background-color: $modalBackgroundColor;
 		border-radius: $defaultBorderRadius;
 		padding: $modalDialogPadding;
 
