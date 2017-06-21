@@ -41,6 +41,9 @@ export class SelectComponent implements OnInit, AfterViewInit, OnChanges, OnDest
 		this.disabledSet = true;
 	}
 
+	@Input() selectedOption: any;
+	@Output() selectedOptionChange = new EventEmitter<any>();
+
 	@Input() selectedValue: any;
 	@Output() selectedValueChange = new EventEmitter<any>();
 
@@ -59,6 +62,10 @@ export class SelectComponent implements OnInit, AfterViewInit, OnChanges, OnDest
 	}
 
 	ngOnInit() {
+		if (this.selectedOption) {
+			this.selectedValue = this.getValue(this.selectedOption);
+		}
+
 		let emit = false;
 		if (this.selectedValue) {
 			this.initialValue = this.selectedValue;
@@ -73,6 +80,12 @@ export class SelectComponent implements OnInit, AfterViewInit, OnChanges, OnDest
 				this.selectedValueChange.emit(this.initialValue);
 			}
 		}, 1);
+
+
+		this.selectedValueChange.subscribe((value) => {
+			const option = this.getOptionForValue(value);
+			this.selectedOptionChange.emit(option);
+		});
 	}
 
 	ngOnChanges() {
@@ -122,6 +135,12 @@ export class SelectComponent implements OnInit, AfterViewInit, OnChanges, OnDest
 
 		$chosenSingle.on('blur', () => {
 			this.isFocused = false;
+		});
+	}
+
+	private getOptionForValue(value) {
+		return this.options.find((option) => {
+			return this.getValue(option) === value;
 		});
 	}
 
