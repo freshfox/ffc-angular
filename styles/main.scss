@@ -96,6 +96,8 @@ $modalFooterBackgroundColor: $colorGrayUltraLighter !default;
 $modalFooterTopBorderColor: $colorSpacerLines !default;
 
 
+@import '~chosen-js/chosen.css';
+
 @import 'mixins';
 @import 'base';
 @import 'components/buttons';
@@ -107,4 +109,4 @@ $modalFooterTopBorderColor: $colorSpacerLines !default;
 @import 'components/tabs';
 @import 'components/dropdowns';
 @import 'components/tables';
-@import 'components/chosen';
+
