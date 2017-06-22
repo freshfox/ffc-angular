@@ -8,7 +8,8 @@ button {
 }
 
 .ff-button,
-.button {
+.button,
+[ff-button] {
   display: inline-block;
   zoom: 1;
   line-height: normal;

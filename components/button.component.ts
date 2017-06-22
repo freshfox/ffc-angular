@@ -11,7 +11,7 @@ import * as Ladda from 'ladda';
             </span>
 		</div>`,
 	host: {
-		'[class]': '"button ff-button " + class',
+		'[class]': '"button ff-button ladda-button" + class',
 		'data-style': 'zoom-in',
 		'[attr.disabled]': 'disabled ? true : null',
 	}
@@ -19,7 +19,7 @@ import * as Ladda from 'ladda';
 export class ButtonComponent implements AfterViewInit, OnChanges, OnDestroy {
 
 	@Input() loading;
-	@Input() class;
+	@Input() class = '';
 	@Input() icon: string;
 	@Input() disabled: boolean = false;
 
