@@ -11,7 +11,7 @@ import * as Ladda from 'ladda';
             </span>
 		</div>`,
 	host: {
-		'[class]': '"button ff-button ladda-button" + class',
+		'[class]': '"button ff-button ladda-button " + class',
 		'data-style': 'zoom-in',
 		'[attr.disabled]': 'disabled ? true : null',
 	}
