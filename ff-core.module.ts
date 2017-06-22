@@ -19,6 +19,7 @@ import {AlertBarComponent} from './components/alert-bar.component';
 import {DropdownComponent} from './components/dropdown.component';
 import {TableComponent} from './components/table/table.component';
 import {TableHeaderCellComponent} from './components/table/table-header-cell.component';
+import {FakeValidationMessageProvider, ValidationMessageProvider} from './validation-message-provider';
 
 export * from './components/button.component';
 export * from './components/confirm.component';
@@ -34,6 +35,10 @@ export * from './services/modal.service';
 export * from './directives/input-date.directive';
 
 export {NumberPipe} from './pipes/number.pipe';
+
+export interface FFCoreModuleConfig {
+	validationMessageProvider?: Provider;
+}
 
 
 @NgModule({
@@ -93,21 +98,5 @@ export class FFCoreModule {
 				},
 			]
 		};
-	}
-}
-
-
-export interface FFCoreModuleConfig {
-	validationMessageProvider?: Provider;
-}
-
-export abstract class ValidationMessageProvider {
-	abstract getValidationMessage(validatorName: string, validatorValue?: any): string;
-}
-
-@Injectable()
-export class FakeValidationMessageProvider extends ValidationMessageProvider {
-	getValidationMessage(validatorName: string, validatorValue?: any): string {
-		return '';
 	}
 }
