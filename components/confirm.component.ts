@@ -13,7 +13,7 @@ import {Component, Input, OnInit, Output} from '@angular/core';
 
 		<div class="modal-footer">
 			<button ff-button class="ff-button--secondary" (click)="cancel()">Abbrechen</button>
-			<button ff-button (click)="confirm()">Löschen</button>
+			<button ff-button (click)="confirm()">{{ confirmText }}</button>
 		</div>
 	`
 })
@@ -21,6 +21,7 @@ export class ConfirmComponent implements OnInit {
 
 	@Input() title: string;
 	@Input() message: string;
+	@Input() confirmText: string;
 
 	@Output() onCancel: Function;
 	@Output() onConfirm: Function;
@@ -29,6 +30,9 @@ export class ConfirmComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		if(!this.confirmText) {
+			this.confirmText = 'Löschen';
+		}
 	}
 
 	confirm() {

@@ -40,13 +40,14 @@ export class ModalService {
         this.injector = injector;
     }
 
-    createConfirmRequest(title: string, message: string, onCancel: Function, onConfirm: Function) {
+    createConfirmRequest(title: string, message: string, onCancel: Function, onConfirm: Function, confirmText?: string) {
         this.create(ConfirmComponent, {
             parameters: {
                 title: title,
                 message: message,
+				confirmText: confirmText,
                 onCancel: onCancel,
-                onConfirm: onConfirm
+                onConfirm: onConfirm,
             }
         });
     }

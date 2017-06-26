@@ -7,6 +7,12 @@ button {
   cursor: pointer;
 }
 
+.ff-button__inner {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 .ff-button,
 .button,
 [ff-button] {
@@ -29,12 +35,6 @@ button {
   text-decoration: none;
   border-radius: $buttonBorderRadius;
   transition: color .25s ease, background .25s ease;
-
-  .ff-button__inner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 
   .ff-icon {
     width: 12px;
@@ -75,7 +75,7 @@ button {
 
   &.ff-button--secondary {
     background: none;
-    border-color: $colorGrayMedium;
+    border-color: $buttonSecondaryBorderColor;
     color: $colorPrimary;
   }
 

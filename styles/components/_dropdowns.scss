@@ -2,6 +2,7 @@
 	position: relative;
 	display: flex;
 	text-align: center;
+	padding: 5px 0;
 
 	.dropdown__inner {
 		position: relative;
@@ -19,8 +20,32 @@
 		}
 	}
 
+	&.ff-dropdown--text {
+
+		.dropdown-target {
+			border: 1px solid $buttonSecondaryBorderColor;
+			border-radius: $buttonBorderRadius;
+			padding: $buttonPadding;
+			padding-top: 4px;
+			padding-bottom: 4px;
+
+			span {
+				color: $colorPrimary;
+			}
+
+			> .ff-button__inner {
+
+				> .ff-icon {
+					margin: 0;
+					height: 24px;
+				}
+			}
+
+		}
+
+	}
+
 	.dropdown-target {
-		width: $dropdownTargetWidth;
 		text-align: center;
 		outline: 0;
 		background: transparent;
@@ -30,6 +55,7 @@
 		cursor: pointer;
 		padding: 0;
 		position: relative;
+		border: 0;
 
 		.ff-icon {
 			display: block;
@@ -73,6 +99,18 @@
 			padding: 6px 20px;
 			width: 100%;
 			text-align: left;
+			border: 0;
+			padding-left: 8px;
+			color: $textColor;
+
+			.ff-button__inner {
+				justify-content: flex-start;
+
+				.ff-icon {
+					width: 24px;
+					fill: $colorPrimary;
+				}
+			}
 
 			&:hover {
 				background: $colorGrayLight;
