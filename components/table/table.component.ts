@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChange} from '@angular/core';
 import {TableOptions} from './table-options.model';
 import {TableColumn} from './table-column.model';
 import {SortDirection} from './sort-direction.enum';
@@ -101,7 +101,14 @@ export class TableComponent implements OnChanges {
 	}
 
 	getColumnValue(column: TableColumn, row): any {
-		const val = this.getValue(row, this.getPropertyName(column));
+		const propertyName = this.getPropertyName(column);
+		let val;
+		if (propertyName) {
+			val = this.getValue(row, propertyName);
+		} else if (column.getDynamicValue) {
+			val = column.getDynamicValue(row);
+		}
+
 		const pipe = column.pipe;
 		return pipe ? pipe.transform(val) : val;
 	}
