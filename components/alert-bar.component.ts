@@ -3,8 +3,8 @@ import {Component, Input} from '@angular/core';
 @Component({
 	selector: 'ff-alert-bar',
 	template: `
-		<div class="alert visible" [ngClass]="getClasses()" *ngIf="message">
-			<div class="msg" [innerHTML]="message"></div>
+		<div class="ff-alert-bar__inner" [ngClass]="getClasses()" *ngIf="message">
+			<div class="ff-alert-bar__message" [innerHTML]="message"></div>
 		</div>`,
 	host: {
 		'class': 'ff-alert-bar'
@@ -16,8 +16,8 @@ export class AlertBarComponent {
 
 	getClasses() {
 		return {
-			'alert--success': this.type === AlertBarType.Success,
-			'alert--warning': this.type === AlertBarType.Warning
+			'ff-alert-bar--success': this.type === AlertBarType.Success,
+			'ff-alert-bar--warning': this.type === AlertBarType.Warning
 		}
 	}
 }
