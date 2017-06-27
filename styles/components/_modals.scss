@@ -26,6 +26,10 @@
 	}
 }
 
+.modal-content {
+	padding: 16px $modalSidePadding;
+}
+
 .modal-backdrop {
 	position: fixed;
 	left: 0;
