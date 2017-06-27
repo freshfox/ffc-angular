@@ -20,6 +20,7 @@ import {DropdownComponent} from './components/dropdown.component';
 import {TableComponent} from './components/table/table.component';
 import {TableHeaderCellComponent} from './components/table/table-header-cell.component';
 import {FakeValidationMessageProvider, ValidationMessageProvider} from './validation-message-provider';
+import {NotificationService} from './services/notification.service';
 
 export * from './components/button.component';
 export * from './components/confirm.component';
@@ -83,7 +84,8 @@ export interface FFCoreModuleConfig {
 		ModalService,
 		NumberPipe,
 		SafePipe,
-		Formatter
+		Formatter,
+		NotificationService
 	]
 })
 export class FFCoreModule {

@@ -99,6 +99,7 @@ $modalFooterTopBorderColor: $colorSpacerLines !default;
 
 @import '~chosen-js/chosen.css';
 @import '~ladda/css/ladda';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 @import 'mixins';
 @import 'base';
@@ -111,5 +112,6 @@ $modalFooterTopBorderColor: $colorSpacerLines !default;
 @import 'components/tabs';
 @import 'components/dropdowns';
 @import 'components/tables';
+@import 'components/notifications';
 @import 'components/alert-bars';
 
