@@ -2,4 +2,8 @@ snack-bar-container {
 	&.success {
 		background: $colorSuccess;
 	}
+
+	&.error {
+		background: $colorError;
+	}
 }

@@ -15,6 +15,12 @@ export class NotificationService {
 		});
 	}
 
+	error(message: string) {
+		this.showNotification(message, {
+			classes: 'error'
+		});
+	}
+
 	private showNotification(message: string, config?: NotificationConfig) {
 		this.snackBar.open(message, null, {
 			duration: 12200,
