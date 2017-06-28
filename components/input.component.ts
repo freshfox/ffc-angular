@@ -87,6 +87,8 @@ export class InputComponent implements ControlValueAccessor, OnInit, AfterViewIn
 	public set disabled(value: any) {
 		if (value !== false) {
 			this.disabledSet = true;
+		} else {
+			this.disabledSet = false;
 		}
 	}
 
