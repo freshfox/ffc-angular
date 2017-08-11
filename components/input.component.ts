@@ -70,6 +70,7 @@ export const FF_INPUT_CONTROL_VALUE_ACCESSOR: any = {
 	`,
 	providers: [FF_INPUT_CONTROL_VALUE_ACCESSOR],
 	host: {
+		'class': 'ff-input input',
 		'[class.ff-focused]': 'isFocused',
 	}
 })
