@@ -61,7 +61,7 @@ export class ModalService {
         }, options);
 
         let factory = this.componentFactoryResolver.resolveComponentFactory(component);
-        return this.createFromFactory(factory, options);
+        return this.createFromFactory(factory, options) as Observable<ComponentRef<T>>;
     }
 
     private createFromFactory<T>(componentFactory: ComponentFactory<T>, options: ModalOptions): Observable<ComponentRef<T>> {
@@ -81,7 +81,7 @@ export class ModalService {
         this.placeholder.registerComponentRef(componentRef);
         componentRef$.next(componentRef);
         componentRef$.complete();
-        return componentRef$.asObservable();
+        return componentRef$.asObservable() as Observable<ComponentRef<T>>;
     }
 }
 
