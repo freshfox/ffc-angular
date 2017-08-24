@@ -1,94 +1,96 @@
 import {
-	AfterViewInit, Component,
+	AfterViewInit,
+	Component,
 	ComponentFactory,
 	ComponentFactoryResolver,
 	ComponentRef,
 	Injectable,
-	Injector, OnInit,
-	ReflectiveInjector, ViewChild,
+	Injector,
+	OnInit,
+	ReflectiveInjector,
+	ViewChild,
 	ViewContainerRef
-} from "@angular/core";
-import {ConfirmComponent} from "../components/confirm.component";
-import {Observable} from "rxjs/Observable";
-import {ReplaySubject} from "rxjs/ReplaySubject";
-import {animate, style, transition, state, trigger, AnimationEvent} from "@angular/animations";
+} from '@angular/core';
+import {ConfirmComponent} from '../components/confirm.component';
+import {Observable} from 'rxjs/Observable';
+import {ReplaySubject} from 'rxjs/ReplaySubject';
+import {animate, AnimationEvent, state, style, transition, trigger} from '@angular/animations';
 
 @Injectable()
 export class ModalService {
-    private vcRef: ViewContainerRef;
-    private injector: Injector;
-    public activeInstances: number = 0;
+	private vcRef: ViewContainerRef;
+	private injector: Injector;
+	public activeInstances: number = 0;
 
-    private placeholder: ModalPlaceholderComponent;
+	private placeholder: ModalPlaceholderComponent;
 
-    constructor(private componentFactoryResolver: ComponentFactoryResolver) {
-    }
+	constructor(private componentFactoryResolver: ComponentFactoryResolver) {
+	}
 
-    hideCurrentModal() {
-        this.placeholder.hide();
-    }
+	hideCurrentModal() {
+		this.placeholder.hide();
+	}
 
-    registerViewContainerRef(vcRef: ViewContainerRef): void {
-        this.vcRef = vcRef;
-    }
+	registerViewContainerRef(vcRef: ViewContainerRef): void {
+		this.vcRef = vcRef;
+	}
 
-    registerPlaceholder(placeholder: ModalPlaceholderComponent) {
-        this.placeholder = placeholder;
-    }
+	registerPlaceholder(placeholder: ModalPlaceholderComponent) {
+		this.placeholder = placeholder;
+	}
 
-    registerInjector(injector: Injector): void {
-        this.injector = injector;
-    }
+	registerInjector(injector: Injector): void {
+		this.injector = injector;
+	}
 
-    createConfirmRequest(title: string, message: string, onCancel: Function, onConfirm: Function, confirmText?: string) {
-        this.create(ConfirmComponent, {
-            parameters: {
-                title: title,
-                message: message,
+	createConfirmRequest(title: string, message: string, onCancel: Function, onConfirm: Function, confirmText?: string) {
+		this.create(ConfirmComponent, {
+			parameters: {
+				title: title,
+				message: message,
 				confirmText: confirmText,
-                onCancel: onCancel,
-                onConfirm: onConfirm,
-            }
-        });
-    }
+				onCancel: onCancel,
+				onConfirm: onConfirm,
+			}
+		});
+	}
 
-    create<T>(component: any, options?: ModalOptions): Observable<ComponentRef<T>> {
-        options = Object.assign({}, {
-            size: ModalSize.Regular,
-            padding: false,
-            clean: false,
-            showCloseButton: true
-        }, options);
+	create<T>(component: any, options?: ModalOptions): Observable<ComponentRef<T>> {
+		options = Object.assign({}, {
+			size: ModalSize.Regular,
+			padding: false,
+			clean: false,
+			showCloseButton: true
+		}, options);
 
-        let factory = this.componentFactoryResolver.resolveComponentFactory(component);
-        return this.createFromFactory(factory, options) as Observable<ComponentRef<T>>;
-    }
+		let factory = this.componentFactoryResolver.resolveComponentFactory(component);
+		return this.createFromFactory(factory, options) as Observable<ComponentRef<T>>;
+	}
 
-    private createFromFactory<T>(componentFactory: ComponentFactory<T>, options: ModalOptions): Observable<ComponentRef<T>> {
-        this.placeholder.show();
+	private createFromFactory<T>(componentFactory: ComponentFactory<T>, options: ModalOptions): Observable<ComponentRef<T>> {
+		this.placeholder.show();
 
-        let componentRef$ = new ReplaySubject();
-        const childInjector = ReflectiveInjector.resolveAndCreate([], this.injector);
-        let componentRef = this.vcRef.createComponent(componentFactory, 0, childInjector);
-        // pass the @Input parameters to the instance
-        Object.assign(componentRef.instance, options.parameters);
+		let componentRef$ = new ReplaySubject();
+		const childInjector = ReflectiveInjector.resolveAndCreate([], this.injector);
+		let componentRef = this.vcRef.createComponent(componentFactory, 0, childInjector);
+		// pass the @Input parameters to the instance
+		Object.assign(componentRef.instance, options.parameters);
 
-        this.placeholder.padding = options.padding;
-        this.placeholder.modalSize = options.size;
-        this.placeholder.clean = options.clean;
-        this.placeholder.showCloseButton = options.showCloseButton;
+		this.placeholder.padding = options.padding;
+		this.placeholder.modalSize = options.size;
+		this.placeholder.clean = options.clean;
+		this.placeholder.showCloseButton = options.showCloseButton;
 
-        this.placeholder.registerComponentRef(componentRef);
-        componentRef$.next(componentRef);
-        componentRef$.complete();
-        return componentRef$.asObservable() as Observable<ComponentRef<T>>;
-    }
+		this.placeholder.registerComponentRef(componentRef);
+		componentRef$.next(componentRef);
+		componentRef$.complete();
+		return componentRef$.asObservable() as Observable<ComponentRef<T>>;
+	}
 }
 
 
-
 @Component({
-	selector: "ff-modal-placeholder",
+	selector: 'ff-modal-placeholder',
 	template: `
 		<div class="modal-outer" [@modalOuter]="state">
 			<div [@modal]="state" (@modal.done)="modalAnimationDone($event)" tabindex="1" class="modal"
@@ -99,7 +101,8 @@ export class ModalService {
 				<div class="modal-dialog">
 					<div class="modal-dialog__inner">
 						<ng-template #modalplaceholder></ng-template>
-						<button ff-button *ngIf="showCloseButton && !clean" class="ff-button--clear modal__close-button-inside"
+						<button ff-button *ngIf="showCloseButton && !clean"
+								class="ff-button--clear modal__close-button-inside"
 								(click)="hide()">
 							<ff-icon name="cross"></ff-icon>
 						</button>
@@ -154,7 +157,7 @@ export class ModalPlaceholderComponent implements OnInit, AfterViewInit {
 	clean: boolean = false;
 	showCloseButton: boolean = true;
 
-	@ViewChild("modalplaceholder", {read: ViewContainerRef}) viewContainerRef;
+	@ViewChild('modalplaceholder', {read: ViewContainerRef}) viewContainerRef;
 
 	constructor(private modalService: ModalService, private injector: Injector) {
 	}
@@ -214,12 +217,12 @@ export class ModalPlaceholderComponent implements OnInit, AfterViewInit {
 	}
 
 	private removeClass(element, clazz) {
-		let newClassName = "";
+		let newClassName = '';
 		let i;
-		let classes = element.className.split(" ");
+		let classes = element.className.split(' ');
 		for (i = 0; i < classes.length; i++) {
 			if (classes[i] !== clazz) {
-				newClassName += classes[i] + " ";
+				newClassName += classes[i] + ' ';
 			}
 		}
 		element.className = newClassName;
