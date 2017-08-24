@@ -37,6 +37,8 @@ export * from './directives/input-date.directive';
 
 export {NumberPipe} from './pipes/number.pipe';
 
+export * from './translate-packaged-loader';
+
 export interface FFCoreModuleConfig {
 	validationMessageProvider?: Provider;
 }
