@@ -7,10 +7,12 @@ import {
 	OnChanges,
 	OnDestroy,
 	OnInit,
-	Output, SimpleChange
+	Output,
+	SimpleChange
 } from '@angular/core';
 
 import * as $ from 'jquery';
+
 window['jQuery'] = window['$'] = $;
 require('chosen-js');
 
@@ -91,6 +93,11 @@ export class SelectComponent implements OnInit, AfterViewInit, OnChanges, OnDest
 	ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
 		for (const propName in changes) {
 			if (propName === 'selectedValue') {
+				this.updateValue();
+			}
+
+			if (propName === 'selectedOption') {
+				this.selectedValue = this.getValue(this.selectedOption);
 				this.updateValue();
 			}
 		}
