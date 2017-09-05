@@ -1,0 +1,31 @@
+{
+  "name": "ffc-angular",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/freshfox/ffc-angular"
+  },
+  "author": {
+    "name": "Freshfox",
+    "email": "hello@freshfox.at"
+  },
+  "keywords": [
+    "angular"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/freshfox/ffc-angular/issues"
+  },
+  "main": "ffc-angular.umd.js",
+  "module": "ffc-angular.js",
+  "jsnext:main": "ffc-angular.js",
+  "typings": "ffc-angular.d.ts",
+  "peerDependencies": {
+    "@angular/core": "^4.0.0",
+    "@angular/forms": "^4.0.0",
+    "@angular/material": "2.0.0-beta.10",
+    "@angular/platform-browser": "^4.0.0",
+    "rxjs": "^5.1.0",
+    "zone.js": "^0.8.4"
+  }
+}

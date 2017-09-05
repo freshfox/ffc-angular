@@ -1,8 +1,8 @@
 import {Injectable, ModuleWithProviders, NgModule, Provider} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {IconComponent} from './components/icon.component';
+import {IconComponent} from '../src/icon/icon.component';
 import {ButtonComponent} from './components/button.component';
-import {SpinnerComponent} from './components/spinner.component';
+import {SpinnerComponent} from '../src/spinner/spinner.component';
 import {ConfirmComponent} from './components/confirm.component';
 import {ControlMessagesComponent} from './components/control-messages.component';
 import {InputComponent} from './components/input.component';
@@ -17,20 +17,20 @@ import {ModalPlaceholderComponent, ModalService} from './services/modal.service'
 import {Formatter} from './formatter';
 import {AlertBarComponent} from './components/alert-bar.component';
 import {DropdownComponent} from './components/dropdown.component';
-import {TableComponent} from './components/table/table.component';
-import {TableHeaderCellComponent} from './components/table/table-header-cell.component';
+import {TableComponent} from '../src/table/table.component';
+import {TableHeaderCellComponent} from '../src/table/table-header-cell.component';
 import {FakeValidationMessageProvider, ValidationMessageProvider} from './validation-message-provider';
 import {NotificationService} from './services/notification.service';
 
 export * from './components/button.component';
 export * from './components/confirm.component';
 export * from './components/control-messages.component';
-export * from './components/icon.component';
-export * from './components/icon.component';
+export * from '../src/icon/icon.component';
+export * from '../src/icon/icon.component';
 export * from './components/input.component';
 export * from './components/material.module';
 export * from './components/select.component';
-export * from './components/spinner.component';
+export * from '../src/spinner/spinner.component';
 
 export * from './services/modal.service';
 export * from './directives/input-date.directive';

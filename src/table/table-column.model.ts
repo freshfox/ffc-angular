@@ -6,6 +6,7 @@ export class TableColumn {
 
 	cellTemplate: any;
 	getDynamicValue: (_: any) => {};
+	getSortValue: (_: any) => any;
 	name: string;
 	prop: string;
 	sortable: boolean = true;

@@ -2,40 +2,41 @@ import {Component, EventEmitter, Input, OnChanges, Output, SimpleChange} from '@
 import {TableOptions} from './table-options.model';
 import {TableColumn} from './table-column.model';
 import {SortDirection} from './sort-direction.enum';
-import {Helpers} from '../../helpers';
+import {SortEvent} from './sort-event';
+import {Helpers} from '../core/helpers';
 
 @Component({
 	selector: 'ff-table',
 	template: `
-		<table [class.table--clickable-items]="options.itemsClickable">
-			<tr>
-				<th ff-table-header-cell *ngFor="let column of options.columns" [column]="column"
-					(click)="sortHeaderClicked(column)"></th>
-			</tr>
+        <table [class.ff-table--selectable]="options.itemsClickable">
+            <tr>
+                <th ff-table-header-cell *ngFor="let column of options.columns" [column]="column"
+                    (click)="sortHeaderClicked(column)"></th>
+            </tr>
 
-			<tbody *ngIf="rows && rows.length > 0">
-			<tr *ngFor="let row of rows" (click)="rowClicked(row)">
-				<td *ngFor="let column of options.columns"
-					[class.ff-table-cell--align-right]="column.alignment == 'right'"
-					[class.ff-table-cell--align-center]="column.alignment == 'center'"
-					[style.width]="column.width + '%'">
+            <tbody *ngIf="rows && rows.length > 0 && !loading">
+            <tr *ngFor="let row of rows" (click)="rowClicked(row)">
+                <td *ngFor="let column of options.columns"
+                    [class.ff-table-cell--align-right]="column.alignment == 'right'"
+                    [class.ff-table-cell--align-center]="column.alignment == 'center'"
+                    [style.width]="column.width + '%'">
 
-					<span *ngIf="!column.cellTemplate" class="text">{{ getColumnValue(column, row) }}</span>
+                    <span *ngIf="!column.cellTemplate" class="text">{{ getColumnValue(column, row) }}</span>
 
-					<ng-template
-						*ngIf="column.cellTemplate"
-						[ngTemplateOutlet]="column.cellTemplate"
-						[ngOutletContext]="{ value: getColumnValue(column, row), row: row, column: column }">
-					</ng-template>
-				</td>
-			</tr>
-			</tbody>
+                    <ng-template
+                            *ngIf="column.cellTemplate"
+                            [ngTemplateOutlet]="column.cellTemplate"
+                            [ngOutletContext]="{ value: getColumnValue(column, row), row: row, column: column }">
+                    </ng-template>
+                </td>
+            </tr>
+            </tbody>
 
-		</table>
+        </table>
 
-		<ng-content select="[empty]" *ngIf="!loading && !rows.length"></ng-content>
+        <ng-content select="[empty]" *ngIf="!loading && !rows.length"></ng-content>
 
-		<ff-spinner class="table-spinner" *ngIf="loading"></ff-spinner>
+        <ff-spinner class="table-spinner" *ngIf="loading"></ff-spinner>
 	`,
 	host: {
 		'class': 'ff-table'
@@ -49,6 +50,7 @@ export class TableComponent implements OnChanges {
 	@Input() loading: boolean;
 
 	@Output() onRowClicked = new EventEmitter<any>();
+	@Output() onSortChanged = new EventEmitter<SortEvent>();
 
 
 	private sortedColumn: TableColumn;
@@ -93,20 +95,22 @@ export class TableComponent implements OnChanges {
 	}
 
 	updateSorting() {
-		this.options.columns.forEach((column) => {
-			if (column.sortDirection) {
-				this.sortColumn(column);
-			}
-		});
+		if (!this.options.asyncSort) {
+			this.options.columns.forEach((column) => {
+				if (column.sortDirection) {
+					this.sortColumn(column);
+				}
+			});
+		}
 	}
 
 	getColumnValue(column: TableColumn, row): any {
 		const propertyName = this.getPropertyName(column);
 		let val;
-		if (propertyName) {
-			val = this.getValue(row, propertyName);
-		} else if (column.getDynamicValue) {
+		if (column.getDynamicValue) {
 			val = column.getDynamicValue(row);
+		} else if (propertyName) {
+			val = this.getValue(row, propertyName);
 		}
 
 		const pipe = column.pipe;
@@ -136,13 +140,24 @@ export class TableComponent implements OnChanges {
 				}
 			}
 
-			this.sortColumn(tableColumn);
+			if (!this.options.asyncSort) {
+				this.sortColumn(tableColumn);
+			} else {
+				const sortEvent = new SortEvent();
+				sortEvent.property = this.sortedColumn.prop;
+				sortEvent.direction = this.sortedColumn.sortDirection;
+				this.onSortChanged.next(sortEvent);
+			}
 		}
 	}
 
 	sortColumn(column: TableColumn) {
 		const propertyName = this.getPropertyName(column);
 		const getValueFunction = (row) => {
+			if (column.getSortValue) {
+				return column.getSortValue(row);
+			}
+
 			if (propertyName) {
 				return this.getValue(row, propertyName);
 			}

@@ -4,6 +4,7 @@ export class TableOptions {
 
 	columns: TableColumn[];
 	itemsClickable = true;
+	asyncSort: boolean = false;
 
 	constructor(props: any) {
 		const columns = [];
