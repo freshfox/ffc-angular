@@ -4,6 +4,8 @@ import {FFIconModule} from './icon/index';
 import {FFSpinnerModule} from './spinner/index';
 
 export * from './table/index';
+export * from './spinner/index';
+export * from './spinner/index';
 
 const FF_MODULES = [
 	FFTableModule,
