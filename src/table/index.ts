@@ -6,12 +6,12 @@ import {FFSpinnerModule} from '../spinner/index';
 import {FFIconModule} from '../icon/index';
 
 export * from './column-alignment.enum';
-export * from './table-header-cell.component';
-export * from './table.component';
 export * from './sort-direction.enum';
-export * from './table-column.model';
-export * from './table-options.model';
 export * from './sort-event';
+export * from './table.component';
+export * from './table-column.model';
+export * from './table-header-cell.component';
+export * from './table-options.model';
 
 @NgModule({
 	imports: [CommonModule, FFSpinnerModule, FFIconModule],
