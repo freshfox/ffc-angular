@@ -20,7 +20,7 @@ import {DropdownComponent} from '../src/dropdown/dropdown.component';
 import {TableComponent} from '../src/table/table.component';
 import {TableHeaderCellComponent} from '../src/table/table-header-cell.component';
 import {FakeValidationMessageProvider, ValidationMessageProvider} from '../src/core/validation-message-provider';
-import {NotificationService} from './services/notification.service';
+import {NotificationService} from '../src/snackbar/notification.service';
 
 export * from './components/button.component';
 export * from './components/confirm.component';
