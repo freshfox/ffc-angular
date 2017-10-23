@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {MdSnackBarModule} from '@angular/material';
 import {SnackbarService} from './snackbar.service';
+import {MatSnackBarModule} from '@angular/material';
 
 export * from './snackbar.service';
 
 @NgModule({
-	imports: [CommonModule, MdSnackBarModule],
+	imports: [CommonModule, MatSnackBarModule],
 	providers: [SnackbarService]
 })
 export class FFSnackbarModule {
