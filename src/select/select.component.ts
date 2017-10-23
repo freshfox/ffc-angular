@@ -11,10 +11,9 @@ import {
 	SimpleChange
 } from '@angular/core';
 
-import * as $ from 'jquery';
-
+import $ from 'jquery';
 window['jQuery'] = window['$'] = $;
-require('chosen-js');
+import 'chosen-js';
 
 @Component({
 	selector: 'ff-select',
