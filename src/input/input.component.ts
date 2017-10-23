@@ -11,62 +11,62 @@ export const FF_INPUT_CONTROL_VALUE_ACCESSOR: any = {
 @Component({
 	selector: 'ff-input,ff-textarea',
 	template: `
-		<label *ngIf="label">{{ label }}</label>
+        <label *ngIf="label">{{ label }}</label>
 
-		<textarea
-			*ngIf="selector == 'ff-textarea'"
-			[placeholder]="placeholder"
-			[attr.name]="name"
-			[(ngModel)]="value"
-			(blur)="onBlur($event)"
-			(focus)="onFocus($event)"
-			(ngModelChange)="onChange()"
-			[tabindex]="tabindex ? tabindex : null"
-			[attr.disabled]="disabledSet ? true : null"
-			(input)="autoGrow($event.target)"
-		></textarea>
+        <textarea
+                *ngIf="selector == 'ff-textarea'"
+                [placeholder]="placeholder"
+                [attr.name]="name"
+                [(ngModel)]="value"
+                (blur)="onBlur($event)"
+                (focus)="onFocus($event)"
+                (ngModelChange)="onChange()"
+                [tabindex]="tabindex ? tabindex : null"
+                [attr.disabled]="disabledSet ? true : null"
+                (input)="autoGrow($event.target)"
+        ></textarea>
 
-		<input
-			*ngIf="type == 'date' && selector == 'ff-input'"
-			ff-datepicker
-			type="text"
-			[placeholder]="placeholder"
-			[attr.name]="name"
-			[(ngModel)]="value"
-			(blur)="onBlur($event)"
-			(focus)="onFocus($event)"
-			[attr.disabled]="disabledSet ? true : null"
-			(ngModelChange)="onChange()"
-			[tabindex]="tabindex">
+        <input
+                *ngIf="type == 'date' && selector == 'ff-input'"
+                ff-datepicker
+                type="text"
+                [placeholder]="placeholder"
+                [attr.name]="name"
+                [(ngModel)]="value"
+                (blur)="onBlur($event)"
+                (focus)="onFocus($event)"
+                [attr.disabled]="disabledSet ? true : null"
+                (ngModelChange)="onChange()"
+                [tabindex]="tabindex">
 
-		<input
-			*ngIf="type != 'date' && type != 'money' && selector == 'ff-input'"
-			[type]="type"
-			[placeholder]="placeholder"
-			[attr.name]="name"
-			[(ngModel)]="value"
-			(blur)="onBlur($event)"
-			(focus)="onFocus($event)"
-			[attr.disabled]="disabledSet ? true : null"
-			(ngModelChange)="onChange()"
-			[tabindex]="tabindex ? tabindex : null">
+        <input
+                *ngIf="type != 'date' && type != 'money' && selector == 'ff-input'"
+                [type]="type"
+                [placeholder]="placeholder"
+                [attr.name]="name"
+                [(ngModel)]="value"
+                (blur)="onBlur($event)"
+                (focus)="onFocus($event)"
+                [attr.disabled]="disabledSet ? true : null"
+                (ngModelChange)="onChange()"
+                [tabindex]="tabindex ? tabindex : null">
 
-		<input
-			ff-decimal
-			*ngIf="type == 'money' && selector == 'ff-input'"
-			[alwaysShowDecimals]="alwaysShowDecimals"
-			[numberOfDecimals]="numberOfDecimals"
-			type="text"
-			[placeholder]="placeholder"
-			[attr.name]="name"
-			[(ngModel)]="value"
-			(blur)="onBlur($event)"
-			(focus)="onFocus($event)"
-			[attr.disabled]="disabledSet ? true : null"
-			(ngModelChange)="onChange()"
-			[tabindex]="tabindex ? tabindex : null">
+        <input
+                ff-decimal
+                *ngIf="type == 'money' && selector == 'ff-input'"
+                [alwaysShowDecimals]="alwaysShowDecimals"
+                [numberOfDecimals]="numberOfDecimals"
+                type="text"
+                [placeholder]="placeholder"
+                [attr.name]="name"
+                [(ngModel)]="value"
+                (blur)="onBlur($event)"
+                (focus)="onFocus($event)"
+                [attr.disabled]="disabledSet ? true : null"
+                (ngModelChange)="onChange()"
+                [tabindex]="tabindex ? tabindex : null">
 
-		<ff-control-messages *ngIf="formControl" [control]="formControl"></ff-control-messages>
+        <ff-control-messages *ngIf="formControl" [control]="formControl"></ff-control-messages>
 	`,
 	providers: [FF_INPUT_CONTROL_VALUE_ACCESSOR],
 	host: {
@@ -103,8 +103,10 @@ export class InputComponent implements ControlValueAccessor, OnInit, AfterViewIn
 
 	value: any = '';
 	private isFocused = false;
-	private onTouchedCallback: () => void = () => {};
-	private onChangeCallback: (_: any) => void = () => {};
+	private onTouchedCallback: () => void = () => {
+	};
+	private onChangeCallback: (_: any) => void = () => {
+	};
 
 	constructor(private el: ElementRef) {
 		this.selector = el.nativeElement.localName;

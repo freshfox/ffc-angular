@@ -1,15 +1,14 @@
 import {Component, Input} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {ValidationMessageProvider} from '../../src/core/validation-message-provider';
+import {ValidationMessageProvider} from './validation-message-provider';
 
 @Component({
 	selector: 'ff-control-messages',
 	template: `
-		<div class="control-message" *ngIf="errorMessage !== null">{{errorMessage}}</div>`
+        <div class="control-message" *ngIf="errorMessage !== null">{{errorMessage}}</div>`
 })
 export class ControlMessagesComponent {
 	@Input() control: FormControl;
-
 
 
 	constructor(private validationMessageProvider: ValidationMessageProvider) {
