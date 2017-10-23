@@ -8,6 +8,7 @@ import {FFButtonModule} from './button/index';
 import {FFDropdownModule} from './dropdown/index';
 import {FFSnackbarModule} from './snackbar/index';
 import {FFInputModule} from './input/index';
+import {FFSelectModule} from './select/index';
 
 export * from './core/index';
 export * from './table/index';
@@ -18,6 +19,7 @@ export * from './button/index';
 export * from './dropdown/index';
 export * from './snackbar/index';
 export * from './input/index';
+export * from './select/index';
 
 const FF_MODULES = [
 	FFCoreModule,
@@ -28,7 +30,8 @@ const FF_MODULES = [
 	FFButtonModule,
 	FFDropdownModule,
 	FFSnackbarModule,
-	FFInputModule
+	FFInputModule,
+	FFSelectModule
 ];
 
 @NgModule({

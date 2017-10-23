@@ -6,7 +6,7 @@ import {SpinnerComponent} from '../src/spinner/spinner.component';
 import {ConfirmComponent} from './components/confirm.component';
 import {ControlMessagesComponent} from '../src/core/control-messages.component';
 import {InputComponent} from '../src/input/input.component';
-import {SelectComponent} from './components/select.component';
+import {SelectComponent} from '../src/select/select.component';
 import {DatePickerDirective} from './directives/input-date.directive';
 import {MaterialModule} from '@angular/material';
 import {FormsModule} from '@angular/forms';
@@ -29,7 +29,7 @@ export * from '../src/icon/icon.component';
 export * from '../src/icon/icon.component';
 export * from '../src/input/input.component';
 export * from './components/material.module';
-export * from './components/select.component';
+export * from '../src/select/select.component';
 export * from '../src/spinner/spinner.component';
 
 export * from './services/modal.service';
