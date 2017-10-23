@@ -68,7 +68,7 @@ $buttonPadding: 8px 14px !default;
 $buttonPaddingSmall: 5px 12px !default;
 $buttonPaddingLarge: 15px 18px !default;
 $buttonTextColor: #fff !default;
-$buttonPrimaryBackground: $colorPrimary !default;
+$buttonPrimaryBackground: $ff-color-primary !default;
 $buttonSecondaryBorderColor: $colorGrayMedium !default;
 
 /**
@@ -90,8 +90,8 @@ $modalBackgroundColor: white !default;
 $modalWidthDefault: 600px !default;
 $modalWidthLarge: 750px !default;
 $modalSidePadding: 24px !default;
-$modalCloseButtonColor: $colorPrimary !default;
+$modalCloseButtonColor: $ff-color-primary !default;
 $modalHeaderDangerBackgroundColor: $colorError !default;
-$modalHeaderBackgroundColor: $colorPrimary !default;
+$modalHeaderBackgroundColor: $ff-color-primary !default;
 $modalFooterBackgroundColor: $colorGrayUltraLighter !default;
 $modalFooterTopBorderColor: $colorSpacerLines !default;
