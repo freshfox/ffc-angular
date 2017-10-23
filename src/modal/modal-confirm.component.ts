@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
 
 @Component({
-	selector: 'ff-confirm',
+	selector: 'ff-modal-confirm',
 	template: `
 		<div class="modal-header" *ngIf="title">
 			{{ title }}
@@ -17,7 +17,7 @@ import {Component, Input, OnInit, Output} from '@angular/core';
 		</div>
 	`
 })
-export class ConfirmComponent implements OnInit {
+export class ModalConfirmComponent implements OnInit {
 
 	@Input() title: string;
 	@Input() message: string;

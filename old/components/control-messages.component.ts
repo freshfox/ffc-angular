@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {ValidationMessageProvider} from '../validation-message-provider';
+import {ValidationMessageProvider} from '../../src/core/validation-message-provider';
 
 @Component({
 	selector: 'ff-control-messages',

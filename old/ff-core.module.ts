@@ -19,7 +19,7 @@ import {AlertBarComponent} from './components/alert-bar.component';
 import {DropdownComponent} from './components/dropdown.component';
 import {TableComponent} from '../src/table/table.component';
 import {TableHeaderCellComponent} from '../src/table/table-header-cell.component';
-import {FakeValidationMessageProvider, ValidationMessageProvider} from './validation-message-provider';
+import {FakeValidationMessageProvider, ValidationMessageProvider} from '../src/core/validation-message-provider';
 import {NotificationService} from './services/notification.service';
 
 export * from './components/button.component';
@@ -37,7 +37,7 @@ export * from './directives/input-date.directive';
 
 export {NumberPipe} from './pipes/number.pipe';
 
-export * from './translate-packaged-loader';
+export * from '../src/core/translate-packaged-loader';
 
 export interface FFCoreModuleConfig {
 	validationMessageProvider?: Provider;
