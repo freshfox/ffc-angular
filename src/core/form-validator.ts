@@ -1,6 +1,6 @@
-import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
 import * as moment from 'moment';
-const validator = require('validator');
+import * as validator from 'validator';
 
 export class FormValidator {
 
@@ -11,15 +11,6 @@ export class FormValidator {
 			return {
 				invalidDate: true
 			};
-		}
-
-		return null;
-	}
-
-	static email(control: FormControl) {
-		const value = control.value;
-		if (value) {
-			return Validators.email(control);
 		}
 
 		return null;
