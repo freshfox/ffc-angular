@@ -5,6 +5,7 @@ import {FFSpinnerModule} from './spinner/index';
 import {FFModalModule} from './modal/index';
 import {FFCoreModule} from './core/index';
 import {FFButtonModule} from './button/index';
+import {FFDropdownModule} from './dropdown/index';
 
 export * from './core/index';
 export * from './table/index';
@@ -12,6 +13,7 @@ export * from './spinner/index';
 export * from './icon/index';
 export * from './modal/index';
 export * from './button/index';
+export * from './dropdown/index';
 
 const FF_MODULES = [
 	FFCoreModule,
@@ -19,7 +21,8 @@ const FF_MODULES = [
 	FFIconModule,
 	FFSpinnerModule,
 	FFModalModule,
-	FFButtonModule
+	FFButtonModule,
+	FFDropdownModule
 ];
 
 @NgModule({

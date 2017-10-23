@@ -16,7 +16,7 @@ import {SafePipe} from './pipes/safe.pipe';
 import {ModalPlaceholderComponent, ModalService} from './services/modal.service';
 import {Formatter} from './formatter';
 import {AlertBarComponent} from './components/alert-bar.component';
-import {DropdownComponent} from './components/dropdown.component';
+import {DropdownComponent} from '../src/dropdown/dropdown.component';
 import {TableComponent} from '../src/table/table.component';
 import {TableHeaderCellComponent} from '../src/table/table-header-cell.component';
 import {FakeValidationMessageProvider, ValidationMessageProvider} from '../src/core/validation-message-provider';
