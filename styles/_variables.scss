@@ -2,10 +2,10 @@
  * Colors
  */
 $ff-color-primary: #4c89fb !default;
-$colorPrimaryDark: darken($colorPrimary, 20%) !default;
-$colorPrimaryLight: lighten($colorPrimary, 10%) !default;
-$colorPrimaryUltraLight: lighten($colorPrimary, 20%) !default;
-$colorPrimaryUltraLighter: lighten($colorPrimary, 23%) !default;
+$colorPrimaryDark: darken($ff-color-primary, 20%) !default;
+$colorPrimaryLight: lighten($ff-color-primary, 10%) !default;
+$colorPrimaryUltraLight: lighten($ff-color-primary, 20%) !default;
+$colorPrimaryUltraLighter: lighten($ff-color-primary, 23%) !default;
 $colorLightAccent: #f2f5f6 !default;
 $colorAccentUltraLight: #fafcfb !default;
 $colorMediumAccent: #a0aaad !default;
