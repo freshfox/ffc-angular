@@ -1,5 +1,5 @@
 import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
-import * as moment from 'moment';
+import moment from 'moment';
 import * as validator from 'validator';
 
 export class FormValidator {

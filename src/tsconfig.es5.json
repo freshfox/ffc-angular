@@ -15,6 +15,7 @@
       "dom"
     ],
     "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
     "types": []
   },
   "angularCompilerOptions": {
