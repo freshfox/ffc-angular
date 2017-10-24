@@ -1,6 +1,6 @@
 {
   "name": "ffc-angular",
-  "version": "1.0.0-alpha.16",
+  "version": "1.0.0-alpha.17",
   "scripts": {
     "build": "gulp build",
     "build:watch": "gulp",
