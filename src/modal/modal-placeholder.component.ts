@@ -1,7 +1,66 @@
-import {AfterViewInit, ComponentRef, Injector, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
-import {AnimationEvent} from '@angular/animations';
+import {AfterViewInit, Component, ComponentRef, Injector, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {animate, AnimationEvent, state, style, transition, trigger} from '@angular/animations';
 import {ModalSize, ModalService} from './modal.service';
 
+@Component({
+	selector: 'ff-modal-placeholder',
+	template: `
+		<div class="modal-outer" [@modalOuter]="state">
+			<div [@modal]="state" (@modal.done)="modalAnimationDone($event)" tabindex="1" class="modal"
+				 [class.modal--no-padding]="!padding"
+				 [class.modal--large]="isLarge()"
+				 [class.modal--full-width]="isFullWidth()"
+				 [class.modal--clean]="isClean()">
+				<div class="modal-dialog">
+					<div class="modal-dialog__inner">
+						<ng-template #modalplaceholder></ng-template>
+						<button ff-button *ngIf="showCloseButton && !clean"
+								class="ff-button--clear modal__close-button-inside"
+								(click)="hide()">
+							<ff-icon name="cross"></ff-icon>
+						</button>
+					</div>
+				</div>
+			</div>
+			<div [@backdrop]="state" class="modal-backdrop" (click)="onBackdropClicked()"></div>
+			<button ff-button *ngIf="showCloseButton && clean" class="modal__close-button" [@closeButton]="state"
+					(click)="hide()">
+				<ff-icon name="cross"></ff-icon>
+			</button>
+		</div>
+	`,
+	animations: [
+		trigger('modalOuter', [
+			state('shown', style({display: 'flex'})),
+			state('hidden', style({display: 'none'})),
+			transition('hidden <=> shown', [
+				animate('0.2s ease')
+			])
+		]),
+		trigger('modal', [
+			state('shown', style({transform: 'scale3d(1, 1, 1)', opacity: 1, display: 'block'})),
+			state('hidden', style({transform: 'scale3d(0.7, 0.7, 0.7)', opacity: 0})),
+			transition('hidden <=> shown', [
+				animate('0.2s ease')
+			])
+		]),
+		trigger('backdrop', [
+			state('shown', style({opacity: 1, display: 'block'})),
+			state('hidden', style({opacity: 0, display: 'none'})),
+			transition('hidden <=> shown', [
+				animate('0.2s ease')
+			])
+		]),
+		trigger('closeButton', [
+			state('shown', style({opacity: 1, display: 'block'})),
+			state('hidden', style({opacity: 0, display: 'none'})),
+			transition('hidden <=> shown', [
+				animate('0.1s ease')
+			])
+		])
+	],
+	host: {'class': 'modal-placeholder'}
+})
 export class ModalPlaceholderComponent implements OnInit, AfterViewInit {
 
 	private isShown: boolean = false;
