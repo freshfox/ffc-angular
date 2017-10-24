@@ -1,6 +1,7 @@
 import {ModuleWithProviders, NgModule, Provider} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FakeValidationMessageProvider, ValidationMessageProvider} from './validation-message-provider';
+import {ControlMessagesComponent} from './control-messages.component';
 
 export * from './helpers';
 export * from './form-helpers';
@@ -13,7 +14,9 @@ export interface FFCoreModuleConfig {
 }
 
 @NgModule({
-	imports: [BrowserModule]
+	imports: [BrowserModule],
+	declarations: [ControlMessagesComponent],
+	exports: [ControlMessagesComponent],
 })
 export class FFCoreModule {
 
