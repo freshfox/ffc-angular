@@ -11,7 +11,7 @@ import {
 	SimpleChange
 } from '@angular/core';
 
-import * as Choices from 'choices.js';
+import Choices from 'choices.js';
 
 @Component({
 	selector: 'ff-select',
