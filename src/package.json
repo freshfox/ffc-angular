@@ -1,6 +1,6 @@
 {
   "name": "ffc-angular",
-  "version": "1.0.0-alpha.13",
+  "version": "1.0.0-alpha.14",
   "repository": {
     "type": "git",
     "url": "https://github.com/freshfox/ffc-angular"
@@ -27,8 +27,7 @@
     "@angular/material": "^2.0.0-beta.12",
     "@angular/platform-browser": "^4.0.0",
     "@ngx-translate/core": "^8.0.0",
-    "chosen-js": "^1.8.2",
-    "jquery": "^3.2.1",
+    "choices.js": "^3.0.2",
     "ladda": "^1.0.5",
     "moment": "^2.19.1",
     "rxjs": "^5.1.0",
