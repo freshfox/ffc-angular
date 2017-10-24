@@ -11,9 +11,7 @@ import {
 	SimpleChange
 } from '@angular/core';
 
-import $ from 'jquery';
-window['jQuery'] = window['$'] = $;
-import 'chosen-js';
+import {Choices} from 'choices.js';
 
 @Component({
 	selector: 'ff-select',
@@ -105,39 +103,22 @@ export class SelectComponent implements OnInit, AfterViewInit, OnChanges, OnDest
 	ngAfterViewInit() {
 		this.select = this.el.nativeElement.querySelector('select');
 
-		this.$select = ($(this.select) as any).chosen({
-			no_results_text: 'Keine Ergebnisse für',
-			disable_search: !this.enableSearchField
+		this.$select = new Choices(this.select, {
+			searchEnabled: this.enableSearchField
 		});
 
-		this.$select.change((e, params) => {
-			let value = params.selected;
+		this.$select.passedElement.addEventListener('change', () => {
+			/*let value = params.selected;
 			if (value === '') {
 				value = null;
 			}
-			this.selectedValue = value;
+			this.selectedValue = value;*/
 			this.onChange();
 		});
 
 		this.updateValue();
 
-		this.$select.on('chosen:showing_dropdown chosen:hiding_dropdown', function (e) {
-			const chosen_container = $(e.target).next('.chosen-container'),
-				classState = e.type == 'chosen:showing_dropdown' && dropdownExceedsBottomViewport();
-
-			function dropdownExceedsBottomViewport() {
-				const dropdown = chosen_container.find('.chosen-drop'),
-					dropdown_top = dropdown.offset().top - document.documentElement.scrollTop,
-					dropdown_height = dropdown.height(),
-					viewport_height = document.documentElement.clientHeight;
-
-				return dropdown_top + dropdown_height > viewport_height;
-			}
-
-			chosen_container.toggleClass('chosen-drop-up', classState);
-		});
-
-		const $chosenSingle = this.$select.find('.chosen-search-input');
+		/*const $chosenSingle = this.$select.find('.chosen-search-input');
 
 		$chosenSingle.on('focus', () => {
 			this.isFocused = true;
@@ -145,7 +126,7 @@ export class SelectComponent implements OnInit, AfterViewInit, OnChanges, OnDest
 
 		$chosenSingle.on('blur', () => {
 			this.isFocused = false;
-		});
+		});*/
 	}
 
 	private getOptionForValue(value) {
@@ -155,13 +136,13 @@ export class SelectComponent implements OnInit, AfterViewInit, OnChanges, OnDest
 	}
 
 	private updateValue() {
-		if (this.$select) {
+		/*if (this.$select) {
 			this.$select.val(this.selectedValue).trigger('chosen:updated');
-		}
+		}*/
 	}
 
 	ngOnDestroy() {
-		this.$select.chosen('destroy');
+		this.$select.destroy();
 	}
 
 	getValue(option) {
