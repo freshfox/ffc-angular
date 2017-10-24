@@ -13,7 +13,7 @@ export interface FFCoreModuleConfig {
 }
 
 @NgModule({
-	imports: [BrowserModule],
+	imports: [BrowserModule]
 })
 export class FFCoreModule {
 

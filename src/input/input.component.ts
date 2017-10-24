@@ -51,21 +51,6 @@ export const FF_INPUT_CONTROL_VALUE_ACCESSOR: any = {
                 (ngModelChange)="onChange()"
                 [tabindex]="tabindex ? tabindex : null">
 
-        <input
-                ff-decimal
-                *ngIf="type == 'money' && selector == 'ff-input'"
-                [alwaysShowDecimals]="alwaysShowDecimals"
-                [numberOfDecimals]="numberOfDecimals"
-                type="text"
-                [placeholder]="placeholder"
-                [attr.name]="name"
-                [(ngModel)]="value"
-                (blur)="onBlur($event)"
-                (focus)="onFocus($event)"
-                [attr.disabled]="disabledSet ? true : null"
-                (ngModelChange)="onChange()"
-                [tabindex]="tabindex ? tabindex : null">
-
         <ff-control-messages *ngIf="formControl" [control]="formControl"></ff-control-messages>
 	`,
 	providers: [FF_INPUT_CONTROL_VALUE_ACCESSOR],
