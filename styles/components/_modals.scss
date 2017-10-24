@@ -55,7 +55,7 @@
 	align-items: flex-start;
 	justify-content: center;
 
-	.ff-button.modal__close-button {
+	[ff-button].modal__close-button {
 		position: fixed;
 		top: 40px;
 		right: 40px;
@@ -74,7 +74,7 @@
 		}
 	}
 
-	.ff-button.modal__close-button-inside {
+	[ff-button].modal__close-button-inside {
 		position: absolute;
 		top: 0;
 		right: 0;
