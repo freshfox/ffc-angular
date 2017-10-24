@@ -8,6 +8,7 @@ export * from './form-helpers';
 export * from './translate-packaged-loader';
 export * from './validation-message-provider';
 export * from './form-validator';
+export * from './control-messages.component';
 
 export interface FFCoreModuleConfig {
 	validationMessageProvider?: Provider;
