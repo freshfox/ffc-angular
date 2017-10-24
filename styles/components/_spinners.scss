@@ -7,10 +7,17 @@
   .mat-progress-spinner {
     width: 100% !important;
     height: 100% !important;
+
+    svg {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    circle {
+      stroke: $ff-color-primary;
+    }
   }
 
-  svg path {
-    stroke: $ff-color-primary !important;
-  }
+
 }
 
