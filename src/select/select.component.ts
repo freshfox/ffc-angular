@@ -8,7 +8,7 @@ import {
 	OnDestroy,
 	OnInit,
 	Output,
-	SimpleChange
+	SimpleChange, ViewChild
 } from '@angular/core';
 
 import Choices from 'choices.js';
@@ -16,13 +16,13 @@ import Choices from 'choices.js';
 @Component({
 	selector: 'ff-select',
 	template: `
-		<label *ngIf="label">{{ label }}</label>
-		<select #s class="{{ class }}" [disabled]="disabledSet">
-			<option
-				*ngFor="let option of options"
-				[attr.value]="getValue(option)">{{ getName(option) }}
-			</option>
-		</select>`,
+        <label *ngIf="label">{{ label }}</label>
+        <select #s class="{{ class }}" [disabled]="disabledSet">
+            <option
+                    *ngFor="let option of options"
+                    [attr.value]="getValue(option)">{{ getName(option) }}
+            </option>
+        </select>`,
 	host: {
 		'class': 'ff-select',
 		'[class.ff-focused]': 'isFocused',
@@ -50,14 +50,15 @@ export class SelectComponent implements OnInit, AfterViewInit, OnChanges, OnDest
 
 	@Input() enableSearchField = true;
 
+	@ViewChild('s') private selectEl: ElementRef;
+
 	disabledSet = false;
 	private select;
 	private $select;
 	private initialValue;
 	private isFocused = false;
-	private isOpen = false;
 
-	constructor(private el: ElementRef) {
+	constructor() {
 	}
 
 	ngOnInit() {
@@ -101,32 +102,24 @@ export class SelectComponent implements OnInit, AfterViewInit, OnChanges, OnDest
 	}
 
 	ngAfterViewInit() {
-		this.select = this.el.nativeElement.querySelector('select');
+		this.select = this.selectEl.nativeElement;
 
 		this.$select = new Choices(this.select, {
-			searchEnabled: this.enableSearchField
+			searchEnabled: this.enableSearchField,
+			itemSelectText: '',
 		});
 
-		this.$select.passedElement.addEventListener('change', () => {
-			/*let value = params.selected;
+		this.select.addEventListener('choice', (event) => {
+			let value = event.detail.choice.value;
 			if (value === '') {
 				value = null;
 			}
-			this.selectedValue = value;*/
+
+			this.selectedValue = value;
 			this.onChange();
 		});
 
 		this.updateValue();
-
-		/*const $chosenSingle = this.$select.find('.chosen-search-input');
-
-		$chosenSingle.on('focus', () => {
-			this.isFocused = true;
-		});
-
-		$chosenSingle.on('blur', () => {
-			this.isFocused = false;
-		});*/
 	}
 
 	private getOptionForValue(value) {
@@ -136,9 +129,9 @@ export class SelectComponent implements OnInit, AfterViewInit, OnChanges, OnDest
 	}
 
 	private updateValue() {
-		/*if (this.$select) {
-			this.$select.val(this.selectedValue).trigger('chosen:updated');
-		}*/
+		if (this.$select) {
+			this.$select.setValueByChoice(this.selectedValue);
+		}
 	}
 
 	ngOnDestroy() {
