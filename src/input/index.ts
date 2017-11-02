@@ -2,7 +2,6 @@ import {ModuleWithProviders, NgModule, Provider} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {InputComponent} from './input.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {FFCoreModule} from '../core/index';
 import {FakeValidationMessageProvider, ValidationMessageProvider} from './validation-message-provider';
 import {ControlMessagesComponent} from './control-messages.component';
 
@@ -22,7 +21,7 @@ export interface FFInputModuleConfig {
 export class FFInputModule {
 	static forRoot(config: FFInputModuleConfig = {}): ModuleWithProviders {
 		return {
-			ngModule: FFCoreModule,
+			ngModule: FFInputModule,
 			providers: [
 				config.validationMessageProvider || {
 					provide: ValidationMessageProvider,
