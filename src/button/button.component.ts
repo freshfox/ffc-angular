@@ -4,12 +4,14 @@ import * as Ladda from 'ladda';
 @Component({
 	selector: '[ff-button]',
 	template: `
-		<div class="ff-button__inner">
-			<ff-icon *ngIf="icon" [name]="icon"></ff-icon>
-			<span class="ladda-label">
-                <ng-content></ng-content>
-            </span>
-		</div>`,
+        <span class="ladda-label">
+			<div class="ff-button__inner">
+				<ff-icon *ngIf="icon" [name]="icon"></ff-icon>
+				<span>
+					<ng-content></ng-content>
+				</span>
+			</div>
+		</span>`,
 	host: {
 		'[class]': '"button ff-button ladda-button " + class',
 		'data-style': 'zoom-in',
