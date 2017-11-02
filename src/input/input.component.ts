@@ -51,7 +51,7 @@ export const FF_INPUT_CONTROL_VALUE_ACCESSOR: any = {
                 (ngModelChange)="onChange()"
                 [tabindex]="tabindex ? tabindex : null">
 
-        <!--<ff-control-messages *ngIf="formControl" [control]="formControl"></ff-control-messages>-->
+        <ff-control-messages *ngIf="formControl" [control]="formControl"></ff-control-messages>
 	`,
 	providers: [FF_INPUT_CONTROL_VALUE_ACCESSOR],
 	host: {
