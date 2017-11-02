@@ -26,7 +26,7 @@ import {Helpers} from '../core/helpers';
                     <ng-template
                             *ngIf="column.cellTemplate"
                             [ngTemplateOutlet]="column.cellTemplate"
-                            [ngOutletContext]="{ value: getColumnValue(column, row), row: row, column: column }">
+                            [ngTemplateOutletContext]="{ value: getColumnValue(column, row), row: row, column: column }">
                     </ng-template>
                 </td>
             </tr>
