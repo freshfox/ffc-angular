@@ -13,7 +13,7 @@ export * from './modal.service';
 	imports: [CommonModule, BrowserAnimationsModule, FFIconModule],
 	declarations: [ModalPlaceholderComponent, ModalConfirmComponent],
 	entryComponents: [ModalConfirmComponent],
-	exports: [ModalPlaceholderComponent],
+	exports: [ModalPlaceholderComponent, ModalConfirmComponent],
 	providers: [ModalService]
 })
 export class FFModalModule {
