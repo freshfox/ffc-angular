@@ -64,7 +64,7 @@ export class TableComponent implements OnChanges {
 	}
 
 	static getSortComparator(sortDirection: SortDirection, getValueFunction: (row) => {}) {
-		return (rowA, rowB) => {
+		const comparator = (rowA, rowB) => {
 
 			const a = getValueFunction(rowA);
 			const b = getValueFunction(rowB);
@@ -79,6 +79,8 @@ export class TableComponent implements OnChanges {
 
 			return a < b ? 1 : -1;
 		}
+
+		return comparator;
 	}
 
 	constructor() {
