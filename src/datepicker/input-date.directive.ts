@@ -1,7 +1,11 @@
 import {Directive, ElementRef, forwardRef, OnDestroy, OnInit} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import * as Pikaday from 'pikaday';
-import * as moment from 'moment';
+
+// Workaround for the fact that numbro doesn't have a default export
+// See https://github.com/rollup/rollup/issues/670#issuecomment-281139978
+import * as moment_ from 'moment';
+let moment: any = (<any>moment_).default || moment_;
 
 export const DATEPICKER_VALUE_ACCESSOR: any = {
 	provide: NG_VALUE_ACCESSOR,

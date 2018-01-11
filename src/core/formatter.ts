@@ -1,6 +1,10 @@
 import {TranslateService} from '@ngx-translate/core';
 import {Injectable} from '@angular/core';
-import * as numbro from 'numbro';
+
+// Workaround for the fact that numbro doesn't have a default export
+// See https://github.com/rollup/rollup/issues/670#issuecomment-281139978
+import * as numbro_ from 'numbro';
+let numbro: any = (<any>numbro_).default || numbro_;
 
 const numbroDELang = {
 	langLocaleCode: 'de',
