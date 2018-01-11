@@ -2,8 +2,8 @@ export class Helpers {
 
 	/**
 	 * Returns a deep object given a string. zoo['animal.type']
-	 * @param {object} obj
-	 * @param {string} path
+	 * @param obj
+	 * @param path
 	 */
 	static getValueDeep(obj, path) {
 		if (!obj || !path) {
