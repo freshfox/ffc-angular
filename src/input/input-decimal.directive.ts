@@ -1,6 +1,6 @@
 import {OnInit, ElementRef, Directive, forwardRef, Input} from "@angular/core";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {Formatter} from '../../src/core/formatter';
+import {Formatter} from '../core/formatter';
 
 export const AMOUNT_VALUE_ACCESSOR: any = {
 	provide: NG_VALUE_ACCESSOR,

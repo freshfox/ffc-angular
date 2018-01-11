@@ -61,6 +61,7 @@
     "node-sass-tilde-importer": "^1.0.0",
     "node-watch": "^0.5.2",
     "numbro": "^1.11.1",
+    "pikaday": "^1.7.0",
     "protractor": "~5.1.0",
     "rollup": "^0.41.6",
     "run-sequence": "^1.2.2",

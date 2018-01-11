@@ -4,6 +4,8 @@ import {InputComponent} from './input.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FakeValidationMessageProvider, ValidationMessageProvider} from './validation-message-provider';
 import {ControlMessagesComponent} from './control-messages.component';
+import {DecimalDirective} from './input-decimal.directive';
+import {DatePickerDirective} from '../datepicker/input-date.directive';
 
 export * from './input.component';
 export * from './control-messages.component';
@@ -15,8 +17,8 @@ export interface FFInputModuleConfig {
 
 @NgModule({
 	imports: [CommonModule, FormsModule, ReactiveFormsModule],
-	declarations: [InputComponent, ControlMessagesComponent],
-	exports: [InputComponent, ControlMessagesComponent],
+	declarations: [InputComponent, ControlMessagesComponent, DecimalDirective],
+	exports: [InputComponent, ControlMessagesComponent, DecimalDirective],
 })
 export class FFInputModule {
 	static forRoot(config: FFInputModuleConfig = {}): ModuleWithProviders {

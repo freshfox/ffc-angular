@@ -10,6 +10,7 @@ import {FFSnackbarModule} from './snackbar/index';
 import {FFInputModule} from './input/index';
 import {FFSelectModule} from './select/index';
 import {FFAlertBarModule} from './alert-bar/index';
+import {FFDatePickerModule} from './datepicker/index';
 
 export * from './core/index';
 export * from './table/index';
@@ -22,6 +23,7 @@ export * from './snackbar/index';
 export * from './input/index';
 export * from './select/index';
 export * from './alert-bar/index';
+export * from './datepicker/index';
 
 const FF_MODULES = [
 	FFCoreModule,
@@ -34,7 +36,8 @@ const FF_MODULES = [
 	FFSnackbarModule,
 	FFInputModule,
 	FFSelectModule,
-	FFAlertBarModule
+	FFAlertBarModule,
+	FFDatePickerModule
 ];
 
 @NgModule({
