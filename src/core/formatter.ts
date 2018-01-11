@@ -1,6 +1,6 @@
 import {TranslateService} from '@ngx-translate/core';
 import {Injectable} from '@angular/core';
-const numbro = require('numbro');
+import * as numbro from 'numbro';
 
 const numbroDELang = {
 	langLocaleCode: 'de',
@@ -42,7 +42,7 @@ export class Formatter {
 	}
 
 	amount(value: number, numberOfDecimals: number = 2, alwaysShowDecimals: boolean = true): string {
-		var format = '0,0';
+		let format = '0,0';
 		format += alwaysShowDecimals ? '.' : '[.]';
 
 		// If we don't want to force decimals, make them optional.
@@ -51,7 +51,7 @@ export class Formatter {
 		}
 
 		// Add the number of decimals we want to show
-		for (var i = 0; i < numberOfDecimals; i++) {
+		for (let i = 0; i < numberOfDecimals; i++) {
 			format += '0';
 		}
 
@@ -68,7 +68,7 @@ export class Formatter {
 	}
 
 	parseMoney(formatted: string): number {
-		var parsed = numbro().unformat(formatted);
+		let parsed = numbro().unformat(formatted);
 		if (typeof parsed == 'undefined') {
 			return 0;
 		}
