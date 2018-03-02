@@ -92,7 +92,10 @@
 }
 
 .ff-dialog-clean {
-	.mat-dialog-container {
+    max-width: none !important;
+
+    .mat-dialog-container {
 		background: transparent;
+        box-shadow: none;
 	}
 }
