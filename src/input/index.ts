@@ -5,7 +5,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FakeValidationMessageProvider, ValidationMessageProvider} from './validation-message-provider';
 import {ControlMessagesComponent} from './control-messages.component';
 import {DecimalDirective} from './input-decimal.directive';
-import {DatePickerDirective} from '../datepicker/input-date.directive';
+import {FFDatePickerModule} from '../datepicker/index';
 
 export * from './input.component';
 export * from './control-messages.component';
@@ -16,7 +16,7 @@ export interface FFInputModuleConfig {
 }
 
 @NgModule({
-	imports: [CommonModule, FormsModule, ReactiveFormsModule],
+	imports: [CommonModule, FormsModule, ReactiveFormsModule, FFDatePickerModule],
 	declarations: [InputComponent, ControlMessagesComponent, DecimalDirective],
 	exports: [InputComponent, ControlMessagesComponent, DecimalDirective],
 })
