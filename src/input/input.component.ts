@@ -40,19 +40,6 @@ export const FF_INPUT_CONTROL_VALUE_ACCESSOR: any = {
                 [tabindex]="tabindex">
 
         <input
-                *ngIf="type == 'date' && selector == 'ff-input'"
-                ff-datepicker
-                type="text"
-                [placeholder]="placeholder"
-                [attr.name]="name"
-                [(ngModel)]="value"
-                (blur)="onBlur($event)"
-                (focus)="onFocus($event)"
-                [attr.disabled]="disabledSet ? true : null"
-                (ngModelChange)="onChange()"
-                [tabindex]="tabindex">
-
-        <input
                 *ngIf="type != 'date' && type != 'money' && selector == 'ff-input'"
                 [type]="type"
                 [placeholder]="placeholder"
