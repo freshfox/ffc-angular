@@ -24,6 +24,8 @@ export class SnackbarService {
 	private showNotification(message: string, config?: NotificationConfig) {
 		this.snackBar.open(message, null, {
 			duration: 4000,
+			horizontalPosition: 'left',
+			verticalPosition: 'bottom',
 			extraClasses: [config.classes]
 		});
 	}
