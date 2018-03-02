@@ -3,21 +3,27 @@ ff-select {
   display: block;
 
   &.connected-with-next {
-    .chosen-drop {
-      width: auto;
-      margin-right: -1px;
+    .choices__inner {
+      border-radius: 0;
+      border-right: 0;
     }
   }
 
   &.ff-focused {
-    .chosen-single {
-      border-color: $colorPrimary;
+    .choices__inner {
+      border-color: $ff-color-primary;
     }
+  }
+
+  .choices,
+  .choices__inner {
+    height: 100%;
   }
 
   .choices__inner {
     padding: 3px 4px;
     min-height: 0;
+    background-color: white;
     border: 1px solid $formFieldBorderColor;
     border-radius: $formFieldBorderRadius;
   }
