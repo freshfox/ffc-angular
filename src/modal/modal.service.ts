@@ -33,11 +33,18 @@ export class ModalService {
 	}
 
 	create<T>(componentOrTemplateRef: ComponentType<T> | TemplateRef<T>, options: ModalOptions = {}) {
+		if (options.panelClass && options.panelClass.constructor !== Array) {
+			options.panelClass = [options.panelClass as string];
+		} else {
+			options.panelClass = [];
+		}
+
 		if (!options.padding) {
-			if (options.panelClass) {
-				options.panelClass = [options.panelClass as string];
-			}
-			options.panelClass = ['rpl-dialog-no-padding'];
+			options.panelClass.push('ff-dialog-no-padding');
+		}
+
+		if (options.clean) {
+			options.panelClass.push('ff-dialog-clean');
 		}
 
 		if (!options.width) {
