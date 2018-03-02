@@ -1,96 +1,81 @@
-import {
-	ComponentFactory,
-	ComponentFactoryResolver,
-	ComponentRef,
-	Injectable,
-	Injector,
-	ReflectiveInjector,
-	ViewContainerRef
-} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {ReplaySubject} from 'rxjs/ReplaySubject';
-import {ModalPlaceholderComponent} from './modal-placeholder.component';
+import {Injectable, TemplateRef} from '@angular/core';
 import {ModalConfirmComponent} from './modal-confirm.component';
+import {MatDialog, MatDialogRef} from '@angular/material';
+import {ComponentType} from '@angular/cdk/portal';
+import {MatDialogConfig} from '@angular/material/dialog/typings/dialog-config';
 
 @Injectable()
 export class ModalService {
-	private vcRef: ViewContainerRef;
-	private injector: Injector;
-	public activeInstances: number = 0;
 
-	private placeholder: ModalPlaceholderComponent;
+	private currentRef: ModalRef<any>;
 
-	constructor(private componentFactoryResolver: ComponentFactoryResolver) {
+	constructor(private dialog: MatDialog) {
 	}
 
-	hideCurrentModal() {
-		this.placeholder.hide();
-	}
-
-	registerViewContainerRef(vcRef: ViewContainerRef): void {
-		this.vcRef = vcRef;
-	}
-
-	registerPlaceholder(placeholder: ModalPlaceholderComponent) {
-		this.placeholder = placeholder;
-	}
-
-	registerInjector(injector: Injector): void {
-		this.injector = injector;
-	}
-
-	createConfirmRequest(title: string, message: string, onCancel: Function, onConfirm: Function, confirmText?: string) {
-		this.create(ModalConfirmComponent, {
+	createConfirmRequest(title: string, message: string, onConfirm: Function, confirmText?: string, onCancel?: Function) {
+		const ref = this.create(ModalConfirmComponent, {
 			parameters: {
 				title: title,
 				message: message,
 				confirmText: confirmText,
-				onCancel: onCancel,
 				onConfirm: onConfirm,
 			}
 		});
+
+		ref.componentInstance.onCancel = () => {
+			ref.close();
+			if (onCancel) {
+				onCancel();
+			}
+		};
+
+		return ref;
 	}
 
-	create<T>(component: any, options?: ModalOptions): Observable<ComponentRef<T>> {
-		options = Object.assign({}, {
-			size: ModalSize.Regular,
-			padding: false,
-			clean: false,
-			showCloseButton: true
-		}, options);
+	create<T>(componentOrTemplateRef: ComponentType<T> | TemplateRef<T>, options: ModalOptions = {}) {
+		if (!options.padding) {
+			if (options.panelClass) {
+				options.panelClass = [options.panelClass as string];
+			}
+			options.panelClass = ['rpl-dialog-no-padding'];
+		}
 
-		let factory = this.componentFactoryResolver.resolveComponentFactory(component);
-		return this.createFromFactory(factory, options) as Observable<ComponentRef<T>>;
-	}
+		if (!options.width) {
+			switch (options.size) {
+				case ModalSize.Small:
+					options.width = '250px';
+					break;
+				case ModalSize.Medium:
+					options.width = '500px';
+					break;
+				case ModalSize.Large:
+					options.width = '700px';
+					break;
+				default:
+					options.width = '500px';
+			}
+		}
 
-	private createFromFactory<T>(componentFactory: ComponentFactory<T>, options: ModalOptions): Observable<ComponentRef<T>> {
-		this.placeholder.show();
+		const matRef = this.dialog.open(componentOrTemplateRef, options);
+		const ref = new ModalRef<T>(matRef);
 
-		let componentRef$ = new ReplaySubject();
-		const childInjector = ReflectiveInjector.resolveAndCreate([], this.injector);
-		let componentRef = this.vcRef.createComponent(componentFactory, 0, childInjector);
+		this.currentRef = ref;
+
 		// pass the @Input parameters to the instance
-		Object.assign(componentRef.instance, options.parameters);
+		Object.assign(matRef.componentInstance, options.parameters);
 
-		this.placeholder.padding = options.padding;
-		this.placeholder.modalSize = options.size;
-		this.placeholder.clean = options.clean;
-		this.placeholder.showCloseButton = options.showCloseButton;
-
-		this.placeholder.registerComponentRef(componentRef);
-		componentRef$.next(componentRef);
-		componentRef$.complete();
-		return componentRef$.asObservable() as Observable<ComponentRef<T>>;
+		return ref;
 	}
+
 }
 
 export enum ModalSize {
-	Regular = 'regular' as any,
-	Large = 'large' as any,
-	FullWidth = 'fullwidth' as any,
+	Small,
+	Medium,
+	Large
 }
 
-export interface ModalOptions {
+export interface ModalOptions extends MatDialogConfig {
 	parameters?: Object;
 	size?: ModalSize;
 	clean?: boolean;
@@ -98,3 +83,17 @@ export interface ModalOptions {
 	showCloseButton?: boolean;
 }
 
+export class ModalRef<T> {
+
+	constructor(private matRef: MatDialogRef<T>) {
+	}
+
+	close() {
+		this.matRef.close();
+	}
+
+	get componentInstance() {
+		return this.matRef.componentInstance;
+	}
+
+}
