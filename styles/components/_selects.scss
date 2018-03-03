@@ -20,6 +20,10 @@ ff-select {
     height: 100%;
   }
 
+  .choices__list--dropdown .choices__item--selectable {
+    padding-right: 16px;
+  }
+
   .choices__inner {
     padding: 3px 4px;
     min-height: 0;
