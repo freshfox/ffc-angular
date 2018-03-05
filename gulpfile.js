@@ -4,7 +4,7 @@ var gulp = require('gulp'),
   ngc = require('@angular/compiler-cli/src/main').main,
   rollup = require('gulp-rollup'),
   rename = require('gulp-rename'),
-  del = require('del'),
+  fs = require('fs-extra'),
   runSequence = require('run-sequence'),
   inlineResources = require('./tools/gulp/inline-resources');
 
@@ -21,7 +21,7 @@ gulp.task('clean:dist', function () {
 
   // Delete contents but not dist folder to avoid broken npm links
   // when dist directory is removed while npm link references it.
-  return deleteFolders([distFolder + '/**', '!' + distFolder]);
+  return fs.emptyDirSync(distFolder);
 });
 
 /**
@@ -47,10 +47,12 @@ gulp.task('inline-resources', function () {
 /**
  * 4. Run the Angular compiler, ngc, on the /.tmp folder. This will output all
  *    compiled modules to the /build folder.
+ *
+ *    As of Angular 5, ngc accepts an array and no longer returns a promise.
  */
 gulp.task('ngc', function () {
-    ngc([ '--project', `${tmpFolder}/tsconfig.es5.json` ]);
-    return Promise.resolve()
+  ngc([ '--project', `${tmpFolder}/tsconfig.es5.json` ]);
+  return Promise.resolve()
 });
 
 /**
@@ -63,8 +65,8 @@ gulp.task('rollup:fesm', function () {
     .pipe(rollup({
 
       // Bundle's entry point
-      // See https://github.com/rollup/rollup/wiki/JavaScript-API#entry
-      entry: `${buildFolder}/index.js`,
+      // See "input" in https://rollupjs.org/#core-functionality
+      input: `${buildFolder}/index.js`,
 
       // Allow mixing of hypothetical and actual files. "Actual" files can be files
       // accessed by Rollup or produced by plugins further down the chain.
@@ -73,14 +75,14 @@ gulp.task('rollup:fesm', function () {
       allowRealFiles: true,
 
       // A list of IDs of modules that should remain external to the bundle
-      // See https://github.com/rollup/rollup/wiki/JavaScript-API#external
+      // See "external" in https://rollupjs.org/#core-functionality
       external: [
         '@angular/core',
         '@angular/common'
       ],
 
       // Format of generated bundle
-      // See https://github.com/rollup/rollup/wiki/JavaScript-API#format
+      // See "format" in https://rollupjs.org/#core-functionality
       format: 'es'
     }))
     .pipe(gulp.dest(distFolder));
@@ -96,8 +98,8 @@ gulp.task('rollup:umd', function () {
     .pipe(rollup({
 
       // Bundle's entry point
-      // See https://github.com/rollup/rollup/wiki/JavaScript-API#entry
-      entry: `${buildFolder}/index.js`,
+      // See "input" in https://rollupjs.org/#core-functionality
+      input: `${buildFolder}/index.js`,
 
       // Allow mixing of hypothetical and actual files. "Actual" files can be files
       // accessed by Rollup or produced by plugins further down the chain.
@@ -106,26 +108,26 @@ gulp.task('rollup:umd', function () {
       allowRealFiles: true,
 
       // A list of IDs of modules that should remain external to the bundle
-      // See https://github.com/rollup/rollup/wiki/JavaScript-API#external
+      // See "external" in https://rollupjs.org/#core-functionality
       external: [
         '@angular/core',
         '@angular/common'
       ],
 
       // Format of generated bundle
-      // See https://github.com/rollup/rollup/wiki/JavaScript-API#format
+      // See "format" in https://rollupjs.org/#core-functionality
       format: 'umd',
 
       // Export mode to use
-      // See https://github.com/rollup/rollup/wiki/JavaScript-API#exports
+      // See "exports" in https://rollupjs.org/#danger-zone
       exports: 'named',
 
       // The name to use for the module for UMD/IIFE bundles
       // (required for bundles with exports)
-      // See https://github.com/rollup/rollup/wiki/JavaScript-API#modulename
-      moduleName: 'ffc-angular',
+      // See "name" in https://rollupjs.org/#core-functionality
+      name: 'ffc-angular',
 
-      // See https://github.com/rollup/rollup/wiki/JavaScript-API#globals
+      // See "globals" in https://rollupjs.org/#core-functionality
       globals: {
         typescript: 'ts'
       }
@@ -161,23 +163,18 @@ gulp.task('copy:readme', function () {
     .pipe(gulp.dest(distFolder));
 });
 
-gulp.task('copy:styles', function () {
-    return gulp.src([path.join(rootFolder, 'styles/**/*')])
-        .pipe(gulp.dest(distFolder + '/styles'));
-});
-
 /**
  * 10. Delete /.tmp folder
  */
 gulp.task('clean:tmp', function () {
-  return deleteFolders([tmpFolder]);
+  return deleteFolder(tmpFolder);
 });
 
 /**
  * 11. Delete /build folder
  */
 gulp.task('clean:build', function () {
-  return deleteFolders([buildFolder]);
+  return deleteFolder(buildFolder);
 });
 
 gulp.task('compile', function () {
@@ -191,13 +188,14 @@ gulp.task('compile', function () {
     'copy:build',
     'copy:manifest',
     'copy:readme',
-    'copy:styles',
     'clean:build',
     'clean:tmp',
     function (err) {
       if (err) {
         console.log('ERROR:', err.message);
-        deleteFolders([distFolder, tmpFolder, buildFolder]);
+        deleteFolder(distFolder);
+        deleteFolder(tmpFolder);
+        deleteFolder(buildFolder);
       } else {
         console.log('Compilation finished succesfully');
       }
@@ -220,6 +218,6 @@ gulp.task('default', ['build:watch']);
 /**
  * Deletes the specified folder
  */
-function deleteFolders(folders) {
-  return del(folders);
+function deleteFolder(folder) {
+  return fs.removeSync(folder);
 }
