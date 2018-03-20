@@ -49,7 +49,7 @@ export class Formatter {
 	}
 
 	parseMoney(formatted: string): number {
-		let parsed = numeral.unformat(formatted);
+		let parsed = numeral().unformat(formatted);
 		if (typeof parsed == 'undefined') {
 			return 0;
 		}
