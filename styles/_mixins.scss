@@ -7,19 +7,22 @@
 }
 
 @mixin form-fields {
-  .ff-input,
-  .ff-select,
-  .ff-textarea {
+  .ff-input input,
+  .ff-input textarea,
+  .ff-select select ,
+  .ff-textarea textarea {
     @content;
   }
 }
 
 @mixin form-fields-with-extensions {
+  .ff-input input,
+  .ff-input textarea,
+  .ff-select select ,
+  .ff-textarea textarea
   ff-input,
   ff-textarea,
-  ff-select,
-  .ff-input,
-  .ff-select {
+  ff-select {
     @content
   }
 }
