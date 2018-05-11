@@ -1,4 +1,14 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output} from '@angular/core';
+import {
+	AfterViewInit,
+	ChangeDetectorRef,
+	Component,
+	ElementRef,
+	EventEmitter,
+	forwardRef,
+	Input,
+	OnInit,
+	Output
+} from '@angular/core';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 
@@ -108,7 +118,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, AfterViewIn
 	private onChangeCallback: (_: any) => void = () => {
 	};
 
-	constructor(private el: ElementRef) {
+	constructor(private el: ElementRef, private cdf: ChangeDetectorRef) {
 		this.selector = el.nativeElement.localName;
 	}
 
@@ -143,6 +153,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, AfterViewIn
 
 	writeValue(value: any) {
 		this.value = value;
+		this.cdf.markForCheck();
 	}
 
 	onChange() {
