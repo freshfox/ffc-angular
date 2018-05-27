@@ -26,7 +26,7 @@ export class SnackbarService {
 			duration: 4000,
 			horizontalPosition: 'left',
 			verticalPosition: 'bottom',
-			extraClasses: [config.classes]
+			panelClass: [config.classes]
 		});
 	}
 
