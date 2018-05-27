@@ -1,13 +1,12 @@
 import {TranslateLoader} from '@ngx-translate/core';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
+import {Observable, of} from 'rxjs/index';
 
 export class TranslatePackagedLoader implements TranslateLoader {
 
 	constructor(private translations) {}
 
 	getTranslation(lang: string): Observable<any> {
-		return Observable.of(this.translations[lang]);
+		return of(this.translations[lang]);
 	}
 
 }
