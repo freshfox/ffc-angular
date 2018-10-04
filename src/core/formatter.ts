@@ -2,14 +2,25 @@ import {TranslateService} from '@ngx-translate/core';
 import {Injectable} from '@angular/core';
 
 import numeral from 'numeral';
-import de from 'numeral/locales/de';
 
-numeral.register('locale', 'de-special', Object.assign(de, {
+numeral.register('locale', 'de-special', {
 	delimiters: {
 		thousands: '.',
 		decimal: ','
+	},
+	abbreviations: {
+		thousand: 'k',
+		million: 'm',
+		billion: 'b',
+		trillion: 't'
+	},
+	ordinal: function (number) {
+		return '.';
+	},
+	currency: {
+		symbol: '€'
 	}
-}));
+});
 
 @Injectable()
 export class Formatter {
