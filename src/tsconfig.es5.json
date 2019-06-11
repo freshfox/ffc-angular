@@ -22,7 +22,7 @@
     "annotateForClosureCompiler": true,
     "strictMetadataEmit": true,
     "skipTemplateCodegen": true,
-    "flatModuleOutFile": "index.js",
+    "flatModuleOutFile": "ffc-angular.js",
     "flatModuleId": "ffc-angular"
   },
   "files": [
