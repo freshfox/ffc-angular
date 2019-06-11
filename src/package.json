@@ -17,7 +17,7 @@
     "url": "https://github.com/freshfox/ffc-angular/issues"
   },
   "main": "ffc-angular.umd.js",
-  "module": "ffc-angular.js",
+  "module": "index.js",
   "jsnext:main": "ffc-angular.js",
   "typings": "ffc-angular.d.ts",
   "peerDependencies": {
