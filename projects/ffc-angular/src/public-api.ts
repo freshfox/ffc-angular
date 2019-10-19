@@ -7,3 +7,4 @@ export * from './input/index';
 export * from './table/index';
 export * from './snackbar/index';
 export * from './alert-bar/index';
+export * from './button/index';
