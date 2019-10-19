@@ -1,0 +1,120 @@
+$buttonBorderRadius: 2px !default;
+$buttonPadding: 8px 14px !default;
+$buttonPaddingSmall: 5px 12px !default;
+$buttonPaddingLarge: 15px 18px !default;
+$buttonTextColor: #fff !default;
+
+.ff-button {
+	display: inline-block;
+	zoom: 1;
+	line-height: normal;
+	vertical-align: baseline;
+	text-align: center;
+	cursor: pointer;
+	-webkit-user-drag: none;
+	user-select: none;
+
+	font-family: inherit;
+	font-size: 100%;
+	color: $buttonTextColor;
+	padding: $buttonPadding;
+	letter-spacing: 1px;
+	background: var(--ff-color-primary);
+	border: 1px solid var(--ff-color-primary);
+	text-decoration: none;
+	border-radius: $buttonBorderRadius;
+	transition: color .25s ease, background .25s ease;
+
+	.ff-icon {
+		width: 12px;
+		height: 12px;
+		fill: currentColor;
+		margin-right: 5px;
+	}
+
+	&:hover,
+	&:focus {
+		background: var(--ff-color-primary);
+	}
+
+	&.ff-button--secondary {
+		background: none;
+		border-color: var(--ff-color-gray-medium);
+		color: var(--ff-color-primary);
+	}
+
+	&.ff-button--outline {
+		background: none;
+		color: white;
+		border-color: white;
+	}
+
+	&.ff-button--white {
+		color: var(--ff-color-primary);
+		background: white;
+		border-color: white;
+	}
+
+	&.ff-button--clear {
+		background: none;
+		border: 0;
+		color: var(--ff-color-text);
+		padding: 0;
+		letter-spacing: inherit;
+
+		&:hover {
+			color: var(--ff-color-primary);
+		}
+	}
+
+	&.ff-button--danger {
+		background: var(--ff-color-error);
+		border-color: var(--ff-color-error);
+	}
+
+	&.ff-button--block {
+		display: block;
+		width: 100%;
+	}
+
+	&.ff-button--h-space {
+		margin-right: 10px;
+	}
+
+	&.ff-button--l {
+		text-transform: uppercase;
+		padding: $buttonPaddingLarge;
+		font-weight: bold;
+	}
+
+	&.ff-button--small {
+		padding: $buttonPaddingSmall;
+	}
+
+	&.ff-button--gray {
+		background-color: var(--ff-color-gray);
+		border-color: var(--ff-color-gray);
+	}
+
+	&.ff-button--success {
+		background: var(--ff-color-success);
+		border-color: var(--ff-color-success);
+	}
+
+	&.ff-button--warning {
+		background: var(--ff-color-warning);
+		border-color: var(--ff-color-warning);
+	}
+
+	&[disabled],
+	&.disabled,
+	&.disabled:hover,
+	&.disabled:focus,
+	&.disabled:active {
+		opacity: .8;
+		background: var(--ff-color-gray-medium);
+		border-color: var(--ff-color-gray-medium);
+		cursor: default;
+	}
+
+}
