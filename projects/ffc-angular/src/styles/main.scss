@@ -1,4 +1,5 @@
 :root {
+	--ff-color-primary: #0997f3;
 	--ff-color-light-accent: #f2f5f6;
 	--ff-color-gray-light: #e7e7e7;
 	--ff-color-gray: #aaa;
@@ -11,6 +12,7 @@
 
 	--ff-default-border-radius: 3px;
 
+	--ff-table-side-padding: 16px;
 	--ff-table-clickable-hover-background: var(--ff-color-light-accent);
 	--ff-table-color-spacer-lines: var(--ff-color-gray-light);
 	--ff-table-heading-background-color: var(--ff-color-light-accent);

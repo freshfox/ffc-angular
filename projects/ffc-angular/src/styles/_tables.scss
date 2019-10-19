@@ -10,7 +10,7 @@
 
 		&.table--clickable-items {
 			tbody tr:hover td {
-				background: $tableClickableHoverBackground;
+				background: var(--ff-table-clickable-hover-background);
 			}
 
 			td {
@@ -31,8 +31,8 @@
 		td {
 			padding: 8px 0;
 			padding-right: 15px;
-			border-bottom: 1px solid $tableColorSpacerLines;
-			color: $tableTextColor;
+			border-bottom: 1px solid var(--ff-table-color-spacer-lines);
+			color: var(--ff-table-text-color);
 
 			.text {
 				width: 100%;
@@ -50,7 +50,7 @@
 		th,
 		td {
 			&:first-child {
-				padding-left: $contentSidePadding;
+				padding-left: var(--ff-table-side-padding);
 			}
 
 			&.ff-table-cell--align-right {
@@ -76,7 +76,7 @@
 			}
 
 			.ff-icon {
-				fill: $tableIconFillColor;
+				fill: var(--ff-table-icon-fill-color);
 			}
 		}
 
@@ -88,10 +88,10 @@
 			}
 
 			&.ff-table-header-cell--sorted {
-				color: $colorPrimary;
+				color: var(--ff-color-primary);
 
 				.ff-icon {
-					fill: $colorPrimary;
+					fill: var(--ff-color-primary);
 				}
 			}
 
@@ -109,14 +109,14 @@
 
 	th,
 	.table-heading {
-		color: $tableTextColor;
+		color: var(--ff-table-text-color);
 		font-size: 12px;
 		padding: 10px 0;
-		line-height: $defaultLineHeight;
-		font-weight: $fontWeightBold;
-		border-top: 1px solid $tableColorSpacerLines;
-		border-bottom: 1px solid $tableColorSpacerLines;
-		background: $tableHeadingBackgroundColor;
+		line-height: 1.5;
+		font-weight: bold;
+		border-top: 1px solid var(--ff-table-color-spacer-lines);
+		border-bottom: 1px solid var(--ff-table-color-spacer-lines);
+		background: var(--ff-table-heading-background-color);
 
 		&:first-child {
 			padding-left: 10px;
