@@ -1,11 +1,15 @@
 .ff-input {
+	label {
+		font-weight: bold;
+	}
+
 	.mat-form-field {
 		display: block;
 		width: 100%;
 	}
 }
 
-.ff-input-small {
+.ff-input--small {
 	.mat-form-field {
 		.mat-form-field-infix {
 			border-top: 0;

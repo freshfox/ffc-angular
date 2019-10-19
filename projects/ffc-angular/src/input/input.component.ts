@@ -1,23 +1,34 @@
-import {ChangeDetectionStrategy, Component, forwardRef, HostBinding, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, forwardRef, HostBinding, Input, OnInit} from '@angular/core';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {InputValidationMessageProvider} from './validation-message-provider';
 
 @Component({
-	selector: 'ff-input',
+	selector: 'ff-input,ff-textarea',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
-		<label *ngIf="isSmall && label">{{ label }}</label>
-        <mat-form-field>
+        <label *ngIf="isSmall && label">{{ label }}</label>
+		
+        <mat-form-field appearance="outline">
             <mat-label *ngIf="!isSmall && label">{{ label }}</mat-label>
-            <input
-                    matInput
-					[placeholder]="placeholder"
-                    [type]="type"
-                    [name]="name"
-                    [(ngModel)]="value"
-                    [formControl]="formControl"
-                    (ngModelChange)="onChange()"
-                    (blur)="onBlur($event)">
+            <input *ngIf="selector === 'ff-input'"
+                   matInput
+                   [placeholder]="placeholder"
+                   [type]="type"
+                   [name]="name"
+                   [(ngModel)]="value"
+                   [formControl]="formControl"
+                   (ngModelChange)="onChange()"
+                   [disabled]="disabled"
+                   (blur)="onBlur($event)">
+
+            <textarea *ngIf="selector === 'ff-textarea'"
+                      matInput
+                      [placeholder]="placeholder"
+                      [name]="name"
+                      [(ngModel)]="value"
+                      (blur)="onBlur($event)"
+                      (ngModelChange)="onChange()"
+                      [disabled]="disabled"></textarea>
             <mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
         </mat-form-field>
 	`,
@@ -36,6 +47,7 @@ export class FFInputComponent implements OnInit, ControlValueAccessor {
 	@Input() placeholder: string;
 	@Input() label: string;
 	@Input() formControl: FormControl = new FormControl();
+	@Input() disabled = false;
 
 	@HostBinding('class') clazz = 'ff-input';
 
@@ -46,14 +58,15 @@ export class FFInputComponent implements OnInit, ControlValueAccessor {
 
 	name: string;
 	value: any = '';
+	selector: string;
 
 	private onTouchedCallback: () => void = () => {
 	};
 	private onChangeCallback: (_: any) => void = () => {
 	};
 
-	constructor(private validationMessageProvider: InputValidationMessageProvider) {
-
+	constructor(private validationMessageProvider: InputValidationMessageProvider, private el: ElementRef) {
+		this.selector = this.el.nativeElement.tagName.toLowerCase();
 	}
 
 	ngOnInit(): void {
@@ -69,6 +82,7 @@ export class FFInputComponent implements OnInit, ControlValueAccessor {
 				}
 			}
 		}
+
 	}
 
 	get errorMessage() {
