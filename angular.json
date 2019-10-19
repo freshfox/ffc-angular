@@ -1,0 +1,164 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "ffc-angular": {
+      "projectType": "library",
+      "root": "projects/ffc-angular",
+      "sourceRoot": "projects/ffc-angular/src",
+      "prefix": "ff",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ffc-angular/tsconfig.lib.json",
+            "project": "projects/ffc-angular/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ffc-angular/src/test.ts",
+            "tsConfig": "projects/ffc-angular/tsconfig.spec.json",
+            "karmaConfig": "projects/ffc-angular/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ffc-angular/tsconfig.lib.json",
+              "projects/ffc-angular/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ffc-angular-test": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/ffc-angular-test",
+      "sourceRoot": "projects/ffc-angular-test/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ffc-angular-test",
+            "index": "projects/ffc-angular-test/src/index.html",
+            "main": "projects/ffc-angular-test/src/main.ts",
+            "polyfills": "projects/ffc-angular-test/src/polyfills.ts",
+            "tsConfig": "projects/ffc-angular-test/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/ffc-angular-test/src/favicon.ico",
+              "projects/ffc-angular-test/src/assets"
+            ],
+            "styles": [
+              "projects/ffc-angular-test/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ffc-angular-test/src/environments/environment.ts",
+                  "with": "projects/ffc-angular-test/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ffc-angular-test:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ffc-angular-test:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ffc-angular-test:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ffc-angular-test/src/test.ts",
+            "polyfills": "projects/ffc-angular-test/src/polyfills.ts",
+            "tsConfig": "projects/ffc-angular-test/tsconfig.spec.json",
+            "karmaConfig": "projects/ffc-angular-test/karma.conf.js",
+            "assets": [
+              "projects/ffc-angular-test/src/favicon.ico",
+              "projects/ffc-angular-test/src/assets"
+            ],
+            "styles": [
+              "projects/ffc-angular-test/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ffc-angular-test/tsconfig.app.json",
+              "projects/ffc-angular-test/tsconfig.spec.json",
+              "projects/ffc-angular-test/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ffc-angular-test/e2e/protractor.conf.js",
+            "devServerTarget": "ffc-angular-test:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ffc-angular-test:serve:production"
+            }
+          }
+        }
+      }
+    }},
+  "defaultProject": "ffc-angular"
+}

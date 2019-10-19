@@ -1,0 +1,9 @@
+.mat-snack-bar-container {
+	&.ff-snackbar-success {
+		background: var(--ff-color-success);
+	}
+
+	&.ff-snackbar-error {
+		background: var(--ff-color-error);
+	}
+}

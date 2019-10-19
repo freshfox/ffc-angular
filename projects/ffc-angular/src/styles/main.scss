@@ -1,0 +1,19 @@
+:root {
+	--ff-color-light-accent: #f2f5f6;
+	--ff-color-gray-light: #e7e7e7;
+	--ff-clor-gray-medium: #888;
+
+	--ff-color-text: #2d3339;
+	--ff-color-success: #7ece65;
+	--ff-color-error: #f87979;
+
+	--ff-table-clickable-hover-background: var(--ff-color-light-accent);
+	--ff-table-color-spacer-lines: var(--ff-color-gray-light);
+	--ff-table-heading-background-color: var(--ff-color-light-accent);
+	--ff-table-text-color: var(--ff-color-text);
+	--ff-table-icon-fill-color: var(--ff-color-gray-medium);
+}
+
+@import 'forms';
+@import 'tables';
+@import 'snack-bar';

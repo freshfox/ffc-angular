@@ -1,0 +1,11 @@
+{
+  "name": "ffc-angular",
+  "version": "3.0.0",
+  "peerDependencies": {
+    "@angular/common": "^8.2.11",
+    "@angular/core": "^8.2.11",
+    "@angular/forms": "^8.2.11",
+    "@angular/material": "^8.2.3",
+    "@angular/cdk": "^8.2.3"
+  }
+}
