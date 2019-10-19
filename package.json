@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build ffc-angular && cp -r ./projects/ffc-angular/src/styles ./dist/ffc-angular/",
+    "build": "ng build ffc-angular && cp -r ./projects/ffc-angular/src/styles ./dist/ffc-angular",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
