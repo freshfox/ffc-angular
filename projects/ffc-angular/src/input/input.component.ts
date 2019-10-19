@@ -1,14 +1,17 @@
-import {Component, forwardRef, HostBinding, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, forwardRef, HostBinding, Input, OnInit} from '@angular/core';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {InputValidationMessageProvider} from './validation-message-provider';
 
 @Component({
 	selector: 'ff-input',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
+		<label *ngIf="isSmall && label">{{ label }}</label>
         <mat-form-field>
-            <mat-label>{{ placeholder || '' }}</mat-label>
+            <mat-label *ngIf="!isSmall && label">{{ label }}</mat-label>
             <input
                     matInput
+					[placeholder]="placeholder"
                     [type]="type"
                     [name]="name"
                     [(ngModel)]="value"
@@ -31,6 +34,7 @@ export class FFInputComponent implements OnInit, ControlValueAccessor {
 	@Input() type = 'text';
 	@Input() size: 'default' | 'large' = 'default';
 	@Input() placeholder: string;
+	@Input() label: string;
 	@Input() formControl: FormControl = new FormControl();
 
 	@HostBinding('class') clazz = 'ff-input';
