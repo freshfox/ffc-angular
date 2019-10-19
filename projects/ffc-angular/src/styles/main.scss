@@ -5,7 +5,10 @@
 
 	--ff-color-text: #2d3339;
 	--ff-color-success: #7ece65;
+	--ff-color-warning: #febb08;
 	--ff-color-error: #f87979;
+
+	--ff-default-border-radius: 3px;
 
 	--ff-table-clickable-hover-background: var(--ff-color-light-accent);
 	--ff-table-color-spacer-lines: var(--ff-color-gray-light);
@@ -17,3 +20,4 @@
 @import 'forms';
 @import 'tables';
 @import 'snack-bar';
+@import 'alert-bar';

@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build ffc-angular && cp -r ./projects/ffc-angular/src/styles ./dist/ffc-angular/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -24,6 +24,7 @@
     "@angular/router": "~8.2.8",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
+    "validator": "^11.1.0",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
