@@ -4,3 +4,4 @@
 
 export * from './input/index';
 export * from './table/index';
+export * from './snackbar/index';
