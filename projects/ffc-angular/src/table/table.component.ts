@@ -36,7 +36,10 @@ import {SortEvent} from './sort-event';
         <ng-content select="[empty]" *ngIf="!loading && !rows.length"></ng-content>
 
         <mat-spinner *ngIf="loading"></mat-spinner>
-	`
+	`,
+	host: {
+		'class': 'ff-table'
+	}
 })
 export class TableComponent implements OnChanges {
 
@@ -46,8 +49,6 @@ export class TableComponent implements OnChanges {
 
 	@Output() onRowClicked = new EventEmitter<any>();
 	@Output() onSortChanged = new EventEmitter<SortEvent>();
-
-	@HostBinding('class') clazz = 'ff-table';
 
 	private sortedColumn: TableColumn;
 

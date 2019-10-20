@@ -32,6 +32,9 @@ import {InputValidationMessageProvider} from './validation-message-provider';
             <mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
         </mat-form-field>
 	`,
+	host: {
+		'class': 'ff-input'
+	},
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -48,8 +51,6 @@ export class FFInputComponent implements OnInit, ControlValueAccessor {
 	@Input() label: string;
 	@Input() formControl: FormControl = new FormControl();
 	@Input() disabled = false;
-
-	@HostBinding('class') clazz = 'ff-input';
 
 	@HostBinding('class.ff-input--small')
 	get isSmall() {

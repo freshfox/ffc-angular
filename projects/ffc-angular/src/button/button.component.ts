@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnChanges, OnDestroy} from '@angular/core';
+import {Component, HostBinding, Input} from '@angular/core';
 
 @Component({
 	selector: 'button[ff-button]',
@@ -9,7 +9,6 @@ import {AfterViewInit, Component, Input, OnChanges, OnDestroy} from '@angular/co
         <mat-spinner *ngIf="loading"></mat-spinner>
 	`,
 	host: {
-		'[class]': '"button ff-button" + class',
 		'[attr.disabled]': 'disabled ? true : null',
 	}
 })
@@ -19,6 +18,11 @@ export class ButtonComponent {
 	@Input() class = '';
 	@Input() icon: string;
 	@Input() disabled = false;
+
+	@HostBinding('class')
+	get clazz() {
+		return `ff-button ${this.class}`;
+	}
 
 	constructor() {
 	}
