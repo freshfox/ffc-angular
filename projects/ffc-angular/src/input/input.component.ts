@@ -7,7 +7,7 @@ import {InputValidationMessageProvider} from './validation-message-provider';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
         <label *ngIf="isSmall && label">{{ label }}</label>
-		
+
         <mat-form-field appearance="outline">
             <mat-label *ngIf="!isSmall && label">{{ label }}</mat-label>
             <input *ngIf="selector === 'ff-input'"
@@ -16,9 +16,8 @@ import {InputValidationMessageProvider} from './validation-message-provider';
                    [type]="type"
                    [name]="name"
                    [(ngModel)]="value"
-                   [formControl]="formControl"
                    (ngModelChange)="onChange()"
-                   [disabled]="disabled"
+                   [attr.disabled]="disabled"
                    (blur)="onBlur($event)">
 
             <textarea *ngIf="selector === 'ff-textarea'"
@@ -28,7 +27,7 @@ import {InputValidationMessageProvider} from './validation-message-provider';
                       [(ngModel)]="value"
                       (blur)="onBlur($event)"
                       (ngModelChange)="onChange()"
-                      [disabled]="disabled"></textarea>
+                      [attr.disabled]="disabled"></textarea>
             <mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
         </mat-form-field>
 	`,
@@ -99,6 +98,10 @@ export class FFInputComponent implements OnInit, ControlValueAccessor {
 	}
 
 	onChange() {
+		if (this.formControl) {
+			this.formControl.patchValue(this.value);
+		}
+
 		this.onChangeCallback(this.value);
 	}
 
