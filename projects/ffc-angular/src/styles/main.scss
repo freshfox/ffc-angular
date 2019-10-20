@@ -11,6 +11,7 @@
 	--ff-color-error: #f87979;
 
 	--ff-default-border-radius: 3px;
+	--ff-font-family: Lato, sans-serif;
 
 	--ff-table-side-padding: 16px;
 	--ff-table-clickable-hover-background: var(--ff-color-light-accent);
@@ -18,6 +19,12 @@
 	--ff-table-heading-background-color: var(--ff-color-light-accent);
 	--ff-table-text-color: var(--ff-color-text);
 	--ff-table-icon-fill-color: var(--ff-color-gray-medium);
+
+	--ff-modal-header-background: var(--ff-color-primary);
+	--ff-modal-side-padding: 24px;
+	--ff-modal-header-danger-background: var(--ff-color-error);
+	--ff-modal-footer-background: #fafafa;
+	--ff-modal-footer-top-border: var(--ff-color-gray-light);
 }
 
 @import 'forms';
@@ -26,3 +33,4 @@
 @import 'alert-bar';
 @import 'buttons';
 @import 'icons';
+@import 'modals';
