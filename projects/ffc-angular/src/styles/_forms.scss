@@ -1,4 +1,7 @@
 .ff-input {
+	margin-bottom: 16px;
+	display: block;
+
 	label {
 		font-weight: bold;
 	}
@@ -6,6 +9,10 @@
 	.mat-form-field {
 		display: block;
 		width: 100%;
+	}
+
+	input {
+		font-family: var(--ff-font-family);
 	}
 }
 
