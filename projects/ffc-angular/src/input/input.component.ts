@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, ElementRef, forwardRef, HostBinding, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, HostBinding, Input, OnInit} from '@angular/core';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {InputValidationMessageProvider} from './validation-message-provider';
 
@@ -65,7 +65,7 @@ export class FFInputComponent implements OnInit, ControlValueAccessor {
 	private onChangeCallback: (_: any) => void = () => {
 	};
 
-	constructor(private validationMessageProvider: InputValidationMessageProvider, private el: ElementRef) {
+	constructor(private validationMessageProvider: InputValidationMessageProvider, private el: ElementRef, private cdr: ChangeDetectorRef) {
 		this.selector = this.el.nativeElement.tagName.toLowerCase();
 	}
 
@@ -112,6 +112,7 @@ export class FFInputComponent implements OnInit, ControlValueAccessor {
 	// Value Accessor methods
 	writeValue(value: any) {
 		this.value = value;
+		this.cdr.markForCheck();
 	}
 
 	registerOnChange(fn: any) {
