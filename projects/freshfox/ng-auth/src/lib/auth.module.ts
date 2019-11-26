@@ -15,6 +15,13 @@ import {FFSnackbarModule, FFInputModule} from '@freshfox/ng-core';
 import {MatCardModule} from '@angular/material/card';
 import {AuthService} from './auth.service';
 
+export * from './auth.service';
+export * from './internal.guard';
+export * from './login.component';
+export * from './password-reset.component';
+export * from './public.component';
+export * from './public.guard';
+
 @NgModule({
 	imports: [
 		CommonModule,
