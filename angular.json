@@ -194,6 +194,41 @@
           }
         }
       }
+    },
+    "ff-ng-firestore": {
+      "projectType": "library",
+      "root": "projects/freshfox/ng-firestore",
+      "sourceRoot": "projects/freshfox/ng-firestore/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/freshfox/ng-firestore/tsconfig.lib.json",
+            "project": "projects/freshfox/ng-firestore/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/freshfox/ng-firestore/src/test.ts",
+            "tsConfig": "projects/freshfox/ng-firestore/tsconfig.spec.json",
+            "karmaConfig": "projects/freshfox/ng-firestore/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/freshfox/ng-firestore/tsconfig.lib.json",
+              "projects/freshfox/ng-firestore/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
   "defaultProject": "ff-ng-core"
 }

@@ -30,6 +30,12 @@
       ],
       "@freshfox/ng-core/*": [
         "dist/freshfox/ng-core/*"
+      ],
+      "@freshfox/ng-firestore": [
+        "dist/freshfox/ng-firestore"
+      ],
+      "@freshfox/ng-firestore/*": [
+        "dist/freshfox/ng-firestore/*"
       ]
     }
   },

@@ -1,6 +1,9 @@
 {
   "name": "@freshfox/ng-core",
   "version": "3.4.3",
+  "publishConfig": {
+    "access": "public"
+  },
   "peerDependencies": {
     "@angular/common": "^8.2.11",
     "@angular/core": "^8.2.11",
