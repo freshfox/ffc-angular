@@ -18,7 +18,7 @@ export class AlertBarComponent {
 		return {
 			'ff-alert-bar--success': this.type === AlertBarType.Success,
 			'ff-alert-bar--warning': this.type === AlertBarType.Warning
-		}
+		};
 	}
 }
 

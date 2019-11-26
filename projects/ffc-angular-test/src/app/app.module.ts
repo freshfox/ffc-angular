@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {FFInputModule} from '../../../ffc-angular/src/input';
+import {FFInputModule} from '../../../freshfox/ng-core/src/input';
 
 @NgModule({
 	declarations: [

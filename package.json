@@ -4,11 +4,13 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build ffc-angular && cp -r ./projects/ffc-angular/src/styles ./dist/ffc-angular",
+    "build": "yarn build:core && yarn build:auth",
+    "build:core": "ng build ff-ng-core && cp -r projects/freshfox/ng-core/src/styles ./dist/freshfox/ng-core",
+    "build:auth": "ng build ff-ng-auth && cp -r projects/freshfox/ng-auth/src/styles ./dist/freshfox/ng-auth",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "release": "yarn publish dist/ffc-angular"
+    "release": "yarn publish dist/freshfox/ng-core && yarn publis dist/freshfox/ng-auth"
   },
   "private": true,
   "dependencies": {
@@ -17,11 +19,14 @@
     "@angular/common": "~8.2.8",
     "@angular/compiler": "~8.2.8",
     "@angular/core": "~8.2.8",
+    "@angular/fire": "^5.2.3",
     "@angular/forms": "~8.2.8",
     "@angular/material": "^8.2.3",
     "@angular/platform-browser": "~8.2.8",
     "@angular/platform-browser-dynamic": "~8.2.8",
     "@angular/router": "~8.2.8",
+    "@ngx-translate/core": "^11.0.1",
+    "firebase": "^7.5.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "validator": "^11.1.0",

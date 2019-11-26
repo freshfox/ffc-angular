@@ -3,41 +3,6 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ffc-angular": {
-      "projectType": "library",
-      "root": "projects/ffc-angular",
-      "sourceRoot": "projects/ffc-angular/src",
-      "prefix": "ff",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/ffc-angular/tsconfig.lib.json",
-            "project": "projects/ffc-angular/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/ffc-angular/src/test.ts",
-            "tsConfig": "projects/ffc-angular/tsconfig.spec.json",
-            "karmaConfig": "projects/ffc-angular/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/ffc-angular/tsconfig.lib.json",
-              "projects/ffc-angular/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
     "ffc-angular-test": {
       "projectType": "application",
       "schematics": {
@@ -159,6 +124,76 @@
           }
         }
       }
+    },
+    "ff-ng-auth": {
+      "projectType": "library",
+      "root": "projects/freshfox/ng-auth",
+      "sourceRoot": "projects/freshfox/ng-auth/src",
+      "prefix": "ff",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/freshfox/ng-auth/tsconfig.lib.json",
+            "project": "projects/freshfox/ng-auth/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/freshfox/ng-auth/src/test.ts",
+            "tsConfig": "projects/freshfox/ng-auth/tsconfig.spec.json",
+            "karmaConfig": "projects/freshfox/ng-auth/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/freshfox/ng-auth/tsconfig.lib.json",
+              "projects/freshfox/ng-auth/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ff-ng-core": {
+      "projectType": "library",
+      "root": "projects/freshfox/ng-core",
+      "sourceRoot": "projects/freshfox/ng-core/src",
+      "prefix": "ff",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/freshfox/ng-core/tsconfig.lib.json",
+            "project": "projects/freshfox/ng-core/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/freshfox/ng-core/src/test.ts",
+            "tsConfig": "projects/freshfox/ng-core/tsconfig.spec.json",
+            "karmaConfig": "projects/freshfox/ng-core/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/freshfox/ng-core/tsconfig.lib.json",
+              "projects/freshfox/ng-core/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
-  "defaultProject": "ffc-angular"
+  "defaultProject": "ff-ng-core"
 }

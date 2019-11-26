@@ -1,5 +1,5 @@
 /*
- * Public API Surface of ffc-angular
+ * Public API Surface of @freshfox/ng-core
  */
 
 export * from './core/form-validator';

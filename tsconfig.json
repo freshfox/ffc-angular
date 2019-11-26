@@ -19,11 +19,17 @@
       "dom"
     ],
     "paths": {
-      "ffc-angular": [
-        "dist/ffc-angular"
+      "@freshfox/ng-auth": [
+        "dist/freshfox/ng-auth"
       ],
-      "ffc-angular/*": [
-        "dist/ffc-angular/*"
+      "@freshfox/ng-auth/*": [
+        "dist/freshfox/ng-auth/*"
+      ],
+      "@freshfox/ng-core": [
+        "dist/freshfox/ng-core"
+      ],
+      "@freshfox/ng-core/*": [
+        "dist/freshfox/ng-core/*"
       ]
     }
   },
