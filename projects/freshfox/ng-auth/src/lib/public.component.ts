@@ -4,12 +4,12 @@ import {animate, style, transition, trigger} from '@angular/animations';
 @Component({
 	template: `
 		<div class="login-wrapper">
-			<img class="login-background" [@fadeIn] href="/assets/images/login/bg.jpg">
+			<img class="login-background" [@fadeIn] src="assets/images/login/bg.jpg">
 
 			<div class="login-inner">
 				<div class="content-wrapper">
 					<div class="header">
-						<img src="/assets/images/login/logo.svg" class="logo">
+						<img src="assets/images/login/logo.svg" class="logo">
 						<p class="sub">{{ 'login.tagline' | translate }}</p>
 					</div>
 					<div class="content">
