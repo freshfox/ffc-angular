@@ -6,12 +6,6 @@
 
 	color: #fff;
 
-	.app-logo {
-		margin: 0 auto;
-		width: var(--ff-auth-logo-size);
-		margin-bottom: 24px;
-	}
-
 	a,
 	a:visited,
 	a:focus {
@@ -41,11 +35,10 @@
 	}
 
 	.logo {
-		margin-bottom: 15px;
-		width: 300px;
-		height: 25px;
 		fill: white;
-		display: inline-block;
+		display: block;
+		width: var(--ff-auth-logo-size);
+		margin: 0 auto 24px;
 	}
 
 	.header {

@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {animate, style, transition, trigger} from '@angular/animations';
 
 @Component({
+	selector: 'ff-public',
 	template: `
 		<div class="login-wrapper">
 			<img class="login-background" [@fadeIn] src="assets/images/login/bg.jpg">
