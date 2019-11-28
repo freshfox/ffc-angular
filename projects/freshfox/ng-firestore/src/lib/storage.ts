@@ -3,6 +3,8 @@ import {Inject, Injectable, InjectionToken} from '@angular/core';
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import {map} from 'rxjs/operators';
+import {SchemaDescription} from './descorators';
+import debugFunc from 'debug';
 import Firestore = firebase.firestore.Firestore;
 import DocumentReference = firebase.firestore.DocumentReference;
 import DocumentSnapshot = firebase.firestore.DocumentSnapshot;
@@ -27,18 +29,29 @@ export interface FirestoreStorageConfig {
 @Injectable()
 export class FirestoreStorage {
 
-	private readonly app: firebase.app.App;
+	private static readonly debugLog = debugFunc('firestore');
+
+	private readonly app: any;
 	public firestore: Firestore;
 	public onMultiTabError = new Subject();
 
 	readonly onFatalError = new Subject<any>();
 	readonly onWrite = new Subject<{ path: string, data: any }>();
 
-	private static clone(data): { id: string, data } {
+	private static clone(schema: SchemaDescription, data): { id: string, data } {
 		const clone = Object.assign({}, data);
 
 		Object.keys(clone).forEach((key) => {
-			if (clone[key] === undefined) {
+			let value = clone[key];
+
+			if (schema) {
+				const propertyDesc = schema[key];
+				if (propertyDesc && propertyDesc.serializer) {
+					value = propertyDesc.serializer(value);
+				}
+			}
+
+			if (value === undefined) {
 				delete clone[key];
 			}
 		});
@@ -47,6 +60,7 @@ export class FirestoreStorage {
 		delete clone.id;
 		delete clone.createdAt;
 		delete clone.updatedAt;
+
 		return {
 			id,
 			data: clone
@@ -57,24 +71,33 @@ export class FirestoreStorage {
 		return `${collection}/${id}`;
 	}
 
-	private static format(snapshot: DocumentSnapshot) {
+	private static format(snapshot: DocumentSnapshot, schema: SchemaDescription) {
 		if (!snapshot.exists) {
 			return null;
 		}
-		return Object.assign({
+
+		const clone = Object.assign({
 			id: snapshot.id
-		}, snapshot.data()) as any;
+		}, snapshot.data());
+
+		if (schema) {
+			Object.keys(clone).forEach((key) => {
+				const propertyDesc = schema[key];
+				if (propertyDesc && propertyDesc.deserializer) {
+					clone[key] = propertyDesc.deserializer(clone[key]);
+				}
+			});
+		}
+
+		return clone;
 	}
 
-	private static logTiming(diff: number, message: string, resultsCount?: number, logFunction?) {
+	private static logTiming(diff: number, message: string, resultsCount?: number) {
 		let str = `Query [${diff}ms] ${message}`;
 		if (resultsCount) {
-			str += ` results: ${resultsCount}`;
+			str += ` (${resultsCount})`;
 		}
-		if (!logFunction) {
-			logFunction = console.log;
-		}
-		logFunction(str);
+		this.debugLog(str);
 	}
 
 	constructor(@Inject(FIRESTORE_STORAGE_CONFIG) private config: FirestoreStorageConfig) {
@@ -88,10 +111,16 @@ export class FirestoreStorage {
 
 	private initFireStore() {
 		this.firestore = this.app.firestore();
-		this.firestore.settings({
+
+		const settings: firebase.firestore.Settings = {
 			cacheSizeBytes: 60000000,
-			timestampsInSnapshots: !this.config.disableTimestamps,
-		});
+		};
+
+		if (this.config.disableTimestamps) {
+			settings.timestampsInSnapshots = false;
+		}
+
+		this.firestore.settings(settings);
 
 		if (this.config.persistenceEnabled) {
 			this.app.firestore().enablePersistence()
@@ -111,7 +140,7 @@ export class FirestoreStorage {
 		}
 	}
 
-	private observe(query: CollectionReference | DocumentReference | Query | any) {
+	private observe(query: CollectionReference | DocumentReference | Query | any, schema: SchemaDescription) {
 
 		const start = Date.now();
 		let logged = false;
@@ -119,35 +148,34 @@ export class FirestoreStorage {
 		const successCallback = (snapshot) => {
 
 			if (!logged) {
-				const diff = Date.now() - start;
+				const deltaMs = Date.now() - start;
 				logged = true;
 				if (query instanceof CollectionReference) {
-					FirestoreStorage.logTiming(diff, `collection ${query.path}`, snapshot.size);
+					FirestoreStorage.logTiming(deltaMs, `Col ${query.path}`, snapshot.size);
 				} else if (query instanceof DocumentReference) {
-					FirestoreStorage.logTiming(diff, `document ${query.path}`);
+					FirestoreStorage.logTiming(deltaMs, `Doc ${query.path}`);
 				} else {
 					const q = query['_query'];
-					FirestoreStorage.logTiming(diff, q.path.segments.join('/'), snapshot.size, console.groupCollapsed);
-					q.filters.forEach((current) => {
+					const path = q.path.segments.join('/');
+					const queryStr = q.filters.map((current) => {
 						const field = current.field.segments.join('/');
 						const op = current.op.name;
 						const value = current.value.internalValue;
 
-						console.log(` => ${field} ${op} ${value}`);
-					}, []);
-					console.groupEnd();
+						return `${field} ${op} ${value}`;
+					}).join(' && ');
+					FirestoreStorage.logTiming(deltaMs, `${path} ${queryStr}`, snapshot.size);
 				}
 			}
 
 			return snapshot.docs
-				? snapshot.docs.map(FirestoreStorage.format)
-				: FirestoreStorage.format(snapshot);
+				? snapshot.docs.map((doc => FirestoreStorage.format(doc, schema)))
+				: FirestoreStorage.format(snapshot, schema);
 		};
 
 		return new Observable<any>((observer) => {
 			// return tear down logic
 			return query.onSnapshot((snapshot) => {
-				console.log(snapshot);
 				const data = successCallback(snapshot);
 				observer.next(data);
 			}, (error) => {
@@ -156,8 +184,17 @@ export class FirestoreStorage {
 				observer.error(error);
 				this.onFatalError.next(error);
 			}, observer.complete);
+
+			/*return query.get()
+				.then((snapshot) => {
+					const data  = successCallback(snapshot);
+					observer.next(data);
+					observer.complete();
+				}, observer.error);*/
+
 		});
 	}
+
 
 	generateId() {
 		return this.firestore.collection('any').doc().id;
@@ -175,24 +212,27 @@ export class FirestoreStorage {
 		});
 	}
 
-	findById(collection: string, id: string) {
+	findById(collection: string, id: string, schema: SchemaDescription) {
 		const path = FirestoreStorage.getPath(collection, id);
 		const docRef = this.firestore.doc(path);
-		return this.observe(docRef);
+		return this.observe(docRef, schema);
 	}
 
-	find(collection: string, cb: (qb: Query) => Query) {
+	find(collection: string, cb: (qb: Query) => Query, schema: SchemaDescription) {
 		return this.query(collection, (qb) => {
 			return cb(qb).limit(1);
-		}).pipe(map((result) => {
+		}, schema).pipe(map((result) => {
 			return result[0] || null;
 		}));
 	}
 
-	save(collection: string, data): string {
-		const model = FirestoreStorage.clone(data);
+	save(schema: SchemaDescription, collection: string, data): string {
+		const model = FirestoreStorage.clone(schema, data);
+		FirestoreStorage.debugLog('Saving', collection, model.id, model.data);
 		if (!model.id) {
-			return this.add(collection, model.data);
+			const id = this.add(collection, model.data);
+			data.id = id;
+			return id;
 		}
 		return this.update(collection, model.id, model.data);
 	}
@@ -216,17 +256,20 @@ export class FirestoreStorage {
 		return docRef.id;
 	}
 
-	batchSave(collection: string, data: any[], remove?: any[]): Observable<void> {
+	batchSave(schema: SchemaDescription, collection: string, data: any[], remove?: any[]): Observable<void> {
 		const promise = this.firestore.runTransaction(async (trx) => {
 
 			if (data) {
+				FirestoreStorage.debugLog('Batch-saving', collection, data);
 				for (const obj of data) {
-					const clone = FirestoreStorage.clone(obj);
+					const clone = FirestoreStorage.clone(schema, obj);
 					if (clone.id) {
 						const path = FirestoreStorage.getPath(collection, clone.id);
-						await trx.update(this.firestore.doc(path), clone.data);
+						await trx.set(this.firestore.doc(path), clone.data, {merge: true});
 					} else {
-						await trx.set(this.firestore.collection(collection).doc(), clone.data);
+						const docRef = this.firestore.collection(collection).doc();
+						await trx.set(docRef, clone.data, {merge: true});
+						obj.id = docRef.id;
 					}
 				}
 			}
@@ -246,11 +289,11 @@ export class FirestoreStorage {
 		return observableFrom(promise);
 	}
 
-	query(collection: string, cb: (qb: Query) => Query) {
+	query(collection: string, cb: (qb: Query) => Query, schema: SchemaDescription) {
 		const qb = this.firestore.collection(collection);
 		const query = cb(qb);
 
-		return this.observe(query);
+		return this.observe(query, schema);
 	}
 
 	delete(collection: string, id: string) {
