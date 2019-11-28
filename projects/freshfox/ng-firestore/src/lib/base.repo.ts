@@ -11,7 +11,9 @@ export abstract class BaseRepository<T> {
 
 	protected schemaModel: FirestoreSchemaModel | any = {};
 
-	protected constructor(private storage: FirestoreStorage) {
+	// Don't make protected unless you want to break Angular
+	// noinspection TypeScriptAbstractClassConstructorCanBeMadeProtected
+	constructor(private storage: FirestoreStorage) {
 	}
 
 	abstract getCollectionPath(...documentIds: string[]): string;
