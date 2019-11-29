@@ -31,7 +31,6 @@ export class FirestoreStorage {
 
 	private static readonly debugLog = debugFunc('firestore');
 
-	private readonly app: any;
 	public firestore: Firestore;
 	public onMultiTabError = new Subject();
 
@@ -101,16 +100,11 @@ export class FirestoreStorage {
 	}
 
 	constructor(@Inject(FIRESTORE_STORAGE_CONFIG) private config: FirestoreStorageConfig) {
-		this.app = firebase.app();
-		if (!this.app) {
-			this.app = firebase.initializeApp(this.config.firebase);
-		}
-
 		this.initFireStore();
 	}
 
 	private initFireStore() {
-		this.firestore = this.app.firestore();
+		this.firestore = firebase.app().firestore();
 
 		const settings: firebase.firestore.Settings = {
 			cacheSizeBytes: 60000000,
@@ -123,7 +117,7 @@ export class FirestoreStorage {
 		this.firestore.settings(settings);
 
 		if (this.config.persistenceEnabled) {
-			this.app.firestore().enablePersistence()
+			this.firestore.enablePersistence()
 				.then(() => {
 					console.log('Offline persistence enabled');
 				})
@@ -246,7 +240,7 @@ export class FirestoreStorage {
 		const path = FirestoreStorage.getPath(collection, id);
 		const docRef = this.firestore.doc(path);
 		try {
-			docRef.set(data);
+			docRef.set(data, { merge: true });
 		} catch (error) {
 			this.onFatalError.next(error);
 			console.error('Caught Firebase error');
