@@ -14,6 +14,7 @@ export * from './dialog.service';
 		MatDialogModule,
 		MatButtonModule,
 	],
+	entryComponents: [DialogConfirmComponent],
 	exports: [DialogConfirmComponent],
 	declarations: [DialogConfirmComponent],
 	providers: [
