@@ -5,6 +5,9 @@ import {DialogService} from './dialog.service';
 import {MatButtonModule} from '@angular/material/button';
 import {CommonModule} from '@angular/common';
 
+export * from './dialog-confirm.component';
+export * from './dialog.service';
+
 @NgModule({
 	imports: [
 		CommonModule,
