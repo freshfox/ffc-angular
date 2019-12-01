@@ -9,3 +9,4 @@ export * from './snackbar/index';
 export * from './alert-bar/index';
 export * from './button/index';
 export * from './icon/index';
+export * from './dialog/index';
