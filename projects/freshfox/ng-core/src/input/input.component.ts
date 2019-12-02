@@ -10,26 +10,42 @@ import {InputValidationMessageProvider} from './validation-message-provider';
 
         <mat-form-field appearance="outline">
             <mat-label *ngIf="!isSmall && label">{{ label }}</mat-label>
-            <input *ngIf="selector === 'ff-input'"
+            <input *ngIf="selector === 'ff-input' && formControl"
                    matInput
                    [placeholder]="placeholder"
                    [type]="type"
                    [name]="name"
                    [formControl]="formControl"
-                   [(ngModel)]="value"
+                   [attr.disabled]="disabled"
+                   (blur)="onBlur($event)">
+
+            <input *ngIf="selector === 'ff-input' && !formControl"
+                   matInput
+                   [placeholder]="placeholder"
+                   [type]="type"
+                   [name]="name"
+				   [(ngModel)]="value"
                    (ngModelChange)="onChange()"
                    [attr.disabled]="disabled"
                    (blur)="onBlur($event)">
 
-            <textarea *ngIf="selector === 'ff-textarea'"
+            <textarea *ngIf="selector === 'ff-textarea' && formControl"
                       matInput
                       [placeholder]="placeholder"
                       [name]="name"
                       [formControl]="formControl"
-                      [(ngModel)]="value"
                       (blur)="onBlur($event)"
-                      (ngModelChange)="onChange()"
                       [attr.disabled]="disabled"></textarea>
+
+            <textarea *ngIf="selector === 'ff-textarea' && !formControl"
+                      matInput
+                      [placeholder]="placeholder"
+                      [name]="name"
+                      [(ngModel)]="value"
+                      (ngModelChange)="onChange()"
+                      (blur)="onBlur($event)"
+                      [attr.disabled]="disabled"></textarea>
+			
             <mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
         </mat-form-field>
 	`,
@@ -50,7 +66,7 @@ export class FFInputComponent implements OnInit, ControlValueAccessor {
 	@Input() size: 'default' | 'large' = 'default';
 	@Input() placeholder: string;
 	@Input() label: string;
-	@Input() formControl: FormControl = new FormControl();
+	@Input() formControl: FormControl;
 	@Input() disabled = false;
 
 	@HostBinding('class.ff-input--small')
