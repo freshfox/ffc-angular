@@ -100,10 +100,6 @@ export class FFInputComponent implements OnInit, ControlValueAccessor {
 	}
 
 	onChange() {
-		if (this.formControl) {
-			this.formControl.patchValue(this.value);
-		}
-
 		this.onChangeCallback(this.value);
 	}
 
