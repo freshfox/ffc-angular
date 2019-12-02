@@ -59,7 +59,8 @@ export abstract class BaseRepository<T> {
 		return this.storage.batchSave(this.schemaModel.__schema, this.getCollectionPath(...documentIds), data, remove);
 	}
 
-	delete(id: string, ...documentIds: string[]) {
+	delete(...documentIds: string[]) {
+		const id = documentIds.pop();
 		return this.storage.delete(this.getCollectionPath(...documentIds), id);
 	}
 
