@@ -15,6 +15,7 @@ import {InputValidationMessageProvider} from './validation-message-provider';
                    [placeholder]="placeholder"
                    [type]="type"
                    [name]="name"
+                   [formControl]="formControl"
                    [(ngModel)]="value"
                    (ngModelChange)="onChange()"
                    [attr.disabled]="disabled"
@@ -24,6 +25,7 @@ import {InputValidationMessageProvider} from './validation-message-provider';
                       matInput
                       [placeholder]="placeholder"
                       [name]="name"
+                      [formControl]="formControl"
                       [(ngModel)]="value"
                       (blur)="onBlur($event)"
                       (ngModelChange)="onChange()"
