@@ -11,7 +11,6 @@ import {fromPromise} from 'rxjs/internal-compatibility';
 export class AuthService {
 
 	authState: Observable<firebase.User>;
-	private authToken: string;
 
 	constructor(private firebaseAuth: AngularFireAuth) {
 		this.authState = this.firebaseAuth.authState;
@@ -23,10 +22,7 @@ export class AuthService {
 				}
 
 				return of(null);
-			}))
-			.subscribe(token => {
-				this.authToken = token;
-			});
+			}));
 	}
 
 	login(email: string, password: string): Observable<any> {
@@ -48,7 +44,10 @@ export class AuthService {
 		return this.authState.pipe(map(auth => !!auth));
 	}
 
-	getAuthToken(): string {
-		return this.authToken;
+	getAuthToken(forceRefresh?: boolean): Observable<string> {
+		return this.authState
+			.pipe(switchMap(user => {
+				return user.getIdToken(forceRefresh);
+			}));
 	}
 }

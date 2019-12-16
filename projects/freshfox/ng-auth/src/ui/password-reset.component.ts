@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import {take} from 'rxjs/operators';
-import {AuthService} from './auth.service';
+import {AuthService} from '../auth/auth.service';
 import {SnackBarService} from '@freshfox/ng-core';
 
 @Component({
