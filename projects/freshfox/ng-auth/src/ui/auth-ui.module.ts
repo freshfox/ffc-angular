@@ -10,7 +10,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {FFInputModule, FFSnackbarModule} from '@freshfox/ng-core';
 import {MatCardModule} from '@angular/material/card';
-import {FFAuthModule} from '@freshfox/ng-auth';
+import {FFAuthModule} from '../auth/auth.module';
 
 export * from '../auth/auth.service';
 export * from '../auth/internal.guard';
