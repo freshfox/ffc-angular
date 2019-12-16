@@ -7,6 +7,7 @@ import {AuthService} from './auth.service';
 export * from './auth.service';
 export * from './internal.guard';
 export * from './public.guard';
+export * from './api-token.interceptor';
 
 @NgModule({
 	imports: [
