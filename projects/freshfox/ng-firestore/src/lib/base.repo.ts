@@ -3,8 +3,8 @@ import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import Query = firestore.Query;
 import CollectionReference = firestore.CollectionReference;
-import {FirestoreSchemaModel} from './descorators';
 import {FirestoreStorage} from './storage';
+import {FirestoreSchemaModel} from './decorators';
 
 @Injectable()
 export abstract class BaseRepository<T> {

@@ -3,13 +3,13 @@ import {Inject, Injectable, InjectionToken} from '@angular/core';
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import {map} from 'rxjs/operators';
-import {SchemaDescription} from './descorators';
 import debugFunc from 'debug';
 import Firestore = firebase.firestore.Firestore;
 import DocumentReference = firebase.firestore.DocumentReference;
 import DocumentSnapshot = firebase.firestore.DocumentSnapshot;
 import CollectionReference = firebase.firestore.CollectionReference;
 import Query = firebase.firestore.Query;
+import {SchemaDescription} from './decorators';
 
 export const FIRESTORE_STORAGE_CONFIG = new InjectionToken('FIRESTORE_STORAGE_CONFIG');
 
