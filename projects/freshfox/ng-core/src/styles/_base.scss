@@ -13,3 +13,13 @@ html {
 	box-sizing: inherit;
 }
 
+
+.mat-spinner {
+	width: 32px !important;
+	height: 32px !important;
+
+	svg {
+		width: 100% !important;
+		height: 100% !important;
+	}
+}
