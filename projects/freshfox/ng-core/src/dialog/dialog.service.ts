@@ -1,11 +1,11 @@
 import {Injectable, TemplateRef} from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {ComponentType} from '@angular/cdk/portal';
-import {MatDialogConfig} from '@angular/material/dialog/typings/dialog-config';
 import {Observable} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
 import {first} from 'rxjs/operators';
 import {DialogConfirmComponent, DialogType} from './dialog-confirm.component';
+import {MatDialogConfig} from '@angular/material/dialog';
 
 @Injectable()
 export class DialogService {
@@ -67,9 +67,15 @@ export class DialogService {
 	}
 
 	create<T>(componentOrTemplateRef: ComponentType<T> | TemplateRef<T>, options: DialogOptions = {}) {
-		if (options.panelClass) {
+		if (!options.panelClass) {
+			options.panelClass = [];
+		}
+
+		if (options.panelClass && typeof options.panelClass === 'string') {
 			options.panelClass = [options.panelClass as string];
 		}
+
+		(options.panelClass as string[]).push('ff-dialog-no-padding');
 
 		if (!options.width) {
 			switch (options.size) {
