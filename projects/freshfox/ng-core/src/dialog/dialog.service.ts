@@ -1,11 +1,10 @@
 import {Injectable, TemplateRef} from '@angular/core';
-import {MatDialog, MatDialogRef} from '@angular/material';
 import {ComponentType} from '@angular/cdk/portal';
 import {Observable} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
 import {first} from 'rxjs/operators';
 import {DialogConfirmComponent, DialogType} from './dialog-confirm.component';
-import {MatDialogConfig} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 
 @Injectable()
 export class DialogService {
