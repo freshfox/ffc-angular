@@ -7,6 +7,10 @@
 	background: var(--ff-modal-header-background);
 	color: white;
 	padding: 16px var(--ff-modal-side-padding);
+
+	&--danger {
+		background:  var(--ff-modal-header-danger-background);
+	}
 }
 
 .ff-dialog-content {
