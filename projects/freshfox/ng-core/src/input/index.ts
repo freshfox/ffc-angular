@@ -12,7 +12,14 @@ export * from './validation-message-provider';
 
 @NgModule({
 	declarations: [FFInputComponent],
-	imports: [CommonModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, BrowserAnimationsModule],
+	imports: [
+		CommonModule,
+		FormsModule,
+		ReactiveFormsModule,
+		MatFormFieldModule,
+		MatInputModule,
+		BrowserAnimationsModule
+	],
 	exports: [FFInputComponent],
 })
 export class FFInputModule {

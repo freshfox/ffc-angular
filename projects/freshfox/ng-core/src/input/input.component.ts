@@ -1,6 +1,20 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, HostBinding, Input, OnInit} from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	ElementRef,
+	EventEmitter,
+	forwardRef,
+	HostBinding,
+	Input,
+	OnChanges, OnDestroy,
+	OnInit,
+	Output,
+	SimpleChanges
+} from '@angular/core';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {InputValidationMessageProvider} from './validation-message-provider';
+import {Subscription} from 'rxjs';
 
 @Component({
 	selector: 'ff-input,ff-textarea',
@@ -24,7 +38,7 @@ import {InputValidationMessageProvider} from './validation-message-provider';
                    [placeholder]="placeholder"
                    [type]="type"
                    [name]="name"
-				   [(ngModel)]="value"
+                   [(ngModel)]="value"
                    (ngModelChange)="onChange()"
                    [attr.disabled]="disabled"
                    (blur)="onBlur($event)">
@@ -45,7 +59,7 @@ import {InputValidationMessageProvider} from './validation-message-provider';
                       (ngModelChange)="onChange()"
                       (blur)="onBlur($event)"
                       [attr.disabled]="disabled"></textarea>
-			
+
             <mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
         </mat-form-field>
 	`,
@@ -60,7 +74,7 @@ import {InputValidationMessageProvider} from './validation-message-provider';
 		}
 	]
 })
-export class FFInputComponent implements OnInit, ControlValueAccessor {
+export class FFInputComponent implements OnInit, ControlValueAccessor, OnChanges, OnDestroy {
 
 	@Input() type = 'text';
 	@Input() size: 'default' | 'large' = 'default';
@@ -68,6 +82,9 @@ export class FFInputComponent implements OnInit, ControlValueAccessor {
 	@Input() label: string;
 	@Input() formControl: FormControl;
 	@Input() disabled = false;
+
+	@Input() model: any;
+	@Output() modelChange = new EventEmitter<any>();
 
 	@HostBinding('class.ff-input--small')
 	get isSmall() {
@@ -77,6 +94,8 @@ export class FFInputComponent implements OnInit, ControlValueAccessor {
 	name: string;
 	value: any = '';
 	selector: string;
+
+	private formControlChangeSubscription: Subscription;
 
 	private onTouchedCallback: () => void = () => {
 	};
@@ -89,6 +108,12 @@ export class FFInputComponent implements OnInit, ControlValueAccessor {
 
 	ngOnInit(): void {
 		if (this.formControl) {
+			this.formControl.valueChanges
+				.subscribe(change => {
+					this.model = change;
+					this.modelChange.emit(change);
+				});
+
 			const parent = this.formControl.parent;
 			if (!parent) {
 				return;
@@ -100,7 +125,18 @@ export class FFInputComponent implements OnInit, ControlValueAccessor {
 				}
 			}
 		}
+	}
 
+	ngOnChanges(changes: SimpleChanges) {
+		if (changes.model) {
+			this.formControl.patchValue(changes.model.currentValue);
+		}
+	}
+
+	ngOnDestroy() {
+		if (this.formControlChangeSubscription) {
+			this.formControlChangeSubscription.unsubscribe();
+		}
 	}
 
 	get errorMessage() {
@@ -136,5 +172,4 @@ export class FFInputComponent implements OnInit, ControlValueAccessor {
 	registerOnTouched(fn: any) {
 		this.onTouchedCallback = fn;
 	}
-
 }
