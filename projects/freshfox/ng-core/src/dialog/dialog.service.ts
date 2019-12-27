@@ -124,7 +124,7 @@ export interface DialogOptions extends MatDialogConfig {
 
 export class DialogRef<T> {
 
-	constructor(private matRef: MatDialogRef<T>) {
+	constructor(public matRef: MatDialogRef<T>) {
 	}
 
 	close() {
