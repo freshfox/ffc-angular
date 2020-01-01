@@ -45,6 +45,7 @@ import {Subscription} from 'rxjs';
 
             <textarea *ngIf="selector === 'ff-textarea' && formControl"
                       matInput
+					  [matTextareaAutosize]="autoSize"
                       [placeholder]="placeholder"
                       [name]="name"
                       [formControl]="formControl"
@@ -54,6 +55,7 @@ import {Subscription} from 'rxjs';
             <textarea *ngIf="selector === 'ff-textarea' && !formControl"
                       matInput
                       [placeholder]="placeholder"
+                      [matTextareaAutosize]="autoSize"
                       [name]="name"
                       [(ngModel)]="value"
                       (ngModelChange)="onChange()"
@@ -82,9 +84,12 @@ export class FFInputComponent implements OnInit, ControlValueAccessor, OnChanges
 	@Input() label: string;
 	@Input() formControl: FormControl;
 	@Input() disabled = false;
+	@Input() autoSize = false;
 
 	@Input() model: any;
 	@Output() modelChange = new EventEmitter<any>();
+
+	@Output() blur = new EventEmitter<any>();
 
 	@HostBinding('class.ff-input--small')
 	get isSmall() {
@@ -156,6 +161,7 @@ export class FFInputComponent implements OnInit, ControlValueAccessor, OnChanges
 	}
 
 	onBlur(event) {
+		this.blur.emit(event);
 		this.onTouchedCallback();
 	}
 
