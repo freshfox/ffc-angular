@@ -121,7 +121,7 @@ export class FFInputComponent implements OnInit, ControlValueAccessor, OnChanges
 
 	ngOnInit(): void {
 		if (this.formControl) {
-			this.formControl.valueChanges
+			this.formControlChangeSubscription = this.formControl.valueChanges
 				.subscribe(change => {
 					this.model = change;
 					this.modelChange.emit(change);
