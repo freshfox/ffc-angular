@@ -50,6 +50,7 @@ import {Subscription} from 'rxjs';
                       [name]="name"
                       [formControl]="formControl"
                       (blur)="onBlur($event)"
+					  [rows]="textAreaRows"
                       [attr.disabled]="disabled"></textarea>
 
             <textarea *ngIf="selector === 'ff-textarea' && !formControl"
@@ -60,6 +61,7 @@ import {Subscription} from 'rxjs';
                       [(ngModel)]="value"
                       (ngModelChange)="onChange()"
                       (blur)="onBlur($event)"
+					  [rows]="textAreaRows"
                       [attr.disabled]="disabled"></textarea>
 
             <mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
@@ -85,6 +87,7 @@ export class FFInputComponent implements OnInit, ControlValueAccessor, OnChanges
 	@Input() formControl: FormControl;
 	@Input() disabled = false;
 	@Input() autoSize = false;
+	@Input() textAreaRows = 0;
 
 	@Input() model: any;
 	@Output() modelChange = new EventEmitter<any>();
