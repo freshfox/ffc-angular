@@ -1,13 +1,13 @@
 {
   "name": "@freshfox/ng-auth",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publishConfig": {
     "access": "public"
   },
   "peerDependencies": {
     "@angular/common": "^8.2.11",
     "@angular/core": "^8.2.11",
-    "@freshfox/ng-core": "^3.4.3",
+    "@freshfox/ng-core": "^3.12.3",
     "@angular/fire": "^5.2.3",
     "@ngx-translate/core": "^11.0.1",
     "firebase": "^7.5.0"
