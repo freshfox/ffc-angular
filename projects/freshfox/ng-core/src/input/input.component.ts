@@ -30,8 +30,8 @@ import {Subscription} from 'rxjs';
                    [type]="type"
                    [name]="name"
                    [formControl]="formControl"
-                   [attr.disabled]="disabled"
-				   [attr.readonly]="readonly"
+                   [disabled]="disabled"
+				   [readonly]="readonly"
                    (blur)="onBlur($event)">
 
             <input *ngIf="selector === 'ff-input' && !formControl"
@@ -41,8 +41,8 @@ import {Subscription} from 'rxjs';
                    [name]="name"
                    [(ngModel)]="value"
                    (ngModelChange)="onChange()"
-                   [attr.disabled]="disabled"
-                   [attr.readonly]="readonly"
+                   [disabled]="disabled"
+                   [readonly]="readonly"
                    (blur)="onBlur($event)">
 
             <textarea *ngIf="selector === 'ff-textarea' && formControl"
@@ -53,8 +53,8 @@ import {Subscription} from 'rxjs';
                       [formControl]="formControl"
                       (blur)="onBlur($event)"
 					  [rows]="textAreaRows"
-                      [attr.readonly]="readonly"
-                      [attr.disabled]="disabled"></textarea>
+                      [readonly]="readonly"
+                      [disabled]="disabled"></textarea>
 
             <textarea *ngIf="selector === 'ff-textarea' && !formControl"
                       matInput
@@ -65,8 +65,8 @@ import {Subscription} from 'rxjs';
                       (ngModelChange)="onChange()"
                       (blur)="onBlur($event)"
 					  [rows]="textAreaRows"
-                      [attr.readonly]="readonly"
-                      [attr.disabled]="disabled"></textarea>
+                      [readonly]="readonly"
+                      [disabled]="disabled"></textarea>
 
             <mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
         </mat-form-field>
