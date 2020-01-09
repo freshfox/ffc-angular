@@ -1,10 +1,17 @@
 :root {
 	--ff-auth-logo-size: 320px;
+	--ff-auth-background-brightness: 50%;
+}
+
+ff-public {
+	height: 100%;
 }
 
 .login-wrapper {
 
 	color: #fff;
+	overflow-y: auto;
+	height: 100%;
 
 	a,
 	a:visited,
@@ -24,6 +31,7 @@
 		top: 0;
 		left: 0;
 		object-fit: cover;
+		filter: brightness(var(--ff-auth-background-brightness));
 	}
 
 	.content-wrapper {

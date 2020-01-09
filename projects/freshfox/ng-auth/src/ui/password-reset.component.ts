@@ -10,7 +10,9 @@ import {SnackBarService} from '@freshfox/ng-core';
 	template: `
         <form class="form-stacked default-form-wrapper login-form" [formGroup]="form" (ngSubmit)="onSubmit()">
             <mat-card>
-                <ff-input type="email" [placeholder]="'general.email' | translate"
+                <ff-input type="email" 
+						  [placeholder]="'general.email' | translate"
+						  [size]="'large'"
                           [formControl]="form.controls['email']"></ff-input>
 
                 <button mat-flat-button color="primary" (click)="onSubmit()" type="submit" [disabled]="loading">

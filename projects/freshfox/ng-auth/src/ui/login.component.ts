@@ -11,9 +11,13 @@ import {SnackBarService} from '@freshfox/ng-core';
         <form class="form-stacked default-form-wrapper login-form" [formGroup]="form" (ngSubmit)="onSubmit()">
             <mat-card>
                 <ff-input [placeholder]="'general.username' | translate"
+                          [size]="'large'"
+						  type="email"
                           [formControl]="form.controls.username"></ff-input>
 
-                <ff-input [placeholder]="'general.password' | translate" [formControl]="form.controls.password"
+                <ff-input [placeholder]="'general.password' | translate"
+                          [size]="'large'"
+                          [formControl]="form.controls.password"
                           type="password"></ff-input>
 
                 <button mat-flat-button color="primary" (click)="onSubmit()" type="submit" [disabled]="loading">
