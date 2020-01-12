@@ -8,24 +8,22 @@ import {SnackBarService} from '@freshfox/ng-core';
 @Component({
 	selector: 'ff-password-reset',
 	template: `
-        <form class="form-stacked default-form-wrapper login-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <form class="ff-auth__default-form" [formGroup]="form" (ngSubmit)="onSubmit()">
             <mat-card>
                 <ff-input type="email"
                           [label]="'general.email' | translate"
                           [size]="'large'"
                           [formControl]="form.controls['email']"></ff-input>
 
-                <button mat-flat-button color="primary" (click)="onSubmit()" type="submit" [disabled]="loading">
-                    <span *ngIf="!loading">{{ 'login.forgot-password-submit' | translate }}</span>
-                    <span *ngIf="loading">{{ 'login.forgot-password-submitting' | translate }}</span>
+                <button ff-button (click)="onSubmit()" type="submit" [loading]="loading">
+                    {{ 'login.forgot-password-submit' | translate }}
                 </button>
             </mat-card>
         </form>
 
-        <div class="after-form">
-            <a [routerLink]="['/login']" class="small-print">{{ 'login.back-to-login' | translate }}</a>
+        <div class="ff-auth__after-form">
+            <a [routerLink]="['/login']" class="ff-auth__small-print">{{ 'login.back-to-login' | translate }}</a>
         </div>
-
 	`
 })
 export class PasswordResetComponent implements OnInit {

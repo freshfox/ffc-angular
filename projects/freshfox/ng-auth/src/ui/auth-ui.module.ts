@@ -8,7 +8,7 @@ import {RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
-import {FFInputModule, FFSnackbarModule} from '@freshfox/ng-core';
+import {FFButtonModule, FFInputModule, FFSnackbarModule} from '@freshfox/ng-core';
 import {MatCardModule} from '@angular/material/card';
 import {FFAuthModule} from '../auth/auth.module';
 
@@ -31,6 +31,7 @@ export * from '../auth/public.guard';
 		ReactiveFormsModule,
 		FFSnackbarModule,
 		FFInputModule,
+		FFButtonModule,
 		FFAuthModule,
 	],
 	exports: [

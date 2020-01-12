@@ -3,14 +3,7 @@
 	--ff-auth-background-brightness: 50%;
 }
 
-ff-public {
-	height: 100%;
-}
-
-.login-wrapper {
-
-	color: #fff;
-	overflow-y: auto;
+.ff-auth {
 	height: 100%;
 
 	a,
@@ -19,12 +12,18 @@ ff-public {
 		color: #fff;
 	}
 
-	.login-inner {
-		padding: 54px 50px;
+	&__wrapper {
+		color: #fff;
+		overflow-y: auto;
+		height: 100%;
+	}
+
+	&__inner {
+		padding: 56px 48px;
 		position: relative;
 	}
 
-	.login-background {
+	&__background {
 		width: 100%;
 		height: 100%;
 		position: fixed;
@@ -34,57 +33,48 @@ ff-public {
 		filter: brightness(var(--ff-auth-background-brightness));
 	}
 
-	.content-wrapper {
-		padding-top: 50px;
-	}
-
-	.top-notice {
-		text-align: right;
-	}
-
-	.logo {
+	&__logo {
 		fill: white;
 		display: block;
 		width: var(--ff-auth-logo-size);
 		margin: 0 auto 24px;
 	}
 
-	.header {
-		text-align: center;
-		padding: 30px 0;
-
-		.sub {
-			font-weight: lighter;
-			font-size: 24px;
-			margin-top: 0;
-		}
+	&__content-wrapper {
+		padding-top: 48px;
 	}
 
-	.default-form-wrapper {
+	&__tagline {
+		font-weight: lighter;
+		font-size: 24px;
+		margin-top: 0;
+	}
+
+	&__header {
+		text-align: center;
+		padding: 32px 0;
+	}
+
+	&__default-form {
 		max-width: 270px;
 		margin: 0 auto;
 		width: 100%;
+
+		button.ff-button {
+			width: 100%;
+			height: 48px;
+		}
 	}
 
-	.default-form-description {
+	&__after-form {
 		text-align: center;
+		margin-top: 24px;
 	}
 
-	.after-form {
-		text-align: center;
-		margin-top: 25px;
-	}
-
-	.small-print {
+	&__small-print {
 		font-size: 12px;
 		line-height: 16px;
 		color: #fff;
 		text-decoration: none;
 	}
-
-	button.mat-primary {
-		width: 100%;
-		height: 48px;
-	}
-
 }

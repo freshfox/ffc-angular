@@ -8,11 +8,11 @@ import {SnackBarService} from '@freshfox/ng-core';
 @Component({
 	selector: 'ff-login',
 	template: `
-        <form class="form-stacked default-form-wrapper login-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <form class="ff-auth__default-form" [formGroup]="form" (ngSubmit)="onSubmit()">
             <mat-card>
                 <ff-input [label]="'general.username' | translate"
                           [size]="'large'"
-						  type="email"
+                          type="email"
                           [formControl]="form.controls.username"></ff-input>
 
                 <ff-input [label]="'general.password' | translate"
@@ -20,15 +20,14 @@ import {SnackBarService} from '@freshfox/ng-core';
                           [formControl]="form.controls.password"
                           type="password"></ff-input>
 
-                <button mat-flat-button color="primary" (click)="onSubmit()" type="submit" [disabled]="loading">
-                    <span *ngIf="!loading">{{ 'login.submit' | translate }}</span>
-                    <span *ngIf="loading">{{ 'login.submitting' | translate }}</span>
+                <button ff-button (click)="onSubmit()" type="submit" [loading]="loading">
+                    {{ 'login.submit' | translate }}
                 </button>
             </mat-card>
         </form>
 
-        <div class="after-form">
-            <a [routerLink]="['/password-reset']" class="small-print">{{ 'login.reset-password' | translate }}</a>
+        <div class="ff-auth__after-form">
+            <a [routerLink]="['/password-reset']" class="ff-auth__small-print">{{ 'login.reset-password' | translate }}</a>
         </div>
 	`
 })
