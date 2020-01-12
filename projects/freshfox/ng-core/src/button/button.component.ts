@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, HostBinding, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, Input} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
@@ -28,15 +28,10 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 export class ButtonComponent {
 
 	@Input() loading = false;
-	@Input() class = '';
 	@Input() icon: string;
 	@Input() disabled = false;
 
-	@HostBinding('class')
-	get clazz() {
-		return `ff-button ${this.class}`;
-	}
-
-	constructor() {
+	constructor(elementRef: ElementRef) {
+		elementRef.nativeElement.classList.add('ff-button');
 	}
 }

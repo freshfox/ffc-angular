@@ -1,5 +1,5 @@
-$buttonBorderRadius: 2px !default;
-$buttonPadding: 8px 14px !default;
+$buttonBorderRadius: 4px !default;
+$buttonPadding: 4px 20px !default;
 $buttonPaddingSmall: 5px 12px !default;
 $buttonPaddingLarge: 15px 18px !default;
 $buttonTextColor: #fff !default;
@@ -7,18 +7,19 @@ $buttonTextColor: #fff !default;
 .ff-button {
 	display: inline-block;
 	zoom: 1;
-	line-height: normal;
+	line-height: 32px;
 	vertical-align: baseline;
 	text-align: center;
 	cursor: pointer;
 	-webkit-user-drag: none;
 	user-select: none;
+	white-space: nowrap;
 
 	font-family: inherit;
-	font-size: 100%;
 	color: $buttonTextColor;
 	padding: $buttonPadding;
 	letter-spacing: 1px;
+	font-size: var(--ff-button-font-size);
 	background: var(--ff-color-primary);
 	border: 1px solid var(--ff-color-primary);
 	text-decoration: none;
