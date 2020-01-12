@@ -1,4 +1,4 @@
-import {Component, HostBinding} from '@angular/core';
+import {Component, HostBinding, Input} from '@angular/core';
 import {animate, style, transition, trigger} from '@angular/animations';
 
 @Component({
@@ -14,7 +14,7 @@ import {animate, style, transition, trigger} from '@angular/animations';
 						<p class="ff-auth__tagline">{{ 'login.tagline' | translate }}</p>
 					</div>
 					<div class="ff-auth__content">
-						<router-outlet></router-outlet>
+						<router-outlet *ngIf="routerMode"></router-outlet>
 						<ng-content></ng-content>
 					</div>
 				</div>
@@ -31,6 +31,8 @@ import {animate, style, transition, trigger} from '@angular/animations';
 	]
 })
 export class PublicComponent {
+
+	@Input() routerMode = true;
 
 	@HostBinding('class') clazz = 'ff-public';
 
