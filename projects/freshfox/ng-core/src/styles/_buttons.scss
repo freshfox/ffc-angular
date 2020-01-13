@@ -61,6 +61,11 @@ $buttonTextColor: #fff !default;
 		color: var(--ff-color-primary);
 	}
 
+	&--small {
+		line-height: 20px;
+		font-size: 13px;
+	}
+
 	&.ff-button--outline {
 		background: none;
 		color: white;
