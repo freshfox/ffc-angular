@@ -7,9 +7,16 @@
 	background: var(--ff-modal-header-background);
 	color: white;
 	padding: 16px var(--ff-modal-side-padding);
+	display: flex;
+	align-items: center;
+	width: 100%;
 
 	&--danger {
 		background:  var(--ff-modal-header-danger-background);
+	}
+
+	&__right {
+		margin-left: auto;
 	}
 }
 
