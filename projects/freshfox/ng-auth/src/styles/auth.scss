@@ -6,16 +6,6 @@
 .ff-auth {
 	height: 100%;
 
-	.mat-form-field-appearance-outline .mat-form-field-outline {
-		background-color: white !important;
-		border-radius: 5px;
-		transition: none !important;
-
-		.mat-input-element {
-			color: var(--ff-color-text);
-		}
-	}
-
 	a,
 	a:visited,
 	a:focus {
@@ -26,6 +16,16 @@
 		color: #fff;
 		overflow-y: auto;
 		height: 100%;
+
+		.mat-form-field-appearance-outline .mat-form-field-outline {
+			background-color: white !important;
+			border-radius: 5px;
+			transition: none !important;
+
+			.mat-input-element {
+				color: var(--ff-color-text);
+			}
+		}
 	}
 
 	&__inner {
