@@ -9,21 +9,19 @@ import {SnackBarService} from '@freshfox/ng-core';
 	selector: 'ff-login',
 	template: `
         <form class="ff-auth__default-form" [formGroup]="form" (ngSubmit)="onSubmit()">
-            <mat-card>
-                <ff-input [label]="'general.username' | translate"
-                          [size]="'large'"
-                          type="email"
-                          [formControl]="form.controls.username"></ff-input>
+			<ff-input [label]="'general.username' | translate"
+					  [size]="'large'"
+					  type="email"
+					  [formControl]="form.controls.username"></ff-input>
 
-                <ff-input [label]="'general.password' | translate"
-                          [size]="'large'"
-                          [formControl]="form.controls.password"
-                          type="password"></ff-input>
+			<ff-input [label]="'general.password' | translate"
+					  [size]="'large'"
+					  [formControl]="form.controls.password"
+					  type="password"></ff-input>
 
-                <button ff-button (click)="onSubmit()" type="submit" [loading]="loading">
-                    {{ 'login.submit' | translate }}
-                </button>
-            </mat-card>
+			<button ff-button (click)="onSubmit()" type="submit" [loading]="loading">
+				{{ 'login.submit' | translate }}
+			</button>
         </form>
 
         <div class="ff-auth__after-form">

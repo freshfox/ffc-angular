@@ -9,16 +9,14 @@ import {SnackBarService} from '@freshfox/ng-core';
 	selector: 'ff-password-reset',
 	template: `
         <form class="ff-auth__default-form" [formGroup]="form" (ngSubmit)="onSubmit()">
-            <mat-card>
-                <ff-input type="email"
-                          [label]="'general.email' | translate"
-                          [size]="'large'"
-                          [formControl]="form.controls['email']"></ff-input>
+			<ff-input type="email"
+					  [label]="'general.email' | translate"
+					  [size]="'large'"
+					  [formControl]="form.controls['email']"></ff-input>
 
-                <button ff-button (click)="onSubmit()" type="submit" [loading]="loading">
-                    {{ 'login.forgot-password-submit' | translate }}
-                </button>
-            </mat-card>
+			<button ff-button (click)="onSubmit()" type="submit" [loading]="loading">
+				{{ 'login.forgot-password-submit' | translate }}
+			</button>
         </form>
 
         <div class="ff-auth__after-form">
