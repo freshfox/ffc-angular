@@ -24,6 +24,15 @@ import {Subscription} from 'rxjs';
 
         <mat-form-field appearance="outline">
             <mat-label *ngIf="!isSmall && label">{{ label }}</mat-label>
+			
+			<ng-container matPrefix>
+				<ng-content select="[ffPrefix]"></ng-content>
+			</ng-container>
+
+            <ng-container matSuffix>
+                <ng-content select="[ffSuffix]"></ng-content>
+            </ng-container>
+			
             <input *ngIf="selector === 'ff-input' && formControl"
                    matInput
                    [placeholder]="placeholder"
