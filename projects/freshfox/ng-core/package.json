@@ -5,11 +5,11 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@angular/common": "^8.2.11",
-    "@angular/core": "^8.2.11",
-    "@angular/forms": "^8.2.11",
-    "@angular/material": "^8.2.3",
-    "@angular/cdk": "^8.2.3",
+    "@angular/common": "^9.0.1",
+    "@angular/core": "^9.0.1",
+    "@angular/forms": "^9.0.1",
+    "@angular/material": "^9.0.0",
+    "@angular/cdk": "^9.0.0",
     "validator": "^12.1.0"
   }
 }
