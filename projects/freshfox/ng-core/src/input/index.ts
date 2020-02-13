@@ -23,7 +23,7 @@ export * from './validation-message-provider';
 	exports: [FFInputComponent],
 })
 export class FFInputModule {
-	static forRoot(config: FFInputModuleConfig = {}): ModuleWithProviders {
+	static forRoot(config: FFInputModuleConfig = {}): ModuleWithProviders<FFInputModule> {
 		return {
 			ngModule: FFInputModule,
 			providers: [

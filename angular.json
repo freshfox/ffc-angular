@@ -22,7 +22,7 @@
             "main": "projects/ffc-angular-test/src/main.ts",
             "polyfills": "projects/ffc-angular-test/src/polyfills.ts",
             "tsConfig": "projects/ffc-angular-test/tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "projects/ffc-angular-test/src/favicon.ico",
               "projects/ffc-angular-test/src/assets"
@@ -45,7 +45,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -137,7 +136,12 @@
             "tsConfig": "projects/freshfox/ng-auth/tsconfig.lib.json",
             "project": "projects/freshfox/ng-auth/ng-package.json"
           }
-        },
+        ,          "configurations": {
+            "production": {
+              "tsConfig": "projects/freshfox/ng-auth/tsconfig.lib.prod.json"
+            }
+          }
+},
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
@@ -172,7 +176,12 @@
             "tsConfig": "projects/freshfox/ng-core/tsconfig.lib.json",
             "project": "projects/freshfox/ng-core/ng-package.json"
           }
-        },
+        ,          "configurations": {
+            "production": {
+              "tsConfig": "projects/freshfox/ng-core/tsconfig.lib.prod.json"
+            }
+          }
+},
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
@@ -207,7 +216,12 @@
             "tsConfig": "projects/freshfox/ng-firestore/tsconfig.lib.json",
             "project": "projects/freshfox/ng-firestore/ng-package.json"
           }
-        },
+        ,          "configurations": {
+            "production": {
+              "tsConfig": "projects/freshfox/ng-firestore/tsconfig.lib.prod.json"
+            }
+          }
+},
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
