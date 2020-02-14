@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import Query = firestore.Query;
 import CollectionReference = firestore.CollectionReference;
+import Transaction = firestore.Transaction;
 import {FirestoreStorage} from './storage';
 import {FirestoreSchemaModel} from './decorators';
 
@@ -64,6 +65,13 @@ export abstract class BaseRepository<T> {
 		return this.storage.delete(this.getCollectionPath(...documentIds), id);
 	}
 
+	transaction(updateFunction: (trx: RepositoryTransaction<T>) => Promise<any>, ...documentIds: string[]) {
+		return this.storage.transaction((trx) => {
+			return updateFunction(new RepositoryTransaction<T>(
+				this.getCollectionPath(...documentIds), this.storage, trx
+			));
+		});
+	}
 }
 
 export interface Order<T> {
@@ -74,4 +82,46 @@ export interface Order<T> {
 export enum OrderDirection {
 	Asc = 'asc',
 	Desc = 'desc'
+}
+
+class RepositoryTransaction<T> {
+
+	constructor(private collectionPath: string, private storage: FirestoreStorage, private trx: Transaction) {
+	}
+
+	create(data: T): Transaction {
+		const model = FirestoreStorage.clone(null, data);
+		return this.trx.set(null, model.data);
+	}
+
+	set(data: T): Transaction {
+		const model = FirestoreStorage.clone(null, data);
+		return this.trx.set(this.doc(model.id), model.data, {
+			merge: true
+		});
+	}
+
+	setAvoidMerge(data: T): Transaction {
+		const model = FirestoreStorage.clone(null, data);
+		return this.trx.set(this.doc(model.id), model.data);
+	}
+
+	delete(docId: string): Transaction {
+		return this.trx.delete(this.doc(docId));
+	}
+
+	get(docId: string): Promise<T> {
+		return this.trx.get(this.doc(docId))
+			.then((snapshot) => {
+				return FirestoreStorage.format(snapshot, null) as any; // Why any?
+			});
+	}
+
+	private doc(path?: string) {
+		if (path) {
+			return this.storage.collection(this.collectionPath).doc(path);
+		}
+		return this.storage.collection(this.collectionPath).doc();
+	}
+
 }

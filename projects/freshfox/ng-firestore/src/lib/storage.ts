@@ -10,6 +10,7 @@ import DocumentSnapshot = firebase.firestore.DocumentSnapshot;
 import CollectionReference = firebase.firestore.CollectionReference;
 import Query = firebase.firestore.Query;
 import {SchemaDescription} from './decorators';
+import Transaction = firebase.firestore.Transaction;
 
 export const FIRESTORE_STORAGE_CONFIG = new InjectionToken('FIRESTORE_STORAGE_CONFIG');
 
@@ -22,7 +23,8 @@ export interface FirestoreStorageConfig {
 		databaseURL: string,
 		projectId: string,
 		storageBucket: string,
-		messagingSenderId: string
+		messagingSenderId: string,
+		appId?: string
 	};
 }
 
@@ -37,7 +39,7 @@ export class FirestoreStorage {
 	readonly onFatalError = new Subject<any>();
 	readonly onWrite = new Subject<{ path: string, data: any }>();
 
-	private static clone(schema: SchemaDescription, data): { id: string, data } {
+	static clone(schema: SchemaDescription, data): { id: string, data } {
 		const clone = Object.assign({}, data);
 
 		Object.keys(clone).forEach((key) => {
@@ -70,7 +72,7 @@ export class FirestoreStorage {
 		return `${collection}/${id}`;
 	}
 
-	private static format(snapshot: DocumentSnapshot, schema: SchemaDescription) {
+	static format(snapshot: DocumentSnapshot, schema: SchemaDescription) {
 		if (!snapshot.exists) {
 			return null;
 		}
@@ -104,6 +106,9 @@ export class FirestoreStorage {
 	}
 
 	private initFireStore() {
+		if (!firebase.apps?.length) {
+			firebase.initializeApp(this.config.firebase);
+		}
 		this.firestore = firebase.app().firestore();
 
 		const settings: firebase.firestore.Settings = {
@@ -178,14 +183,6 @@ export class FirestoreStorage {
 				observer.error(error);
 				this.onFatalError.next(error);
 			}, observer.complete);
-
-			/*return query.get()
-				.then((snapshot) => {
-					const data  = successCallback(snapshot);
-					observer.next(data);
-					observer.complete();
-				}, observer.error);*/
-
 		});
 	}
 
@@ -293,5 +290,13 @@ export class FirestoreStorage {
 	delete(collection: string, id: string) {
 		const qb = this.firestore.collection(collection);
 		return observableFrom(qb.doc(id).delete());
+	}
+
+	collection(path: string) {
+		return this.firestore.collection(path);
+	}
+
+	transaction<R>(updateFunction: (transaction: Transaction) => Promise<R>): Promise<R> {
+		return this.firestore.runTransaction<R>(updateFunction);
 	}
 }

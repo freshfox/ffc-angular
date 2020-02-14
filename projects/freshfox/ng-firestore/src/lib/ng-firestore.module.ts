@@ -1,5 +1,5 @@
-import {NgModule} from '@angular/core';
-import {FirestoreStorage} from './storage';
+import {ModuleWithProviders, NgModule} from '@angular/core';
+import {FIRESTORE_STORAGE_CONFIG, FirestoreStorage, FirestoreStorageConfig} from './storage';
 
 export * from './base.model';
 export * from './base.repo';
@@ -15,4 +15,13 @@ export * from './decorators';
 	exports: []
 })
 export class FFFirestoreModule {
+	static forRoot(config: FirestoreStorageConfig): ModuleWithProviders {
+		return {
+			ngModule: FFFirestoreModule,
+			providers: [{
+				provide: FIRESTORE_STORAGE_CONFIG,
+				useValue: config
+			}]
+		};
+	}
 }
