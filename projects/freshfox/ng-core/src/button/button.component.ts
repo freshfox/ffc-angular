@@ -5,10 +5,11 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 	selector: 'button[ff-button]',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
-        <div class="ff-button__text" [style.visibility]="loading ? 'hidden' : 'visible'">
-            <ng-content></ng-content>
-        </div>
-        <mat-spinner *ngIf="loading" @fade></mat-spinner>
+		<div class="ff-button__text" [style.visibility]="loading ? 'hidden' : 'visible'">
+			<ff-icon *ngIf="icon" [name]="icon"></ff-icon>
+			<ng-content></ng-content>
+		</div>
+		<mat-spinner *ngIf="loading" @fade></mat-spinner>
 	`,
 	animations: [
 		trigger('fade', [
