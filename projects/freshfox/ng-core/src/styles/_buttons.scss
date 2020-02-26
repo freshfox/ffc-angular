@@ -28,6 +28,11 @@ $buttonTextColor: #fff !default;
 
 	position: relative;
 
+	&__text {
+		display: flex;
+		align-items: center;
+	}
+
 	.mat-spinner {
 		display: block;
 		position: absolute;
