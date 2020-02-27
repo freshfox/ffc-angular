@@ -2,17 +2,19 @@ import {
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
+	DoCheck,
 	ElementRef,
 	EventEmitter,
 	forwardRef,
 	HostBinding,
 	Input,
-	OnChanges, OnDestroy,
+	OnChanges,
+	OnDestroy,
 	OnInit,
 	Output,
 	SimpleChanges
 } from '@angular/core';
-import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {ControlValueAccessor, FormControl, FormGroupDirective, NG_VALUE_ACCESSOR, NgForm} from '@angular/forms';
 import {InputValidationMessageProvider} from './validation-message-provider';
 import {Subscription} from 'rxjs';
 
@@ -20,65 +22,65 @@ import {Subscription} from 'rxjs';
 	selector: 'ff-input,ff-textarea',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
-        <label *ngIf="isSmall && label">{{ label }}</label>
+		<label *ngIf="isSmall && label">{{ label }}</label>
 
-        <mat-form-field appearance="outline">
-            <mat-label *ngIf="!isSmall && label">{{ label }}</mat-label>
-			
+		<mat-form-field appearance="outline">
+			<mat-label *ngIf="!isSmall && label">{{ label }}</mat-label>
+
 			<ng-container matPrefix>
 				<ng-content select="[ffPrefix]"></ng-content>
 			</ng-container>
 
-            <ng-container matSuffix>
-                <ng-content select="[ffSuffix]"></ng-content>
-            </ng-container>
-			
-            <input *ngIf="selector === 'ff-input' && formControl"
-                   matInput
-                   [placeholder]="placeholder"
-                   [type]="type"
-                   [name]="name"
-                   [formControl]="formControl"
-                   [disabled]="disabled"
+			<ng-container matSuffix>
+				<ng-content select="[ffSuffix]"></ng-content>
+			</ng-container>
+
+			<input *ngIf="selector === 'ff-input' && formControl"
+				   matInput
+				   [placeholder]="placeholder"
+				   [type]="type"
+				   [name]="name"
+				   [formControl]="formControl"
+				   [disabled]="disabled"
 				   [readonly]="readonly"
-                   (blur)="onBlur($event)">
+				   (blur)="onBlur($event)">
 
-            <input *ngIf="selector === 'ff-input' && !formControl"
-                   matInput
-                   [placeholder]="placeholder"
-                   [type]="type"
-                   [name]="name"
-                   [(ngModel)]="value"
-                   (ngModelChange)="onChange()"
-                   [disabled]="disabled"
-                   [readonly]="readonly"
-                   (blur)="onBlur($event)">
+			<input *ngIf="selector === 'ff-input' && !formControl"
+				   matInput
+				   [placeholder]="placeholder"
+				   [type]="type"
+				   [name]="name"
+				   [(ngModel)]="value"
+				   (ngModelChange)="onChange()"
+				   [disabled]="disabled"
+				   [readonly]="readonly"
+				   (blur)="onBlur($event)">
 
-            <textarea *ngIf="selector === 'ff-textarea' && formControl"
-                      matInput
+			<textarea *ngIf="selector === 'ff-textarea' && formControl"
+					  matInput
 					  [matTextareaAutosize]="autoSize"
-                      [placeholder]="placeholder"
-                      [name]="name"
-                      [formControl]="formControl"
-                      (blur)="onBlur($event)"
+					  [placeholder]="placeholder"
+					  [name]="name"
+					  [formControl]="formControl"
+					  (blur)="onBlur($event)"
 					  [rows]="textAreaRows"
-                      [readonly]="readonly"
-                      [disabled]="disabled"></textarea>
+					  [readonly]="readonly"
+					  [disabled]="disabled"></textarea>
 
-            <textarea *ngIf="selector === 'ff-textarea' && !formControl"
-                      matInput
-                      [placeholder]="placeholder"
-                      [matTextareaAutosize]="autoSize"
-                      [name]="name"
-                      [(ngModel)]="value"
-                      (ngModelChange)="onChange()"
-                      (blur)="onBlur($event)"
+			<textarea *ngIf="selector === 'ff-textarea' && !formControl"
+					  matInput
+					  [placeholder]="placeholder"
+					  [matTextareaAutosize]="autoSize"
+					  [name]="name"
+					  [(ngModel)]="value"
+					  (ngModelChange)="onChange()"
+					  (blur)="onBlur($event)"
 					  [rows]="textAreaRows"
-                      [readonly]="readonly"
-                      [disabled]="disabled"></textarea>
+					  [readonly]="readonly"
+					  [disabled]="disabled"></textarea>
 
-            <mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
-        </mat-form-field>
+			<mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
+		</mat-form-field>
 	`,
 	host: {
 		'class': 'ff-input'
@@ -91,7 +93,7 @@ import {Subscription} from 'rxjs';
 		}
 	]
 })
-export class FFInputComponent implements OnInit, ControlValueAccessor, OnChanges, OnDestroy {
+export class FFInputComponent implements OnInit, ControlValueAccessor, OnChanges, OnDestroy, DoCheck {
 
 	@Input() type = 'text';
 	@Input() size: 'default' | 'large' = 'default';
@@ -116,6 +118,8 @@ export class FFInputComponent implements OnInit, ControlValueAccessor, OnChanges
 	name: string;
 	value: any = '';
 	selector: string;
+
+	private touched = false;
 
 	private formControlChangeSubscription: Subscription;
 
@@ -145,6 +149,15 @@ export class FFInputComponent implements OnInit, ControlValueAccessor, OnChanges
 				if (parent.controls[key] === this.formControl) {
 					this.name = key;
 				}
+			}
+		}
+	}
+
+	ngDoCheck(): void {
+		if (this.formControl) {
+			if (this.touched !== this.formControl.touched) {
+				this.touched = this.formControl.touched;
+				this.cdr.markForCheck();
 			}
 		}
 	}
