@@ -5,9 +5,13 @@ import {FormControl, Validators} from '@angular/forms';
 @Component({
 	selector: 'app-root',
 	template: `
-        <ff-input [(ngModel)]="value"></ff-input>
+        <ff-input [formControl]="control"></ff-input>
 
-        <button ff-button [loading]="loading">Absenden</button>
+		<pre>
+		{{ control.touched }}
+		</pre>
+
+        <button ff-button (click)="buttonClicked()">Absenden</button>
 	`,
 	styleUrls: ['./app.component.scss']
 })
@@ -15,9 +19,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	loading = false;
 
-	value = 'heyho';
-
-	control = new FormControl('heyho', Validators.required);
+	control = new FormControl('', Validators.compose([Validators.required, Validators.email]));
 
 	constructor(private snackbar: SnackBarService) {
 
@@ -31,5 +33,11 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	ngAfterViewInit() {
 		this.snackbar.error('test');
+	}
+
+	buttonClicked() {
+		this.control.markAsTouched();
+		this.control.markAsDirty();
+		console.log(this.control.errors);
 	}
 }
