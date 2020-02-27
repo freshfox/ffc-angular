@@ -31,6 +31,7 @@ $buttonTextColor: #fff !default;
 	&__text {
 		display: flex;
 		align-items: center;
+		justify-content: center;
 	}
 
 	.mat-spinner {
@@ -52,7 +53,9 @@ $buttonTextColor: #fff !default;
 		width: 12px;
 		height: 12px;
 		fill: currentColor;
-		margin-right: 5px;
+		margin-right: 6px;
+		display: inline-block;
+		vertical-align: middle;
 	}
 
 	&:hover,
