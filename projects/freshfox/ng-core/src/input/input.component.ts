@@ -14,7 +14,7 @@ import {
 	Output,
 	SimpleChanges
 } from '@angular/core';
-import {ControlValueAccessor, FormControl, FormGroupDirective, NG_VALUE_ACCESSOR, NgForm} from '@angular/forms';
+import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {InputValidationMessageProvider} from './validation-message-provider';
 import {Subscription} from 'rxjs';
 
@@ -22,7 +22,7 @@ import {Subscription} from 'rxjs';
 	selector: 'ff-input,ff-textarea',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
-		<label *ngIf="isSmall && label">{{ label }}</label>
+		<label *ngIf="isSmall && label" class="ff-input__label">{{ label }}</label>
 
 		<mat-form-field appearance="outline">
 			<mat-label *ngIf="!isSmall && label">{{ label }}</mat-label>
