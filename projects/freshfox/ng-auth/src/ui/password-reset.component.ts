@@ -10,7 +10,7 @@ import {SnackBarService} from '@freshfox/ng-core';
 	template: `
         <form class="ff-auth__default-form" [formGroup]="form" (ngSubmit)="onSubmit()">
 			<ff-input type="email"
-					  [label]="'general.email' | translate"
+					  [placeholder]="'general.email' | translate"
 					  [size]="'large'"
 					  [formControl]="form.controls['email']"></ff-input>
 
