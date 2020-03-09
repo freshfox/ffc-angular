@@ -154,7 +154,7 @@ export class FirestoreStorage {
 				} else if (query instanceof DocumentReference) {
 					FirestoreStorage.logTiming(deltaMs, `Doc ${query.path}`);
 				} else {
-					const q = query['_query'];
+					const q = (query as any)._query || (query as any).wp;
 					const path = q.path.segments.join('/');
 					const queryStr = q.filters.map((current) => {
 						const field = current.field.segments.join('/');
