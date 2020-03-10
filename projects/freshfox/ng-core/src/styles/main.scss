@@ -1,5 +1,6 @@
 :root {
 	--ff-color-primary: #0997f3;
+	--ff-color-primary-dark: #096caf;
 	--ff-color-light-accent: #f2f5f6;
 	--ff-color-gray-light: #e7e7e7;
 	--ff-color-gray: #aaa;
@@ -27,6 +28,14 @@
 	--ff-modal-header-danger-background: var(--ff-color-error);
 	--ff-modal-footer-background: #fafafa;
 	--ff-modal-footer-top-border: var(--ff-color-gray-light);
+
+	--ff-sidenav-logo-height: 20px;
+	--ff-sidenav-width: 264px;
+	--ff-sidenav-side-padding: 20px;
+	--ff-sidenav-background: #171732;
+	--ff-sidenav-spacer-color: #283351;
+	--ff-sidenav-user-subtitle-color: var(--ff-color-primary);
+	--ff-sidenav-item-active-color: var(--ff-color-primary-dark);
 }
 
 @import 'base';
@@ -37,3 +46,4 @@
 @import 'buttons';
 @import 'icons';
 @import 'dialog';
+@import 'sidenav';
