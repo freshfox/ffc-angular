@@ -1,3 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import '../../freshfox/ng-core/src/styles/main';
+
+html,
+body,
+app-root,
+.mat-sidenav-container {
+	width: 100%;
+	height: 100%;
+}
+
+app-root {
+	display: block;
+}
