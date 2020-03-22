@@ -51,7 +51,7 @@ import {map} from 'rxjs/operators';
 					</div>
 				</div>
 
-				<button (click)="logoutClick.emit()" class="ff-sidenav__item ff-sidenav__item--bottom">
+				<button (click)="logoutClick.emit()" class="ff-sidenav__item">
 					<div class="ff-sidenav__item-inner">
 						<mat-icon>logout</mat-icon>
 						<span class="ff-sidenav-item__text">{{ 'general.logout' | translate }}</span>
