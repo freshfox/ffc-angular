@@ -123,7 +123,7 @@ export class SidenavComponent implements OnInit {
 	}
 
 	get avatarColor() {
-		const hashBase = this.userSubtitle || this.userName;
+		const hashBase = this.userSubtitle || this.userName || '';
 		const code = Math.abs(hashCode(hashBase));
 		return this.defaultColors[code % this.defaultColors.length];
 	}
