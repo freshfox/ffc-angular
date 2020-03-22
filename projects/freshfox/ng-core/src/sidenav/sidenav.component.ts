@@ -39,10 +39,8 @@ import {map} from 'rxjs/operators';
 			<div class="ff-sidenav__bottom">
 				<div class="ff-sidenav__user">
 					<div class="ff-sidenav__user-avatar" [style.background-color]="avatarColor">
-						<img [src]="userAvatarUrl " class="ff-sidenav__user-image" *ngIf="userAvatarUrl; else initial">
-						<ng-template #initial>
-							<span class="ff-sidenav__user-initials">{{ initials }}</span>
-						</ng-template>
+						<img [src]="userAvatarUrl " class="ff-sidenav__user-image" *ngIf="userAvatarUrl">
+						<span class="ff-sidenav__user-initials">{{ initials }}</span>
 					</div>
 
 					<div>
