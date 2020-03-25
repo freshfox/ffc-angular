@@ -6,14 +6,18 @@ import {NavGroup} from '../../../freshfox/ng-core/src/sidenav';
 @Component({
 	selector: 'app-root',
 	template: `
-		<mat-sidenav-container>
+		<!-- <mat-sidenav-container>
 			<mat-sidenav [opened]="true" [mode]="'side'">
 				<ff-sidenav [navGroups]="navGroups"
 							[userName]="'Alexander Ott'"
 							[userSubtitle]="'alex@freshfox.at'"
 							[version]="'1.0.0'"></ff-sidenav>
 			</mat-sidenav>
-		</mat-sidenav-container>
+		</mat-sidenav-container> -->
+
+		<ff-public [routerMode]="false">
+			<ff-login></ff-login>
+		</ff-public>
 	`,
 	styleUrls: ['./app.component.scss']
 })
@@ -74,5 +78,20 @@ export class AppComponent implements OnInit, AfterViewInit {
 		this.control.markAsTouched();
 		this.control.markAsDirty();
 		console.log(this.control.errors);
+	}
+}
+
+@Component({
+	selector: 'terms',
+	template: `
+		test terms
+	`
+})
+export class TermsComponent implements OnInit {
+
+	constructor() {
+	}
+
+	ngOnInit() {
 	}
 }

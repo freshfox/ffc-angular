@@ -1,18 +1,23 @@
 {
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "outDir": "../../out-tsc/app",
-    "types": []
-  },
-  "files": [
-    "src/main.ts",
-    "src/polyfills.ts"
-  ],
-  "include": [
-    "src/**/*.d.ts"
-  ],
-  "exclude": [
-    "src/test.ts",
-    "src/**/*.spec.ts"
-  ]
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"outDir": "../../out-tsc/app",
+		"types": []
+	},
+	"paths": {
+		"@freshfox/ng-core": ["../freshfox/ng-core"],
+		"@freshfox/ng-auth": ["../freshfox/ng-auth"],
+		"@freshfox/ng-firestore": ["../freshfox/ng-firestore"]
+	},
+	"files": [
+		"src/main.ts",
+		"src/polyfills.ts"
+	],
+	"include": [
+		"src/**/*.d.ts"
+	],
+	"exclude": [
+		"src/test.ts",
+		"src/**/*.spec.ts"
+	]
 }

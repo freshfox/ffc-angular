@@ -1,12 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ComponentFactoryResolver, Inject, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {AuthService} from '../auth/auth.service';
-import {SnackBarService} from '@freshfox/ng-core';
+import {DialogService, SnackBarService} from '@freshfox/ng-core';
+import {BehaviorSubject} from 'rxjs';
+import {FF_AUTH_UI_TERMS} from './auth-ui.module';
 
 @Component({
 	selector: 'ff-login',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
         <form class="ff-auth__default-form" [formGroup]="form" (ngSubmit)="onSubmit()">
 			<ff-input [placeholder]="'general.username' | translate"
@@ -19,25 +22,31 @@ import {SnackBarService} from '@freshfox/ng-core';
 					  [formControl]="form.controls.password"
 					  type="password"></ff-input>
 
-			<button ff-button (click)="onSubmit()" type="submit" [loading]="loading">
+			<button ff-button (click)="onSubmit()" type="submit" [loading]="loading$ | async">
 				{{ 'login.submit' | translate }}
 			</button>
-        </form>
 
-        <div class="ff-auth__after-form">
-            <a [routerLink]="['/password-reset']" class="ff-auth__small-print">{{ 'login.reset-password' | translate }}</a>
-        </div>
+			<div class="ff-auth__after-form">
+				<p *ngIf="terms">Durch den Login stimmen Sie<br>den <a href="#" (click)="$event.preventDefault(); openTerms()">Nutzungsbedingungen</a> zu.</p>
+
+				<a [routerLink]="['/password-reset']" class="ff-auth__small-print">{{ 'login.reset-password' | translate }}</a>
+			</div>
+        </form>
 	`
 })
 export class LoginComponent implements OnInit {
 
-	loading = false;
+	loading$ = new BehaviorSubject(false);
 	form: FormGroup;
+
+	@ViewChild('afterLogin', {static: true}) afterLogin: ViewContainerRef;
 
 	constructor(private authService: AuthService,
 				private router: Router,
 				private fb: FormBuilder,
 				private snackbarService: SnackBarService,
+				private dialog: DialogService,
+				@Inject(FF_AUTH_UI_TERMS) public terms,
 				private translate: TranslateService) {
 	}
 
@@ -53,7 +62,7 @@ export class LoginComponent implements OnInit {
 		this.form.markAllAsTouched();
 		if (this.form.valid) {
 			const data = this.form.value;
-			this.loading = true;
+			this.loading$.next(true);
 			this.authService.login(data.username, data.password)
 				.subscribe(
 					() => {
@@ -82,9 +91,13 @@ export class LoginComponent implements OnInit {
 						}
 
 						this.snackbarService.error(alertMessage);
-						this.loading = false;
+						this.loading$.next(false);
 					}
 				);
 		}
+	}
+
+	openTerms() {
+		this.dialog.create(this.terms.component);
 	}
 }

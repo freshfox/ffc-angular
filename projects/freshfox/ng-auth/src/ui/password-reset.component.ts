@@ -1,12 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import {take} from 'rxjs/operators';
 import {AuthService} from '../auth/auth.service';
 import {SnackBarService} from '@freshfox/ng-core';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
 	selector: 'ff-password-reset',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
         <form class="ff-auth__default-form" [formGroup]="form" (ngSubmit)="onSubmit()">
 			<ff-input type="email"
@@ -14,7 +16,7 @@ import {SnackBarService} from '@freshfox/ng-core';
 					  [size]="'large'"
 					  [formControl]="form.controls['email']"></ff-input>
 
-			<button ff-button (click)="onSubmit()" type="submit" [loading]="loading">
+			<button ff-button (click)="onSubmit()" type="submit" [loading]="loading$ | async">
 				{{ 'login.forgot-password-submit' | translate }}
 			</button>
         </form>
@@ -27,7 +29,7 @@ import {SnackBarService} from '@freshfox/ng-core';
 export class PasswordResetComponent implements OnInit {
 
 	form: FormGroup;
-	loading = false;
+	loading$ = new BehaviorSubject(false);
 
 	constructor(private authService: AuthService,
 				private snackbar: SnackBarService,
@@ -44,15 +46,15 @@ export class PasswordResetComponent implements OnInit {
 	onSubmit() {
 		this.form.markAllAsTouched();
 		if (this.form.valid) {
-			this.loading = true;
+			this.loading$.next(true);
 			this.authService.resetPassword(this.form.value.email)
 				.pipe(take(1))
 				.subscribe(() => {
-						this.loading = false;
+						this.loading$.next( false);
 						this.snackbar.success(this.translate.instant('login.forgot-password-success'));
 					},
 					() => {
-						this.loading = false;
+						this.loading$.next( false);
 						this.snackbar.error(this.translate.instant('login.forgot-password-error'));
 					});
 		}

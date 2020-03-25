@@ -68,7 +68,7 @@
 	}
 
 	&__default-form {
-		max-width: 270px;
+		max-width: 300px;
 		margin: 0 auto;
 		width: 100%;
 
@@ -79,13 +79,21 @@
 	}
 
 	&__after-form {
-		text-align: center;
+		text-align: left;
 		margin-top: 24px;
+		font-size: 14px;
+
+		p {
+			margin-bottom: 8px;
+		}
+
+		a {
+			text-decoration: underline;
+			color: white;
+		}
 	}
 
 	&__small-print {
-		font-size: 12px;
-		line-height: 16px;
 		color: #fff;
 		text-decoration: none;
 	}
