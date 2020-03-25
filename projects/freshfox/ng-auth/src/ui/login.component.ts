@@ -3,9 +3,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {AuthService} from '../auth/auth.service';
-import {DialogService, SnackBarService} from '@freshfox/ng-core';
+import {SnackBarService} from '@freshfox/ng-core';
 import {BehaviorSubject} from 'rxjs';
-import {FF_AUTH_UI_TERMS} from './auth-ui.module';
 
 @Component({
 	selector: 'ff-login',
@@ -27,8 +26,7 @@ import {FF_AUTH_UI_TERMS} from './auth-ui.module';
 			</button>
 
 			<div class="ff-auth__after-form">
-				<p *ngIf="terms">Durch den Login stimmen Sie<br>den <a href="#" (click)="$event.preventDefault(); openTerms()">Nutzungsbedingungen</a> zu.</p>
-
+				<ng-content select="[after-form]"></ng-content>
 				<a [routerLink]="['/password-reset']" class="ff-auth__small-print">{{ 'login.reset-password' | translate }}</a>
 			</div>
         </form>
@@ -45,8 +43,6 @@ export class LoginComponent implements OnInit {
 				private router: Router,
 				private fb: FormBuilder,
 				private snackbarService: SnackBarService,
-				private dialog: DialogService,
-				@Inject(FF_AUTH_UI_TERMS) public terms,
 				private translate: TranslateService) {
 	}
 
@@ -95,9 +91,5 @@ export class LoginComponent implements OnInit {
 					}
 				);
 		}
-	}
-
-	openTerms() {
-		this.dialog.create(this.terms.component);
 	}
 }

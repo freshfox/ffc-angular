@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, HostBinding, Inject, Input} from '@angular/core';
-import {FF_AUTH_UI_SHOW_TAGLINE} from './auth-ui.module';
+import {FF_AUTH_UI_SHOW_TAGLINE} from './tokens';
 
 @Component({
 	selector: 'ff-public',
