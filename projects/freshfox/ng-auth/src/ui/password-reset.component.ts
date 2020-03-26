@@ -19,11 +19,11 @@ import {BehaviorSubject} from 'rxjs';
 			<button ff-button (click)="onSubmit()" type="submit" [loading]="loading$ | async">
 				{{ 'login.forgot-password-submit' | translate }}
 			</button>
-        </form>
 
-        <div class="ff-auth__after-form">
-            <a [routerLink]="['/login']" class="ff-auth__small-print">{{ 'login.back-to-login' | translate }}</a>
-        </div>
+			<div class="ff-auth__after-form">
+				<a [routerLink]="['/login']" class="ff-auth__small-print">{{ 'login.back-to-login' | translate }}</a>
+			</div>
+        </form>
 	`
 })
 export class PasswordResetComponent implements OnInit {
