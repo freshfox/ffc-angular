@@ -155,15 +155,17 @@ export class FirestoreStorage {
 					FirestoreStorage.logTiming(deltaMs, `Doc ${query.path}`);
 				} else {
 					const q = (query as any)._query || (query as any).wp;
-					const path = q.path.segments.join('/');
-					const queryStr = q.filters.map((current) => {
-						const field = current.field.segments.join('/');
-						const op = current.op.name;
-						const value = current.value.internalValue;
+					if (q) {
+						const path = q.path.segments.join('/');
+						const queryStr = q.filters.map((current) => {
+							const field = current.field.segments.join('/');
+							const op = current.op.name;
+							const value = current.value.internalValue;
 
-						return `${field} ${op} ${value}`;
-					}).join(' && ');
-					FirestoreStorage.logTiming(deltaMs, `${path} ${queryStr}`, snapshot.size);
+							return `${field} ${op} ${value}`;
+						}).join(' && ');
+						FirestoreStorage.logTiming(deltaMs, `${path} ${queryStr}`, snapshot.size);
+					}
 				}
 			}
 
