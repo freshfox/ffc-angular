@@ -5,6 +5,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {TranslateModule} from '@ngx-translate/core';
+import {FFAvatarModule} from '../avatar/index';
 
 export * from './sidenav.component';
 
@@ -14,7 +15,8 @@ export * from './sidenav.component';
 		MatIconModule,
 		BrowserAnimationsModule,
 		RouterModule,
-		TranslateModule
+		TranslateModule,
+		FFAvatarModule,
 	],
 	declarations: [SidenavComponent],
 	exports: [SidenavComponent],

@@ -38,10 +38,7 @@ import {map} from 'rxjs/operators';
 
 			<div class="ff-sidenav__bottom">
 				<div class="ff-sidenav__user">
-					<div class="ff-sidenav__user-avatar" [style.background-color]="avatarColor">
-						<img [src]="userAvatarUrl " class="ff-sidenav__user-image" *ngIf="userAvatarUrl">
-						<span class="ff-sidenav__user-initials">{{ initials }}</span>
-					</div>
+					<ff-avatar [imageUrl]="userAvatarUrl" [userName]="userName" [userHashBase]="userSubtitle"></ff-avatar>
 
 					<div>
 						<span class="ff-sidenav__user-name" *ngIf="userName">{{ userName }}</span>
@@ -75,55 +72,10 @@ export class SidenavComponent implements OnInit {
 	@Output() logoutClick = new EventEmitter();
 	@Output() changelogClick = new EventEmitter();
 
-	readonly defaultColors = [
-		'#f44336',
-		'#e91e63',
-		'#9c27b0',
-		'#673ab7',
-		'#3f51b5',
-		'#2196f3',
-		'#03a9f4',
-		'#00bcd4',
-		'#009688',
-		'#4caf50',
-		'#8bc34a',
-		'#cddc39',
-		'#ffeb3b',
-		'#ffc107',
-		'#ff9800',
-		'#ff5722',
-		'#795548',
-		'#607d8b'
-	];
-
 	constructor() {
 	}
 
 	ngOnInit() {
-	}
-
-	get initials() {
-		if (this.userName) {
-			const parts = this.userName.split(' ');
-			let full = '';
-			if (parts[0]) {
-				full += parts[0].substr(0, 1);
-			}
-
-			if (parts[1]) {
-				full += parts[1].substr(0, 1);
-			}
-
-			return full;
-		}
-
-		return '';
-	}
-
-	get avatarColor() {
-		const hashBase = this.userSubtitle || this.userName || '';
-		const code = Math.abs(hashCode(hashBase));
-		return this.defaultColors[code % this.defaultColors.length];
 	}
 
 	canActivateGroup(group: NavGroup) {
@@ -140,19 +92,6 @@ export class SidenavComponent implements OnInit {
 				return values.some(v => !!v);
 			}));
 	}
-}
-
-function hashCode(s) {
-	let h = 0;
-	const l = s.length;
-	let i = 0;
-	if (l > 0) {
-		while (i < l) {
-			// tslint:disable-next-line:no-bitwise
-			h = (h << 5) - h + s.charCodeAt(i++) | 0;
-		}
-	}
-	return h;
 }
 
 export interface NavGroup {

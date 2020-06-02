@@ -12,3 +12,4 @@ export * from './icon/index';
 export * from './dialog/index';
 export * from './api/index';
 export * from './sidenav/index';
+export * from './avatar/index';
