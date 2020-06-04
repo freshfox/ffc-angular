@@ -7,20 +7,20 @@ export class SnackBarService {
 	constructor(private snackBar: MatSnackBar) {
 	}
 
-	success(message: string) {
+	success(message: string, action?: string) {
 		this.showNotification(message, {
 			classes: 'ff-snack-bar-success'
-		});
+		}, action);
 	}
 
-	error(message: string) {
+	error(message: string, action?: string) {
 		this.showNotification(message, {
 			classes: 'ff-snack-bar-error'
-		});
+		}, action);
 	}
 
-	private showNotification(message: string, config?: NotificationConfig) {
-		this.snackBar.open(message, null, {
+	private showNotification(message: string, config?: NotificationConfig, action?: string) {
+		return this.snackBar.open(message, action, {
 			duration: 4000,
 			horizontalPosition: 'left',
 			verticalPosition: 'bottom',
