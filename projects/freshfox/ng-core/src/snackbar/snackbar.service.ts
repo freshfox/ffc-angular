@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatSnackBar, MatSnackBarRef} from '@angular/material/snack-bar';
 
 @Injectable()
 export class SnackBarService {
@@ -8,18 +8,18 @@ export class SnackBarService {
 	}
 
 	success(message: string, action?: string) {
-		this.showNotification(message, {
+		return this.showNotification(message, {
 			classes: 'ff-snack-bar-success'
 		}, action);
 	}
 
 	error(message: string, action?: string) {
-		this.showNotification(message, {
+		return this.showNotification(message, {
 			classes: 'ff-snack-bar-error'
 		}, action);
 	}
 
-	private showNotification(message: string, config?: NotificationConfig, action?: string) {
+	private showNotification(message: string, config?: NotificationConfig, action?: string): MatSnackBarRef<any> {
 		return this.snackBar.open(message, action, {
 			duration: 4000,
 			horizontalPosition: 'left',
