@@ -15,7 +15,7 @@ export * from './decorators';
 	exports: []
 })
 export class FFFirestoreModule {
-	static forRoot(config: FirestoreStorageConfig): ModuleWithProviders {
+	static forRoot(config: FirestoreStorageConfig): ModuleWithProviders<FFFirestoreModule> {
 		return {
 			ngModule: FFFirestoreModule,
 			providers: [{

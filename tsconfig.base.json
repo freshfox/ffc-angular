@@ -1,0 +1,47 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "@freshfox/ng-auth": [
+        "dist/freshfox/ng-auth"
+      ],
+      "@freshfox/ng-auth/*": [
+        "dist/freshfox/ng-auth/*"
+      ],
+      "@freshfox/ng-core": [
+        "dist/freshfox/ng-core"
+      ],
+      "@freshfox/ng-core/*": [
+        "dist/freshfox/ng-core/*"
+      ],
+      "@freshfox/ng-firestore": [
+        "dist/freshfox/ng-firestore"
+      ],
+      "@freshfox/ng-firestore/*": [
+        "dist/freshfox/ng-firestore/*"
+      ]
+    }
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true,
+  	"enableIvy": false
+  }
+}

@@ -11,5 +11,8 @@
     "@angular/material": "^9.0.0",
     "@angular/cdk": "^9.0.0",
     "validator": "^12.1.0"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
   }
 }
