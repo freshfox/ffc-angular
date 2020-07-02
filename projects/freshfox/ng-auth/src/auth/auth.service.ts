@@ -26,18 +26,18 @@ export class AuthService {
 	}
 
 	login(email: string, password: string): Observable<any> {
-		return fromPromise(this.firebaseAuth.auth.signInWithEmailAndPassword(email, password))
+		return fromPromise(this.firebaseAuth.signInWithEmailAndPassword(email, password))
 			.pipe(map(result => {
 				return result;
 			}));
 	}
 
 	logout(): Observable<any> {
-		return fromPromise(this.firebaseAuth.auth.signOut());
+		return fromPromise(this.firebaseAuth.signOut());
 	}
 
 	resetPassword(email: string) {
-		return fromPromise(this.firebaseAuth.auth.sendPasswordResetEmail(email));
+		return fromPromise(this.firebaseAuth.sendPasswordResetEmail(email));
 	}
 
 	isLoggedIn(): Observable<boolean> {
