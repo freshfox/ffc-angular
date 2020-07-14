@@ -19,6 +19,10 @@ export abstract class BaseRepository<T> {
 
 	abstract getCollectionPath(...documentIds: string[]): string;
 
+	getCollectionId(): string {
+		throw Error('Please implement the getCollectionId method to use group queries');
+	}
+
 	generateId() {
 		return this.storage.generateId();
 	}
@@ -36,6 +40,10 @@ export abstract class BaseRepository<T> {
 			}
 			return query;
 		}, ...documentIds);
+	}
+
+	collectionGroup(): Observable<T[]> {
+		return this.storage.collectionGroup(this.getCollectionId());
 	}
 
 	protected mapToWhereClause(query: Query, attributes?: T): Query {

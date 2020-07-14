@@ -298,6 +298,15 @@ export class FirestoreStorage {
 		return this.firestore.collection(path);
 	}
 
+	collectionGroup(collectionId: string, cb?: (qb: Query) => Query, schema?: SchemaDescription) {
+		let query = this.firestore.collectionGroup(collectionId);
+		if (cb) {
+			query = cb(query);
+		}
+
+		return this.observe(query, schema);
+	}
+
 	transaction<R>(updateFunction: (transaction: Transaction) => Promise<R>): Promise<R> {
 		return this.firestore.runTransaction<R>(updateFunction);
 	}
