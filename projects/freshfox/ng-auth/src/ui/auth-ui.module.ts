@@ -11,7 +11,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {FFButtonModule, FFInputModule, FFSnackbarModule} from '@freshfox/ng-core';
 import {MatCardModule} from '@angular/material/card';
 import {FFAuthModule} from '../auth/auth.module';
-import {FF_AUTH_UI_SHOW_TAGLINE} from './tokens';
+import {FF_AUTH_UI_LOGO_PATH, FF_AUTH_UI_SHOW_TAGLINE} from './tokens';
 
 export * from '../auth/auth.service';
 export * from '../auth/internal.guard';
@@ -48,6 +48,7 @@ export * from './tokens';
 	],
 	providers: [
 		{provide: FF_AUTH_UI_SHOW_TAGLINE, useValue: true},
+		{provide: FF_AUTH_UI_LOGO_PATH, useValue: 'assets/images/login/logo.svg'},
 	]
 })
 export class FFAuthUserInterfaceModule {
