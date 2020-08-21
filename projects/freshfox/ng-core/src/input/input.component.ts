@@ -83,7 +83,7 @@ import {Subscription} from 'rxjs';
 		</mat-form-field>
 	`,
 	host: {
-		'class': 'ff-input'
+		class: 'ff-input'
 	},
 	providers: [
 		{
@@ -104,6 +104,7 @@ export class FFInputComponent implements OnInit, ControlValueAccessor, OnChanges
 	@Input() autoSize = false;
 	@Input() textAreaRows = 0;
 	@Input() readonly = false;
+	@Input() bottomPadding = true;
 
 	@Input() model: any;
 	@Output() modelChange = new EventEmitter<any>();
@@ -113,6 +114,11 @@ export class FFInputComponent implements OnInit, ControlValueAccessor, OnChanges
 	@HostBinding('class.ff-input--small')
 	get isSmall() {
 		return this.size === 'default';
+	}
+
+	@HostBinding('class.ff-input--no-bottom-padding')
+	get noBottomPadding() {
+		return !this.bottomPadding;
 	}
 
 	name: string;

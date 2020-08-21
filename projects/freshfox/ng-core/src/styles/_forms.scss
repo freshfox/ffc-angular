@@ -17,6 +17,12 @@
 	.mat-form-field:not(.mat-form-field-has-label) .mat-form-field-infix {
 		border-top-width: .3em;
 	}
+
+	&--no-bottom-padding {
+		.mat-form-field-wrapper {
+			padding-bottom: 0;
+		}
+	}
 }
 
 .ff-input--small {
