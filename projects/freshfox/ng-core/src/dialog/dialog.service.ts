@@ -65,7 +65,7 @@ export class DialogService {
 		return ref;
 	}
 
-	create<T>(componentOrTemplateRef: ComponentType<T> | TemplateRef<T>, options: DialogOptions = {}) {
+	create<T>(componentOrTemplateRef: ComponentType<T> | TemplateRef<T>, options: DialogOptions<T> = {}) {
 		if (!options.panelClass) {
 			options.panelClass = [];
 		}
@@ -117,8 +117,8 @@ export enum DialogSize {
 	Large
 }
 
-export interface DialogOptions extends MatDialogConfig {
-	parameters?: object;
+export interface DialogOptions<T> extends MatDialogConfig {
+	parameters?: Partial<T>;
 	size?: DialogSize;
 }
 
