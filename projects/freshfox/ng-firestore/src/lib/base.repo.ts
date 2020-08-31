@@ -64,6 +64,10 @@ export abstract class BaseRepository<T> {
 		return this.storage.save(this.schemaModel.__schema, this.getCollectionPath(...documentIds), data);
 	}
 
+	write(data: T, ...documentIds: string[]): string {
+		return this.storage.save(this.schemaModel.__schema, this.getCollectionPath(...documentIds), data, true);
+	}
+
 	batchSave(data: T[], remove?: T[], ...documentIds: string[]): Observable<void> {
 		return this.storage.batchSave(this.schemaModel.__schema, this.getCollectionPath(...documentIds), data, remove);
 	}

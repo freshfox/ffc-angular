@@ -219,7 +219,7 @@ export class FirestoreStorage {
 		}));
 	}
 
-	save(schema: SchemaDescription, collection: string, data): string {
+	save(schema: SchemaDescription, collection: string, data, avoidMerge = false): string {
 		const model = FirestoreStorage.clone(schema, data);
 		FirestoreStorage.debugLog('Saving', collection, model.id, model.data);
 		if (!model.id) {
@@ -227,7 +227,7 @@ export class FirestoreStorage {
 			data.id = id;
 			return id;
 		}
-		return this.update(collection, model.id, model.data);
+		return this.update(collection, model.id, model.data, avoidMerge);
 	}
 
 	private add(collection: string, data): string {
@@ -235,11 +235,11 @@ export class FirestoreStorage {
 		return this.update(collection, docRef.id, data);
 	}
 
-	private update(collection: string, id: string, data): string {
+	private update(collection: string, id: string, data, avoidMerge = false): string {
 		const path = FirestoreStorage.getPath(collection, id);
 		const docRef = this.firestore.doc(path);
 		try {
-			docRef.set(data, { merge: true });
+			docRef.set(data, { merge: !avoidMerge });
 		} catch (error) {
 			this.onFatalError.next(error);
 			console.error('Caught Firebase error');
