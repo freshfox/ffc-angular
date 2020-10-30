@@ -6,6 +6,8 @@ import {CommonModule} from '@angular/common';
 import {BreadcrumbsService} from './breadcrumbs.service';
 import { MatIconModule } from '@angular/material/icon';
 
+export { BreadcrumbResolver } from './breadcrumbs.service';
+
 @NgModule({
 	declarations: [
 		BreadcrumbsComponent
