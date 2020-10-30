@@ -36,6 +36,9 @@
 	--ff-sidenav-spacer-color: #283351;
 	--ff-sidenav-user-subtitle-color: var(--ff-color-primary);
 	--ff-sidenav-item-active-color: var(--ff-color-primary-dark);
+
+	--ff-breadcrumbs-color: var(--ff-color-text);
+
 }
 
 @import 'base';
@@ -48,3 +51,4 @@
 @import 'dialog';
 @import 'sidenav';
 @import 'avatar';
+@import 'breadcrumbs';
