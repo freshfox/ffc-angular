@@ -21,7 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
 	],
 	exports: [BreadcrumbsComponent]
 })
-export class BreadcrumbsModule {
+export class FFBreadcrumbsModule {
 	constructor() {
 	}
 
