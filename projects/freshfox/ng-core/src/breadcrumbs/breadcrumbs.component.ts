@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 @Component({
 	selector: 'ff-breadcrumbs',
 	template: `
-		<ol class="hro-breadcrumbs__list">
+		<ol class="ff-breadcrumbs__list">
 			<li *ngFor="let breadcrumb of breadcrumbs$ | async; let last = last" [class.active]="last">
 				<a *ngIf="!last" [routerLink]="getParams(breadcrumb)">
 					{{ breadcrumb.label | async}}
@@ -18,7 +18,7 @@ import {Observable} from 'rxjs';
 })
 export class BreadcrumbsComponent {
 
-	@HostBinding('class') clazz = 'hro-breadcrumbs';
+	@HostBinding('class') clazz = 'ff-breadcrumbs';
 
 	breadcrumbs$: Observable<Breadcrumb[]>;
 
