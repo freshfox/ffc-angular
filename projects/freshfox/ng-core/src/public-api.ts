@@ -14,3 +14,4 @@ export * from './api/index';
 export * from './sidenav/index';
 export * from './avatar/index';
 export * from './breadcrumbs/index';
+export * from './permissions/index';
