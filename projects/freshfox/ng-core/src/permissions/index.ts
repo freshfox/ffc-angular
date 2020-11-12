@@ -1,6 +1,8 @@
 import {ModuleWithProviders, NgModule, Provider} from '@angular/core';
 import {PermissionManager} from './permission-manager';
 
+export * from './permission-manager';
+
 @NgModule({
 	imports: [],
 	exports: [],
