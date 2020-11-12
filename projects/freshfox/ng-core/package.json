@@ -10,7 +10,7 @@
     "@angular/forms": "^10.0.2",
     "@angular/material": "^10.0.1",
     "@angular/cdk": "^10.0.1",
-    "validator": "^12.1.0"
+    "validator": "^12.1.0 | ^13.0.0"
   },
   "dependencies": {
     "tslib": "^2.0.0"
