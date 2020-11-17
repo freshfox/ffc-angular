@@ -15,3 +15,4 @@ export * from './sidenav/index';
 export * from './avatar/index';
 export * from './breadcrumbs/index';
 export * from './permissions/index';
+export * from './can-deactivate-unsaved/index';

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 
 @Component({
@@ -31,6 +31,7 @@ export class DialogConfirmComponent implements OnInit {
 
 	@Output() onCancel: () => void;
 	@Output() onConfirm: () => void;
+	@Output() buttonPress: EventEmitter<DialogConfirmButton> = new EventEmitter<DialogConfirmButton>();
 
 	constructor(private translate: TranslateService) {
 	}
@@ -57,6 +58,11 @@ export class DialogConfirmComponent implements OnInit {
 		return this.type === 'danger';
 	}
 
+}
+
+export enum DialogConfirmButton {
+	Cancel = 'cancel',
+	Confirm = 'confirm',
 }
 
 export enum DialogType {
