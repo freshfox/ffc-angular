@@ -1,3 +1,11 @@
+// Clickable Material Table helper class
+.ff-table-clickable {
+	.mat-row:hover {
+		cursor: pointer;
+		background-color: var(--ff-table-clickable-hover-background);
+	}
+}
+
 .ff-table {
 	display: block;
 
