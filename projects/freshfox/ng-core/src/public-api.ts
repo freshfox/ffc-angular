@@ -4,6 +4,7 @@
 
 export * from './core/form-validator';
 export * from './core/utils';
+export * from './core/typed-form-group';
 export * from './input/index';
 export * from './table/index';
 export * from './snackbar/index';
