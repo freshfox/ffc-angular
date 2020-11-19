@@ -1,6 +1,6 @@
 {
   "name": "@freshfox/ng-core",
-  "version": "5.6.0",
+  "version": "5.7.0",
   "publishConfig": {
     "access": "public"
   },
