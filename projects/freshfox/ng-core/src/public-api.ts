@@ -3,6 +3,7 @@
  */
 
 export * from './core/form-validator';
+export * from './core/utils';
 export * from './input/index';
 export * from './table/index';
 export * from './snackbar/index';
