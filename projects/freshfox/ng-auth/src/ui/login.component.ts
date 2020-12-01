@@ -11,23 +11,23 @@ import {BehaviorSubject} from 'rxjs';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
         <form class="ff-auth__default-form" [formGroup]="form" (ngSubmit)="onSubmit()">
-			<ff-input [placeholder]="'general.username' | translate"
+			<ff-input [placeholder]="'ff-auth.email' | translate"
 					  [size]="'large'"
 					  type="email"
 					  [formControl]="form.controls.username"></ff-input>
 
-			<ff-input [placeholder]="'general.password' | translate"
+			<ff-input [placeholder]="'ff-auth.password' | translate"
 					  [size]="'large'"
 					  [formControl]="form.controls.password"
 					  type="password"></ff-input>
 
 			<button ff-button (click)="onSubmit()" type="submit" [loading]="loading$ | async">
-				{{ 'login.submit' | translate }}
+				{{ 'ff-auth.login.submit' | translate }}
 			</button>
 
 			<div class="ff-auth__after-form">
 				<ng-content select="[after-form]"></ng-content>
-				<a [routerLink]="['/password-reset']" class="ff-auth__small-print">{{ 'login.reset-password' | translate }}</a>
+				<a [routerLink]="['/password-reset']" class="ff-auth__small-print">{{ 'ff-auth.login.reset-password' | translate }}</a>
 			</div>
         </form>
 	`
@@ -62,27 +62,25 @@ export class LoginComponent implements OnInit {
 			this.authService.login(data.username, data.password)
 				.subscribe(
 					() => {
-						console.log('Login Successful');
 						this.router.navigateByUrl('/');
 					},
 					error => {
 						let alertMessage;
-						console.log('Login Error: ' + error.code);
 						switch (error.code) {
 							case 'auth/network-request-failed':
-								alertMessage = this.translate.instant('login.error-network-request-failed');
+								alertMessage = this.translate.instant('ff-auth.login.errors.network-request-failed');
 								break;
 							case 'auth/invalid-email':
-								alertMessage = this.translate.instant('login.error-invalid-email');
+								alertMessage = this.translate.instant('ff-auth.login.errors.invalid-email');
 								break;
 							case 'auth/user-not-found':
-								alertMessage = this.translate.instant('login.error-user-not-found');
+								alertMessage = this.translate.instant('ff-auth.login.errors.user-not-found');
 								break;
 							case 'auth/wrong-password':
-								alertMessage = this.translate.instant('login.error-wrong-password');
+								alertMessage = this.translate.instant('ff-auth.login.errors.wrong-password');
 								break;
 							case 'auth/too-many-requests':
-								alertMessage = this.translate.instant('login.error-too-many-attempts');
+								alertMessage = this.translate.instant('ff-auth.login.errors.too-many-attempts');
 								break;
 						}
 

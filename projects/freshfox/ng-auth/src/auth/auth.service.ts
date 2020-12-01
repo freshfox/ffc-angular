@@ -40,6 +40,10 @@ export class AuthService {
 		return fromPromise(this.firebaseAuth.sendPasswordResetEmail(email));
 	}
 
+	confirmPasswordReset(token: string, newPassword: string) {
+		return fromPromise(this.firebaseAuth.confirmPasswordReset(token, newPassword));
+	}
+
 	isLoggedIn(): Observable<boolean> {
 		return this.authState.pipe(map(auth => !!auth));
 	}

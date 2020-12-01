@@ -1,0 +1,38 @@
+{
+	"ff-auth": {
+		"email": "Email",
+		"password": "Password",
+		"password-confirm": "Confirm password",
+		"back-to-login": "Back to Login",
+		"login": {
+			"submit": "Login",
+			"reset-password": "Forgot your password? Click here.",
+			"errors": {
+				"wrong-password": "The entered password is incorrect. Please check your input and try again.",
+				"too-many-attempts": "You tried to login with invalid credentials too many times. Please wait a few minutes and try again.",
+				"user-not-found": "We were unable to find this username.",
+				"invalid-email": "Invalid username. The username must be a valid email address.",
+				"network-request-failed": "Login failed. You appear to have no internet connection."
+			}
+		},
+		"reset": {
+			"submit": "Request a reset",
+			"error": "Error when trying to reset password",
+			"success": "Password reset successfully requested"
+		},
+		"reset-confirm": {
+			"title": "Set your new password",
+			"submit": "Set password",
+			"missing-token": "This password reset link is not valid",
+			"success": "Password reset successfully. Please login",
+			"errors": {
+				"generic": "Unable to reset your password. Please try again",
+				"expired-action-code": "This reset link has expired. Please request a new password reset.",
+				"invalid-action-code": "This reset link is invalid or has already been used.",
+				"user-disabled": "The user for this password reset has been disabled",
+				"user-not-found": "The user for this password reset has been deleted",
+				"weak-password": "The chosen password is too weak."
+			}
+		}
+	}
+}

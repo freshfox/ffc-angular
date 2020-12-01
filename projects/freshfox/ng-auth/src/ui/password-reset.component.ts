@@ -12,16 +12,16 @@ import {BehaviorSubject} from 'rxjs';
 	template: `
         <form class="ff-auth__default-form" [formGroup]="form" (ngSubmit)="onSubmit()">
 			<ff-input type="email"
-					  [placeholder]="'general.email' | translate"
+					  [placeholder]="'ff-auth.email' | translate"
 					  [size]="'large'"
 					  [formControl]="form.controls['email']"></ff-input>
 
 			<button ff-button (click)="onSubmit()" type="submit" [loading]="loading$ | async">
-				{{ 'login.forgot-password-submit' | translate }}
+				{{ 'ff-auth.reset.submit' | translate }}
 			</button>
 
 			<div class="ff-auth__after-form">
-				<a [routerLink]="['/login']" class="ff-auth__small-print">{{ 'login.back-to-login' | translate }}</a>
+				<a [routerLink]="['/login']" class="ff-auth__small-print">{{ 'ff-auth.back-to-login' | translate }}</a>
 			</div>
         </form>
 	`
@@ -51,11 +51,11 @@ export class PasswordResetComponent implements OnInit {
 				.pipe(take(1))
 				.subscribe(() => {
 						this.loading$.next( false);
-						this.snackbar.success(this.translate.instant('login.forgot-password-success'));
+						this.snackbar.success(this.translate.instant('ff-auth.reset.success'));
 					},
 					() => {
 						this.loading$.next( false);
-						this.snackbar.error(this.translate.instant('login.forgot-password-error'));
+						this.snackbar.error(this.translate.instant('ff-auth.reset.error'));
 					});
 		}
 	}

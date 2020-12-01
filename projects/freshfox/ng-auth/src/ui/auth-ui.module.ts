@@ -8,15 +8,17 @@ import {RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
-import {FFButtonModule, FFInputModule, FFSnackbarModule} from '@freshfox/ng-core';
+import {FFAlertBarModule, FFButtonModule, FFInputModule, FFSnackbarModule} from '@freshfox/ng-core';
 import {MatCardModule} from '@angular/material/card';
 import {FFAuthModule} from '../auth/auth.module';
-import {FF_AUTH_UI_LOGO_PATH, FF_AUTH_UI_SHOW_TAGLINE} from './tokens';
+import {FF_AUTH_UI_BACKGROUND_PATH, FF_AUTH_UI_LOGO_PATH, FF_AUTH_UI_TAGLINE} from './tokens';
+import {PasswordResetConfirmComponent} from './password-reset-confirm.component';
 
 export * from '../auth/auth.service';
 export * from '../auth/internal.guard';
 export * from './login.component';
 export * from './password-reset.component';
+export * from './password-reset-confirm.component';
 export * from './public.component';
 export * from '../auth/public.guard';
 export * from './tokens';
@@ -35,20 +37,24 @@ export * from './tokens';
 		FFInputModule,
 		FFButtonModule,
 		FFAuthModule,
+		FFAlertBarModule,
 	],
 	exports: [
 		PublicComponent,
 		LoginComponent,
 		PasswordResetComponent,
+		PasswordResetConfirmComponent,
 	],
 	declarations: [
 		PublicComponent,
 		LoginComponent,
 		PasswordResetComponent,
+		PasswordResetConfirmComponent,
 	],
 	providers: [
-		{provide: FF_AUTH_UI_SHOW_TAGLINE, useValue: true},
+		{provide: FF_AUTH_UI_TAGLINE, useValue: null},
 		{provide: FF_AUTH_UI_LOGO_PATH, useValue: 'assets/images/login/logo.svg'},
+		{provide: FF_AUTH_UI_BACKGROUND_PATH, useValue: 'assets/images/login/bg.jpg'},
 	]
 })
 export class FFAuthUserInterfaceModule {

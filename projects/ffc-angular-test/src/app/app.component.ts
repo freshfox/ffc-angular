@@ -16,7 +16,7 @@ import {NavGroup} from '../../../freshfox/ng-core/src/sidenav';
 		</mat-sidenav-container> -->
 
 		<ff-public [routerMode]="false">
-			<ff-login></ff-login>
+			<ff-password-reset-confirm></ff-password-reset-confirm>
 		</ff-public>
 	`,
 	styleUrls: ['./app.component.scss']
