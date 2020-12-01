@@ -1,35 +1,47 @@
-/*
-  This is a "Solution Style" tsconfig.json file, and is used by editors and TypeScript’s language server to improve development experience.
-  It is not intended to be used to perform a compilation.
-
-  To learn more about this file see: https://angular.io/config/solution-tsconfig.
-*/
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./projects/ffc-angular-test/tsconfig.app.json"
-    },
-    {
-      "path": "./projects/ffc-angular-test/tsconfig.spec.json"
-    },
-    {
-      "path": "./projects/freshfox/ng-auth/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/freshfox/ng-auth/tsconfig.spec.json"
-    },
-    {
-      "path": "./projects/freshfox/ng-core/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/freshfox/ng-core/tsconfig.spec.json"
-    },
-    {
-      "path": "./projects/freshfox/ng-firestore/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/freshfox/ng-firestore/tsconfig.spec.json"
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "@freshfox/ng-auth": [
+        "dist/freshfox/ng-auth"
+      ],
+      "@freshfox/ng-auth/*": [
+        "dist/freshfox/ng-auth/*"
+      ],
+      "@freshfox/ng-core": [
+        "dist/freshfox/ng-core"
+      ],
+      "@freshfox/ng-core/*": [
+        "dist/freshfox/ng-core/*"
+      ],
+      "@freshfox/ng-firestore": [
+        "dist/freshfox/ng-firestore"
+      ],
+      "@freshfox/ng-firestore/*": [
+        "dist/freshfox/ng-firestore/*"
+      ]
     }
-  ]
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true,
+  	"enableIvy": false
+  }
 }
