@@ -34,7 +34,7 @@ import {of} from 'rxjs';
 		TranslateModule.forRoot(),
 		ReactiveFormsModule,
 		MatSidenavModule,
-		RouterModule.forRoot([]),
+		RouterModule.forRoot([], { relativeLinkResolution: 'legacy' }),
 		AngularFireModule.initializeApp({
 			apiKey: '***REMOVED***',
 			authDomain: '***REMOVED***',
