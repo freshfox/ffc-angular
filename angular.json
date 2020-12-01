@@ -131,7 +131,7 @@
       "prefix": "ff",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/freshfox/ng-auth/tsconfig.lib.json",
             "project": "projects/freshfox/ng-auth/ng-package.json"
@@ -171,7 +171,7 @@
       "prefix": "ff",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/freshfox/ng-core/tsconfig.lib.json",
             "project": "projects/freshfox/ng-core/ng-package.json"
@@ -211,7 +211,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/freshfox/ng-firestore/tsconfig.lib.json",
             "project": "projects/freshfox/ng-firestore/ng-package.json"
