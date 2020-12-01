@@ -4,7 +4,7 @@ import {Inject, Injectable, InjectionToken} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ServiceError, ServiceErrorCode} from './service-error';
 
-export const FF_API_CONFIG = new InjectionToken('FF_API_CONFIG');
+export const FF_API_CONFIG = new InjectionToken<ApiServiceConfig>('FF_API_CONFIG');
 
 export interface ApiServiceConfig {
 	baseUrl: string;
