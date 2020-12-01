@@ -7,9 +7,9 @@
   "peerDependencies": {
     "@angular/common": "^10.0.2",
     "@angular/core": "^10.0.2",
-    "@freshfox/ng-core": "^4.5.0",
-    "@angular/fire": "^6.0.2",
-    "@ngx-translate/core": "^12.1.1",
+    "@freshfox/ng-core": "^5.0.0",
+    "@angular/fire": "6.0.3",
+    "@ngx-translate/core": "^13.0.0",
     "firebase": "^7.5.0"
   },
   "dependencies": {
