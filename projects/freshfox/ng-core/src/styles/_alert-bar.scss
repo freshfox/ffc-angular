@@ -18,7 +18,7 @@
 	&__message {
 		padding: 8px 16px;
 		background: var(--ff-color-error);
-		border-radius: var(-ff-default-border-radius);
+		border-radius: var(--ff-default-border-radius);
 		color: #fff;
 	}
 }
