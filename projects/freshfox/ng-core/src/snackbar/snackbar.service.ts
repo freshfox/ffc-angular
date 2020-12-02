@@ -1,10 +1,14 @@
 import {Injectable} from '@angular/core';
-import {MatSnackBar, MatSnackBarConfig, MatSnackBarRef} from '@angular/material/snack-bar';
+import {MatSnackBar, MatSnackBarConfig} from '@angular/material/snack-bar';
 
 @Injectable()
 export class SnackBarService {
 
 	constructor(private snackBar: MatSnackBar) {
+	}
+
+	info(message: string, action?: string) {
+		return this.showNotification(message, null, action);
 	}
 
 	success(message: string, action?: string) {
@@ -19,7 +23,7 @@ export class SnackBarService {
 		}, action);
 	}
 
-	private showNotification(message: string, config?: MatSnackBarConfig, action?: string): MatSnackBarRef<any> {
+	private showNotification(message: string, config?: MatSnackBarConfig, action?: string) {
 		return this.snackBar.open(message, action, config);
 	}
 
