@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
-import {AppComponent, TermsComponent} from './app.component';
+import {AppComponent} from './app.component';
 import {FFButtonModule} from '../../../freshfox/ng-core/src/button';
 import {FFSnackbarModule} from '../../../freshfox/ng-core/src/snackbar';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -23,10 +23,6 @@ import {of} from 'rxjs';
 @NgModule({
 	declarations: [
 		AppComponent,
-		TermsComponent,
-	],
-	entryComponents: [
-		TermsComponent,
 	],
 	imports: [
 		BrowserModule,

@@ -6,6 +6,8 @@ import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {TranslateModule} from '@ngx-translate/core';
 import {FFAvatarModule} from '../avatar/index';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatButtonModule} from '@angular/material/button';
 
 export * from './sidenav.component';
 
@@ -17,6 +19,8 @@ export * from './sidenav.component';
 		RouterModule,
 		TranslateModule,
 		FFAvatarModule,
+		MatButtonModule,
+		MatTooltipModule,
 	],
 	declarations: [SidenavComponent],
 	exports: [SidenavComponent],
