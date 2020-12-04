@@ -1,6 +1,6 @@
 import {from as observableFrom, Observable, Subject} from 'rxjs';
 import {Inject, Injectable, InjectionToken} from '@angular/core';
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import 'firebase/firestore';
 import {map} from 'rxjs/operators';
 import debugFunc from 'debug';
