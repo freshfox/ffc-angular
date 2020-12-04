@@ -26,6 +26,7 @@ import {map} from 'rxjs/operators';
 							<a [routerLink]="[item.path]" class="ff-sidenav__item"
 							   routerLinkActive="ff-sidenav__item--active"
 							   *ngIf="item.canActivate$ ? (item.canActivate$ | async) : true"
+							   (click)="itemClick.emit(item)"
 							   [matTooltip]="item.titleKey | translate" [matTooltipDisabled]="!isSlim" [matTooltipPosition]="'right'">
 								<div class="ff-sidenav__item-inner">
 									<mat-icon [svgIcon]="item.svgIcon" *ngIf="item.svgIcon"></mat-icon>
@@ -86,6 +87,7 @@ export class SidenavComponent implements OnInit {
 
 	@Input() navGroups: NavGroup[] = [];
 
+	@Output() itemClick = new EventEmitter<NavItem>();
 	@Output() logoutClick = new EventEmitter();
 	@Output() changelogClick = new EventEmitter();
 
