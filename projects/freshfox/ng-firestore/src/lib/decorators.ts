@@ -1,5 +1,6 @@
-import {firestore} from 'firebase';
-import Timestamp = firestore.Timestamp;
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import Timestamp = firebase.firestore.Timestamp;
 
 export function FSPropertySerializer<T, E>(serializer: SerializerFunction<T, E>) {
 	return (target: any, propertyKey: string) => {

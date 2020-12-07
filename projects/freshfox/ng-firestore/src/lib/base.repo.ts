@@ -1,9 +1,10 @@
-import {firestore} from 'firebase/app';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
-import Query = firestore.Query;
-import CollectionReference = firestore.CollectionReference;
-import Transaction = firestore.Transaction;
+import Query = firebase.firestore.Query;
+import CollectionReference = firebase.firestore.CollectionReference;
+import Transaction = firebase.firestore.Transaction;
 import {FirestoreStorage} from './storage';
 import {FirestoreSchemaModel} from './decorators';
 
