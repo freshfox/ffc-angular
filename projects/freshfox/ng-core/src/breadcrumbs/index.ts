@@ -5,11 +5,13 @@ import {BrowserModule} from '@angular/platform-browser';
 import {CommonModule} from '@angular/common';
 import {BreadcrumbsService} from './breadcrumbs.service';
 import { MatIconModule } from '@angular/material/icon';
+import {BreadcrumbsListComponent} from './breadcrumbs-list.component';
 
 export { BreadcrumbResolver } from './breadcrumbs.service';
 
 @NgModule({
 	declarations: [
+		BreadcrumbsListComponent,
 		BreadcrumbsComponent
 	],
 	providers: [
@@ -21,7 +23,10 @@ export { BreadcrumbResolver } from './breadcrumbs.service';
 		CommonModule,
 		MatIconModule,
 	],
-	exports: [BreadcrumbsComponent]
+	exports: [
+		BreadcrumbsComponent,
+		BreadcrumbsListComponent,
+	]
 })
 export class FFBreadcrumbsModule {
 	constructor() {
