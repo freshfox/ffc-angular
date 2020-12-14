@@ -35,35 +35,32 @@ export class BreadcrumbsService {
 					return;
 				}
 
-				if (route.routeConfig && route.routeConfig.data && route.routeConfig.data.breadcrumbs) {
+				if (route.routeConfig?.data?.breadcrumbs) {
 					const breadcrumbConfig: BreadcrumbConfigItem[] = route.routeConfig.data.breadcrumbs;
 
 					for (const item of breadcrumbConfig) {
 						let label: Observable<string>;
 
+						const params: Params = {};
+						for (const path of route.pathFromRoot) {
+							Object.assign(params, path.snapshot.params);
+						}
+
 						if (item.label) {
 							label = of(item.label);
 						} else if (item.resolver) {
 							const resolver = this.injector.get(item.resolver);
-
-							const params = {};
-							for (const path of route.pathFromRoot) {
-								Object.assign(params, path.snapshot.params);
-							}
-
 							label = resolver.getTitle(params);
 						}
 
 						let url: string;
-						const params: Params = {};
 						if (!item.url) {
 							const routeUrl = route.pathFromRoot
-								.map(route => route.snapshot.url.map(segment => segment.path).join('/'))
+								.map(r => r.snapshot.url.map(segment => segment.path).join('/'))
 								.filter(segment => segment).join('/');
 							url = `/${routeUrl}`;
-							// params = route.snapshot.params;
 						} else {
-							url = item.url;
+							url = this.formatUrl(item.url, params);
 						}
 
 						breadcrumbs.push({
@@ -77,6 +74,17 @@ export class BreadcrumbsService {
 		}
 
 		this.breadcrumbs$.next(breadcrumbs);
+	}
+
+	private formatUrl(url: string, params: Params) {
+		const parts = url.split('/');
+		return parts.map(p => {
+			if (p.startsWith(':') && params.hasOwnProperty(p.substring(1))) {
+				return params[p.substring(1)];
+			}
+
+			return p;
+		}).join('/');
 	}
 
 }
