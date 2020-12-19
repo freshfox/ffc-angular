@@ -1,0 +1,38 @@
+{
+	"ff-auth": {
+		"email": "E-Mail",
+		"password": "Passwort",
+		"password-confirm": "Passwort bestätigen",
+		"back-to-login": "Zurück zum Login",
+		"login": {
+			"submit": "Einloggen",
+			"reset-password": "Passwort vergessen? Hier klicken.",
+			"errors": {
+				"wrong-password": "Dieses Passwort ist nicht korrekt. Bitte überprüfen Sie Ihre Eingaben.",
+				"too-many-attempts": "Sie haben zu oft versucht, sich mit inkorrekten Daten anzumelden. Bitte warten Sie einen Augenblick und versuchen Sie es dann erneut.",
+				"user-not-found": "Dieser Benutzername konnte nicht gefunden werden.",
+				"invalid-email": "Ungültiger Benutzername. Der Benutzername muss eine gültige Email Adresse sein.",
+				"network-request-failed": "Login fehlgeschlagen. Sie haben keine Internetverbindung."
+			}
+		},
+		"reset": {
+			"submit": "Passwort zurücksetzen",
+			"error": "Fehler beim Zurücksetzen Ihres Passworts.",
+			"success": "Passwort Reset erfolgreich angefragt."
+		},
+		"reset-confirm": {
+			"title": "Neues Passwort setzen",
+			"submit": "Passwort setzen",
+			"missing-token": "Dieser Passwort Reset Link ist nicht gültig.",
+			"success": "Passwort erfolgreich zurückgsetzt. Bitte loggen Sie sich ein.",
+			"errors": {
+				"generic": "Passwort Reset fehlgeschlagen. Bitte versuchen Sie es erneut.",
+				"expired-action-code": "Dieser Reset Link ist abgelaufen. Bitte fordern Sie einen neuen Passwort Reset an.",
+				"invalid-action-code": "Dieser Reset Link ist ungültig oder wurde bereits verwendet.",
+				"user-disabled": "Der Benutzer für diesen Passwort Reset wurde deaktiviert.",
+				"user-not-found": "Der Benutzer für diesen Passwort Reset wurde gelöscht.",
+				"weak-password": "Das gewählte Passwort ist zu schwach."
+			}
+		}
+	}
+}
