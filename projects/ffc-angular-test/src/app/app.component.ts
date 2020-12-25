@@ -13,6 +13,14 @@ import {NavGroup} from '../../../freshfox/ng-core/src/sidenav';
 							[userSubtitle]="'alex@freshfox.at'"
 							[version]="'1.0.0'"></ff-sidenav>
 			</mat-sidenav>
+
+			<mat-card>
+				<ff-select [label]="'Country'" [formControl]="control">
+					<ff-option *ngFor="let food of foods" [value]="food.value">
+						{{food.viewValue}}
+					</ff-option>
+				</ff-select>
+			</mat-card>
 		</mat-sidenav-container>
 
 		<!-- <ff-public [routerMode]="false">
@@ -25,7 +33,13 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	loading = false;
 
-	control = new FormControl('', Validators.compose([Validators.required, Validators.email]))
+	control = new FormControl('', Validators.compose([Validators.required, Validators.email]));
+
+	foods: any[] = [
+		{value: 'steak-0', viewValue: 'Steak'},
+		{value: 'pizza@example.com', viewValue: 'Pizza'},
+		{value: 'tacos-2', viewValue: 'Tacos'}
+	];
 
 	navGroups: NavGroup[] = [
 		{

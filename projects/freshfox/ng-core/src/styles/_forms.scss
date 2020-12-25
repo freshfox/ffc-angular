@@ -1,8 +1,12 @@
-.ff-input {
+.ff-input,
+.ff-form-field {
 	display: block;
 
 	&__label {
-		font-weight: bold;
+		font-size: var(--ff-forms-font-size);
+		margin-bottom: .25rem;
+		font-weight: 600;
+		display: block;
 	}
 
 	.mat-form-field {
@@ -12,6 +16,7 @@
 
 	input {
 		font-family: var(--ff-font-family);
+		font-size: var(--ff-forms-font-size);
 	}
 
 	.mat-form-field:not(.mat-form-field-has-label) .mat-form-field-infix {
@@ -25,7 +30,13 @@
 	}
 }
 
-.ff-input--small {
+.mat-option,
+.mat-select-value {
+	font-size: var(--ff-forms-font-size) !important;
+}
+
+.ff-input--small,
+.ff-form-field--small {
 	.mat-form-field {
 		.mat-form-field-infix {
 			border-top: 0;

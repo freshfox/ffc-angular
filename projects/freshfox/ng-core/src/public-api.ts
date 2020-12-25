@@ -18,3 +18,5 @@ export * from './avatar/index';
 export * from './breadcrumbs/index';
 export * from './permissions/index';
 export * from './can-deactivate-unsaved/index';
+export * from './select/index';
+export * from './validation-message/index';

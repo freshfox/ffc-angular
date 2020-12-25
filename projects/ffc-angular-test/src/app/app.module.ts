@@ -19,6 +19,10 @@ import {FFAuthModule} from '../../../freshfox/ng-auth/src/auth/auth.module';
 import {AngularFireModule} from '@angular/fire';
 import {FFInputModule} from '@freshfox/ng-core';
 import {of} from 'rxjs';
+import {FFSelectModule} from '../../../freshfox/ng-core/src/select';
+import {FFFormControlValidationMessageModule, InputValidationMessageProvider} from '../../../freshfox/ng-core/src/validation-message';
+import {MatCardModule} from '@angular/material/card';
+import {ValidationProvider} from './validation-provider';
 
 @NgModule({
 	declarations: [
@@ -30,6 +34,7 @@ import {of} from 'rxjs';
 		TranslateModule.forRoot(),
 		ReactiveFormsModule,
 		MatSidenavModule,
+		MatCardModule,
 		RouterModule.forRoot([], { relativeLinkResolution: 'legacy' }),
 		AngularFireModule.initializeApp({
 			apiKey: '***REMOVED***',
@@ -44,7 +49,14 @@ import {of} from 'rxjs';
 		FFSidenavModule,
 		FFButtonModule,
 		FFSnackbarModule,
-		FFInputModule.forRoot(),
+		FFInputModule,
+		FFSelectModule,
+		FFFormControlValidationMessageModule.forRoot({
+			validationMessageProvider: 	{
+				provide: InputValidationMessageProvider,
+				useClass: ValidationProvider,
+			}
+		})
 	],
 	providers: [
 		{provide: FF_AUTH_UI_TAGLINE, useValue: of('hello')},
