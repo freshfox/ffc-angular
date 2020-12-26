@@ -14,7 +14,8 @@
 		width: 100%;
 	}
 
-	input {
+	input,
+	textarea {
 		font-family: var(--ff-font-family);
 		font-size: var(--ff-forms-font-size);
 	}
@@ -34,6 +35,17 @@
 .mat-select-value {
 	font-size: var(--ff-forms-font-size) !important;
 }
+
+.mat-form-field-appearance-outline .mat-form-field-subscript-wrapper {
+	padding: 0 !important;
+	margin-top: 4px !important;
+}
+
+// Checkboxes
+.mat-checkbox .mat-checkbox-label {
+	font-size: var(--ff-forms-font-size);
+}
+
 
 .ff-input--small,
 .ff-form-field--small {
