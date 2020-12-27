@@ -45,6 +45,7 @@ export class FFOptionComponent {
 						[(ngModel)]="value"
 						(ngModelChange)="onChange()"
 						[disabled]="disabled"
+						[multiple]="multiple"
 						(blur)="onBlur($event)" *ngIf="!formControl">
 				<mat-option *ngFor="let option of options" [value]="option.value">
 					<ng-template [ngTemplateOutlet]="option.innerTemplate"></ng-template>
@@ -74,6 +75,8 @@ export class FFOptionComponent {
 export class FFSelectComponent extends FFFormFieldComponent {
 
 	@HostBinding('class.ff-select') ffSelectClazz = true;
+
+	@Input() multiple = false;
 
 	@ContentChildren(FFOptionComponent, {descendants: true}) options: QueryList<FFOptionComponent>;
 
