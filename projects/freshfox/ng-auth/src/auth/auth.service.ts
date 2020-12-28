@@ -1,20 +1,19 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
+
 import firebase from 'firebase/app';
 import {map, switchMap} from 'rxjs/operators';
-import {fromPromise} from 'rxjs/internal-compatibility';
 import {AngularFireAuth} from '@angular/fire/auth';
+import {fromPromise} from 'rxjs/internal-compatibility';
+
 
 @Injectable()
 export class AuthService {
 
 	authState: Observable<firebase.User>;
 
-	private firebaseAuth: firebase.auth.Auth;
-
-	constructor(private angularFireAuth: AngularFireAuth) {
-		this.firebaseAuth = firebase.auth();
-		this.authState = this.angularFireAuth.authState;
+	constructor(private firebaseAuth: AngularFireAuth) {
+		this.authState = this.firebaseAuth.authState;
 
 		this.authState
 			.pipe(switchMap(user => {
