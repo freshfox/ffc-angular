@@ -2,6 +2,8 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {SnackBarService} from '../../../freshfox/ng-core/src/snackbar';
 import {FormControl, Validators} from '@angular/forms';
 import {NavGroup} from '../../../freshfox/ng-core/src/sidenav';
+import { of } from 'rxjs';
+import {delay} from 'rxjs/operators';
 
 @Component({
 	selector: 'app-root',
@@ -16,7 +18,7 @@ import {NavGroup} from '../../../freshfox/ng-core/src/sidenav';
 
 			<mat-card>
 				<ff-select [label]="'Country'" [formControl]="control">
-					<ff-option *ngFor="let food of foods" [value]="food.value">
+					<ff-option *ngFor="let food of foods$ | async" [value]="food.value">
 						{{food.viewValue}}
 					</ff-option>
 				</ff-select>
@@ -33,13 +35,13 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	loading = false;
 
-	control = new FormControl('', Validators.compose([Validators.required, Validators.email]));
+	control = new FormControl('steak-0', Validators.compose([Validators.required, Validators.email]));
 
-	foods: any[] = [
+	foods$ = of([
 		{value: 'steak-0', viewValue: 'Steak'},
 		{value: 'pizza@example.com', viewValue: 'Pizza'},
 		{value: 'tacos-2', viewValue: 'Tacos'}
-	];
+	]).pipe(delay(500));
 
 	navGroups: NavGroup[] = [
 		{
