@@ -6,6 +6,7 @@ import {
 	EventEmitter,
 	HostBinding,
 	Input,
+	NgModule,
 	OnChanges,
 	OnDestroy,
 	OnInit,
@@ -13,8 +14,10 @@ import {
 	SimpleChanges
 } from '@angular/core';
 import {ControlValueAccessor, FormControl} from '@angular/forms';
-import {Subject, Subscription} from 'rxjs';
-import {InputValidationMessageProvider} from '../validation-message';
+import {Subject} from 'rxjs';
+import {FFFormControlValidationMessageModule, InputValidationMessageProvider} from '../validation-message/index';
+import {CommonModule} from '@angular/common';
+import {takeUntil} from 'rxjs/operators';
 
 // tslint:disable-next-line:no-conflicting-lifecycle
 @Component({
@@ -57,8 +60,10 @@ export class FFFormFieldComponent implements OnInit, ControlValueAccessor, OnCha
 
 	protected onDestroy$ = new Subject();
 
-	private onTouchedCallback: () => void = () => {};
-	private onChangeCallback: (_: any) => void = () => {};
+	private onTouchedCallback: () => void = () => {
+	};
+	private onChangeCallback: (_: any) => void = () => {
+	};
 
 	constructor(private validationMessageProvider: InputValidationMessageProvider, protected cdr: ChangeDetectorRef) {
 	}
@@ -142,12 +147,8 @@ export class FFFormFieldComponent implements OnInit, ControlValueAccessor, OnCha
 }
 
 
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {takeUntil} from 'rxjs/operators';
-
 @NgModule({
-	imports: [CommonModule],
+	imports: [CommonModule, FFFormControlValidationMessageModule],
 	exports: [FFFormFieldComponent],
 	declarations: [FFFormFieldComponent],
 	providers: [],

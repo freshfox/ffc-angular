@@ -7,7 +7,12 @@ export * from './validation-message-provider';
 	imports: [],
 	exports: [],
 	declarations: [],
-	providers: [],
+	providers: [
+		{
+			provide: InputValidationMessageProvider,
+			useClass: FakeInputValidationMessageProvider
+		},
+	],
 })
 export class FFFormControlValidationMessageModule {
 	static forRoot(config: FFFormControlValidationMessageModuleConfig = {}): ModuleWithProviders<FFFormControlValidationMessageModule> {

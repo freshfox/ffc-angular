@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, HostBinding, Input} from '@angular/core';
 import {NG_VALUE_ACCESSOR} from '@angular/forms';
 import {FFFormFieldComponent} from '../core/form-field.component';
-import {InputValidationMessageProvider} from '../validation-message';
+import {InputValidationMessageProvider} from '../validation-message/index';
 
 @Component({
 	selector: 'ff-input,ff-textarea',
