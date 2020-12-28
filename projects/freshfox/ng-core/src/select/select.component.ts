@@ -1,15 +1,17 @@
 import {
-	ChangeDetectionStrategy,
+	AfterViewInit,
+	ChangeDetectionStrategy, ChangeDetectorRef,
 	Component,
 	ContentChildren,
 	forwardRef,
-	HostBinding, Input,
+	HostBinding, Input, OnInit,
 	QueryList,
 	TemplateRef,
 	ViewChild
 } from '@angular/core';
 import {FFFormFieldComponent} from '../core/form-field.component';
 import {NG_VALUE_ACCESSOR} from '@angular/forms';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
 	selector: 'ff-option',
@@ -72,7 +74,7 @@ export class FFOptionComponent {
 		}
 	]
 })
-export class FFSelectComponent extends FFFormFieldComponent {
+export class FFSelectComponent extends FFFormFieldComponent implements AfterViewInit {
 
 	@HostBinding('class.ff-select') ffSelectClazz = true;
 
@@ -80,4 +82,11 @@ export class FFSelectComponent extends FFFormFieldComponent {
 
 	@ContentChildren(FFOptionComponent, {descendants: true}) options: QueryList<FFOptionComponent>;
 
+	ngAfterViewInit() {
+		this.options.changes
+			.pipe(takeUntil(this.onDestroy$))
+			.subscribe(() => {
+				this.cdr.markForCheck();
+			});
+	}
 }

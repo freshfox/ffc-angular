@@ -13,7 +13,7 @@ import {
 	SimpleChanges
 } from '@angular/core';
 import {ControlValueAccessor, FormControl} from '@angular/forms';
-import {Subscription} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import {InputValidationMessageProvider} from '../validation-message';
 
 // tslint:disable-next-line:no-conflicting-lifecycle
@@ -55,17 +55,18 @@ export class FFFormFieldComponent implements OnInit, ControlValueAccessor, OnCha
 
 	private touched = false;
 
-	private formControlChangeSubscription: Subscription;
+	protected onDestroy$ = new Subject();
 
 	private onTouchedCallback: () => void = () => {};
 	private onChangeCallback: (_: any) => void = () => {};
 
-	constructor(private validationMessageProvider: InputValidationMessageProvider, private cdr: ChangeDetectorRef) {
+	constructor(private validationMessageProvider: InputValidationMessageProvider, protected cdr: ChangeDetectorRef) {
 	}
 
 	ngOnInit(): void {
 		if (this.formControl) {
-			this.formControlChangeSubscription = this.formControl.valueChanges
+			this.formControl.valueChanges
+				.pipe(takeUntil(this.onDestroy$))
 				.subscribe(change => {
 					this.model = change;
 					this.modelChange.emit(change);
@@ -100,9 +101,8 @@ export class FFFormFieldComponent implements OnInit, ControlValueAccessor, OnCha
 	}
 
 	ngOnDestroy() {
-		if (this.formControlChangeSubscription) {
-			this.formControlChangeSubscription.unsubscribe();
-		}
+		this.onDestroy$.next();
+		this.onDestroy$.complete();
 	}
 
 	get errorMessage() {
@@ -144,6 +144,7 @@ export class FFFormFieldComponent implements OnInit, ControlValueAccessor, OnCha
 
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {takeUntil} from 'rxjs/operators';
 
 @NgModule({
 	imports: [CommonModule],
