@@ -51,7 +51,7 @@ export class AuthService {
 	getAuthToken(forceRefresh?: boolean): Observable<string> {
 		return this.authState
 			.pipe(switchMap(user => {
-				return user?.getIdToken(forceRefresh) || null;
+				return user?.getIdToken(forceRefresh) || of(null);
 			}));
 	}
 }
