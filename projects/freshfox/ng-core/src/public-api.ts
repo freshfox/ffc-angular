@@ -22,3 +22,4 @@ export * from './select/index';
 export * from './validation-message/index';
 export * from './card/index';
 export * from './form-section/index';
+export * from './badge/index';

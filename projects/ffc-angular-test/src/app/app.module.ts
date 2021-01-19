@@ -17,6 +17,7 @@ import {FFFormControlValidationMessageModule} from '../../../freshfox/ng-core/sr
 import {FFSidenavModule} from '../../../freshfox/ng-core/src/sidenav';
 import {FFCardModule} from '../../../freshfox/ng-core/src/card';
 import {FFFormSectionModule} from '../../../freshfox/ng-core/src/form-section';
+import {FFBadgeModule} from '../../../freshfox/ng-core/src/badge';
 
 @NgModule({
 	declarations: [
@@ -44,6 +45,7 @@ import {FFFormSectionModule} from '../../../freshfox/ng-core/src/form-section';
 		FFSelectModule,
 		FFCardModule,
 		FFFormSectionModule,
+		FFBadgeModule,
 		FFFormControlValidationMessageModule.forRoot()
 	],
 	providers: [

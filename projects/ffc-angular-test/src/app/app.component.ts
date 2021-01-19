@@ -17,6 +17,9 @@ import {delay} from 'rxjs/operators';
 			</mat-sidenav>
 
 			<mat-card>
+				<ff-badge [type]="'success'">
+					Hello
+				</ff-badge>
 				<ff-select [label]="'Country'" [formControl]="control">
 					<ff-option *ngFor="let food of foods$ | async" [value]="food.value">
 						{{food.viewValue}}
