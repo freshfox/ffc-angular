@@ -1,47 +1,45 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {Observable, of, ReplaySubject} from 'rxjs';
 
 import firebase from 'firebase/app';
+import 'firebase/auth';
 import {map, switchMap} from 'rxjs/operators';
-import {AngularFireAuth} from '@angular/fire/auth';
 import {fromPromise} from 'rxjs/internal-compatibility';
 
 
 @Injectable()
 export class AuthService {
 
-	authState: Observable<firebase.User>;
+	authState = new ReplaySubject<firebase.User | null>(1);
 
-	constructor(private firebaseAuth: AngularFireAuth) {
-		this.authState = this.firebaseAuth.authState;
+	private auth: firebase.auth.Auth;
 
-		this.authState
-			.pipe(switchMap(user => {
-				if (user) {
-					return fromPromise(user.getIdToken());
-				}
+	constructor() {
 
-				return of(null);
-			}));
+		this.auth = firebase.auth();
+
+		firebase.auth().onAuthStateChanged(user => {
+			this.authState.next(user || null);
+		});
 	}
 
 	login(email: string, password: string): Observable<any> {
-		return fromPromise(this.firebaseAuth.signInWithEmailAndPassword(email, password))
+		return fromPromise(this.auth.signInWithEmailAndPassword(email, password))
 			.pipe(map(result => {
 				return result;
 			}));
 	}
 
 	logout(): Observable<any> {
-		return fromPromise(this.firebaseAuth.signOut());
+		return fromPromise(this.auth.signOut());
 	}
 
 	resetPassword(email: string) {
-		return fromPromise(this.firebaseAuth.sendPasswordResetEmail(email));
+		return fromPromise(this.auth.sendPasswordResetEmail(email));
 	}
 
 	confirmPasswordReset(token: string, newPassword: string) {
-		return fromPromise(this.firebaseAuth.confirmPasswordReset(token, newPassword));
+		return fromPromise(this.auth.confirmPasswordReset(token, newPassword));
 	}
 
 	isLoggedIn(): Observable<boolean> {
