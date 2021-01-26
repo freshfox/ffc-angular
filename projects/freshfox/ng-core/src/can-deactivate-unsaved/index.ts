@@ -3,6 +3,8 @@ import {CanDeactivateUnsaved, CanDeactivateUnsavedService} from './can-deactivat
 import {FFDialogModule} from '../dialog/index';
 import {MatDialogModule} from '@angular/material/dialog';
 
+export * from './can-deactivate';
+
 @NgModule({
 	imports: [FFDialogModule, MatDialogModule],
 	exports: [],

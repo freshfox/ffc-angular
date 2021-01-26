@@ -20,7 +20,7 @@ export class CanDeactivateUnsavedService {
 	confirmReloadNativeDialog(component: HasUnsaved, event) {
 		if (component.hasUnsaved()) {
 			event.preventDefault();
-			const text = this.translate.instant('ffc.can-deactivate-unsaved.text');
+			const text = this.translate.instant('ff-can-deactivate-unsaved.text');
 			return event.returnValue = confirm(text);
 		}
 		return true;
@@ -48,9 +48,9 @@ export class CanDeactivateUnsaved implements CanDeactivate<HasUnsaved> {
 	private openDialog(): Observable<boolean> {
 		const ref = this.dialog.open(DialogConfirmComponent, {
 			data: {
-				title: this.translate.instant('ffc.can-deactivate-unsaved.title'),
-				text: this.translate.instant('ffc.can-deactivate-unsaved.text'),
-				confirmText: this.translate.instant('ffc.can-deactivate-unsaved.confirm-text'),
+				title: this.translate.instant('ff-can-deactivate-unsaved.title'),
+				text: this.translate.instant('ff-can-deactivate-unsaved.text'),
+				confirmText: this.translate.instant('ff-can-deactivate-unsaved.confirm-text'),
 			}
 		});
 		return ref.componentInstance.buttonPress

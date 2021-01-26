@@ -1,0 +1,7 @@
+{
+	"ff-can-deactivate-unsaved": {
+		"title": "You have unsaved changes",
+		"text": "Are you sure you want to navigate away from this page without saving?",
+		"confirm-text": "Continue"
+	}
+}

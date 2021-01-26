@@ -1,0 +1,7 @@
+{
+	"ff-can-deactivate-unsaved": {
+		"title": "Ungespeicherte Daten verwerfen?",
+		"text": "Sie haben ungespeicherte Daten. Möchten Sie Ihre Änderungen verwerfen und weiter navigieren?",
+		"confirm-text": "Weiter"
+	}
+}
