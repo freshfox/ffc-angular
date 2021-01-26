@@ -25,12 +25,12 @@ import {TranslateService} from '@ngx-translate/core';
 		</div>
 		<div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
 			<div class="w-full sm:ml-3 sm:w-auto">
-				<button mat-flat-button [color]="type === DialogType.Danger ? 'warn' : 'primary'" class="w-full sm:w-auto" (click)="cancel()">
+				<button mat-flat-button [color]="type === DialogType.Danger ? 'warn' : 'primary'" class="w-full sm:w-auto" (click)="confirm()">
 					{{ confirmText }}
 				</button>
 			</div>
 			<div class="mt-3 w-full sm:ml-3 sm:w-auto sm:mt-0">
-				<button class="w-full sm:w-auto" mat-stroked-button *ngIf="showCancelButton" (click)="confirm()">
+				<button class="w-full sm:w-auto" mat-stroked-button *ngIf="showCancelButton" (click)="cancel()">
 					{{ cancelText }}
 				</button>
 			</div>
