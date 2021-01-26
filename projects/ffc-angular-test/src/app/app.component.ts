@@ -4,6 +4,7 @@ import {FormControl, Validators} from '@angular/forms';
 import {NavGroup} from '../../../freshfox/ng-core/src/sidenav';
 import { of } from 'rxjs';
 import {delay} from 'rxjs/operators';
+import {DialogConfirmComponent, DialogService } from 'projects/freshfox/ng-core/src/dialog';
 
 @Component({
 	selector: 'app-root',
@@ -89,7 +90,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 		}
 	];
 
-	constructor(private snackbar: SnackBarService) {
+	constructor(private snackbar: SnackBarService, private dialog: DialogService) {
 
 	}
 
@@ -97,6 +98,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 		setInterval(() => {
 			this.loading = !this.loading;
 		}, 2000);
+
+		const ref = this.dialog.create(DialogConfirmComponent);
 	}
 
 	ngAfterViewInit() {
