@@ -48,7 +48,7 @@ export class DialogConfirmComponent implements OnInit {
 
 	@Output() onCancel: () => void;
 	@Output() onConfirm: () => void;
-	@Output() buttonPress: EventEmitter<DialogConfirmButton> = new EventEmitter<DialogConfirmButton>();
+	@Output() buttonPress = new EventEmitter<DialogConfirmButton>();
 
 	DialogType = DialogType;
 
@@ -66,17 +66,19 @@ export class DialogConfirmComponent implements OnInit {
 	}
 
 	confirm() {
-		this.onConfirm();
+		if (this.onConfirm) {
+			this.onConfirm();
+		}
+		this.buttonPress.next(DialogConfirmButton.Confirm);
 	}
 
 	cancel() {
-		this.onCancel();
-	}
+		if (this.onCancel) {
+			this.onCancel();
+		}
 
-	get isDanger() {
-		return this.type === 'danger';
+		this.buttonPress.next(DialogConfirmButton.Cancel);
 	}
-
 }
 
 export enum DialogConfirmButton {
