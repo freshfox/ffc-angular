@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "yarn build:core && yarn build:auth && yarn build:firestore",
-    "build:core": "ng build ff-ng-core && cp -r projects/freshfox/ng-core/src/styles ./dist/freshfox/ng-core",
+    "build:core": "ng build ff-ng-core && cp -r projects/freshfox/ng-core/src/styles ./dist/freshfox/ng-core && cp -r projects/freshfox/ng-core/src/can-deactivate-unsaved/i18n ./dist/freshfox/ng-core/can-deactivate-unsaved",
     "build:auth": "ng build ff-ng-auth && cp -r projects/freshfox/ng-auth/src/styles ./dist/freshfox/ng-auth && cp -r projects/freshfox/ng-auth/src/i18n ./dist/freshfox/ng-auth",
     "build:firestore": "ng build ff-ng-firestore",
     "test": "ng test",
