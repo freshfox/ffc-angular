@@ -1,10 +1,9 @@
 import {CanDeactivate} from '@angular/router';
 import {Injectable} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
 import {map} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
-import {DialogConfirmButton, DialogConfirmComponent} from '../dialog/index';
+import {DialogConfirmButton, DialogConfirmComponent, DialogService} from '../dialog/index';
 
 export interface HasUnsaved {
 	hasUnsaved(): boolean;
@@ -30,7 +29,7 @@ export class CanDeactivateUnsavedService {
 @Injectable()
 export class CanDeactivateUnsaved implements CanDeactivate<HasUnsaved> {
 
-	constructor(private dialog: MatDialog, private translate: TranslateService) {
+	constructor(private dialog: DialogService, private translate: TranslateService) {
 	}
 
 	canDeactivate(component: HasUnsaved): Observable<boolean> {
@@ -46,13 +45,14 @@ export class CanDeactivateUnsaved implements CanDeactivate<HasUnsaved> {
 	}
 
 	private openDialog(): Observable<boolean> {
-		const ref = this.dialog.open(DialogConfirmComponent, {
-			data: {
+		const ref = this.dialog.create<DialogConfirmComponent>(DialogConfirmComponent, {
+			parameters: {
 				title: this.translate.instant('ff-can-deactivate-unsaved.title'),
-				text: this.translate.instant('ff-can-deactivate-unsaved.text'),
+				message: this.translate.instant('ff-can-deactivate-unsaved.text'),
 				confirmText: this.translate.instant('ff-can-deactivate-unsaved.confirm-text'),
 			}
 		});
+
 		return ref.componentInstance.buttonPress
 			.pipe(map((btn) => {
 				ref.close();
