@@ -12,11 +12,10 @@ export interface HasUnsaved {
 @Injectable()
 export class CanDeactivateUnsavedService {
 
-	constructor(private translate: TranslateService) {
-
+	constructor(private translate: TranslateService, private dialog: DialogService) {
 	}
 
-	confirmReloadNativeDialog(component: HasUnsaved, event) {
+	openConfirmReloadNativeDialog(component: HasUnsaved, event) {
 		if (component.hasUnsaved()) {
 			event.preventDefault();
 			const text = this.translate.instant('ff-can-deactivate-unsaved.text');
@@ -24,27 +23,8 @@ export class CanDeactivateUnsavedService {
 		}
 		return true;
 	}
-}
 
-@Injectable()
-export class CanDeactivateUnsaved implements CanDeactivate<HasUnsaved> {
-
-	constructor(private dialog: DialogService, private translate: TranslateService) {
-	}
-
-	canDeactivate(component: HasUnsaved): Observable<boolean> {
-		if (!component.hasUnsaved) {
-			console.error(`${component.constructor?.name} is required to implement the HasUnsaved interface`);
-			return of(true);
-		}
-		const hasUnsavedData = component.hasUnsaved();
-		if (!hasUnsavedData) {
-			return of(true);
-		}
-		return this.openDialog();
-	}
-
-	private openDialog(): Observable<boolean> {
+	openConfirmUnsavedDialog(): Observable<boolean> {
 		const ref = this.dialog.create<DialogConfirmComponent>(DialogConfirmComponent, {
 			parameters: {
 				title: this.translate.instant('ff-can-deactivate-unsaved.title'),
@@ -58,5 +38,25 @@ export class CanDeactivateUnsaved implements CanDeactivate<HasUnsaved> {
 				ref.close();
 				return btn === DialogConfirmButton.Confirm;
 			}));
+	}
+}
+
+@Injectable()
+export class CanDeactivateUnsaved implements CanDeactivate<HasUnsaved> {
+
+	constructor(private canDeactivateUnsavedService: CanDeactivateUnsavedService) {
+	}
+
+	canDeactivate(component: HasUnsaved): Observable<boolean> {
+		if (!component.hasUnsaved) {
+			console.error(`${component.constructor?.name} is required to implement the HasUnsaved interface`);
+			return of(true);
+		}
+		const hasUnsavedData = component.hasUnsaved();
+		if (!hasUnsavedData) {
+			return of(true);
+		}
+
+		return this.canDeactivateUnsavedService.openConfirmUnsavedDialog();
 	}
 }
