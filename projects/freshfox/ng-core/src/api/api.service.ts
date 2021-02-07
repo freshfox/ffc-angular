@@ -44,9 +44,18 @@ export class ApiService {
 		});
 	}
 
-
 	patch(url: string, data?: any): Observable<any> {
 		return this.httpClient.patch(this.constructApiUrl(url), data)
+			.pipe(catchError(this.handleError));
+	}
+
+	put(url: string, data?: any): Observable<any> {
+		return this.httpClient.put(this.constructApiUrl(url), data)
+			.pipe(catchError(this.handleError));
+	}
+
+	delete(url: string): Observable<any> {
+		return this.httpClient.delete(this.constructApiUrl(url))
 			.pipe(catchError(this.handleError));
 	}
 
