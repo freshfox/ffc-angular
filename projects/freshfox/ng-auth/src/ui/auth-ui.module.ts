@@ -6,7 +6,6 @@ import {PasswordResetComponent} from './password-reset.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {FFAlertBarModule, FFButtonModule, FFInputModule, FFSnackbarModule} from '@freshfox/ng-core';
 import {MatCardModule} from '@angular/material/card';
@@ -26,7 +25,6 @@ export * from './tokens';
 @NgModule({
 	imports: [
 		CommonModule,
-		BrowserAnimationsModule,
 		MatButtonModule,
 		MatCardModule,
 		TranslateModule,
