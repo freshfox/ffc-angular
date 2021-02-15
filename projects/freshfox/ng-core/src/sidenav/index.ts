@@ -1,5 +1,4 @@
 import {CommonModule} from '@angular/common';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SidenavComponent} from './sidenav.component';
 import {MatIconModule} from '@angular/material/icon';
 import {NgModule} from '@angular/core';
@@ -15,7 +14,6 @@ export * from './sidenav.component';
 	imports: [
 		CommonModule,
 		MatIconModule,
-		BrowserAnimationsModule,
 		RouterModule,
 		TranslateModule,
 		FFAvatarModule,
