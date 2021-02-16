@@ -1,53 +1,32 @@
-import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
-import * as validator from 'validator';
+import {AbstractControl, FormGroup, ValidationErrors} from '@angular/forms';
 
-export class FormValidator {
+export function formValidatorEqual(group: FormGroup): ValidationErrors {
+	let valid = true;
 
-	static number(control: FormControl) {
-		let value = control.value;
-		if (value) {
-			value = `${value}`;
-			if (!FormValidator.isNumeric(value)) {
-				return {
-					notNumeric: true
-				};
-			}
+	let lastVal: string;
+	let currentControl: AbstractControl;
+	for (const key of Object.keys(group.controls)) {
+		currentControl = group.controls[key];
+		const val = currentControl.value;
+		if (lastVal && val !== lastVal) {
+			valid = false;
 		}
+		lastVal = val;
+	}
 
+	if (valid) {
+		if (currentControl.errors && currentControl.errors.notEqual) {
+			delete currentControl.errors.notEqual;
+			currentControl.updateValueAndValidity();
+		}
 		return null;
 	}
 
-	private static isNumeric(value: string) {
-		return validator.isNumeric(value);
+	const errors = {passwordsNotEqual: true};
+	if (!currentControl.errors) {
+		currentControl.setErrors(errors);
+		return errors;
 	}
 
-	static equal(group: FormGroup) {
-		let valid = true;
-
-		let lastVal: string;
-		let currentControl: AbstractControl;
-		for (const key of Object.keys(group.controls)) {
-			currentControl = group.controls[key];
-			const val = currentControl.value;
-			if (lastVal && val !== lastVal) {
-				valid = false;
-			}
-			lastVal = val;
-		}
-
-		if (valid) {
-			if (currentControl.errors && currentControl.errors.notEqual) {
-				delete currentControl.errors.notEqual;
-				currentControl.updateValueAndValidity();
-			}
-			return null;
-		}
-
-		if (!currentControl.errors) {
-			return currentControl.setErrors({passwordsNotEqual: true});
-		}
-
-		return null;
-	}
-
+	return null;
 }
