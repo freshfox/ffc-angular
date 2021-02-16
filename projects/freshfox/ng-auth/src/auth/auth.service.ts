@@ -8,6 +8,7 @@ import {fromPromise} from 'rxjs/internal-compatibility';
 import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
 import OAuthProvider = firebase.auth.OAuthProvider;
 import FacebookAuthProvider = firebase.auth.FacebookAuthProvider;
+import UserCredential = firebase.auth.UserCredential;
 
 
 @Injectable()
@@ -31,6 +32,10 @@ export class AuthService {
 			.pipe(map(result => {
 				return result;
 			}));
+	}
+
+	signUp(email: string, password: string): Observable<UserCredential> {
+		return fromPromise(this.auth.createUserWithEmailAndPassword(email, password));
 	}
 
 	signInWithGoogle() {
