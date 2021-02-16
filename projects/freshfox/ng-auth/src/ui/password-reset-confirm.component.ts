@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import {first} from 'rxjs/operators';
 import {AuthService} from '../auth/auth.service';
-import {FormValidator, SnackBarService} from '@freshfox/ng-core';
+import {formValidatorEqual, SnackBarService} from '@freshfox/ng-core';
 import {BehaviorSubject} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -57,7 +57,7 @@ export class PasswordResetConfirmComponent implements OnInit {
 		this.form = this.fb.group({
 			password: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
 			passwordConfirm: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
-		}, {validators: [FormValidator.equal]});
+		}, {validators: [formValidatorEqual]});
 
 		this.route.queryParams
 			.pipe(first())
