@@ -5,6 +5,9 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import {map, switchMap} from 'rxjs/operators';
 import {fromPromise} from 'rxjs/internal-compatibility';
+import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
+import OAuthProvider = firebase.auth.OAuthProvider;
+import FacebookAuthProvider = firebase.auth.FacebookAuthProvider;
 
 
 @Injectable()
@@ -28,6 +31,22 @@ export class AuthService {
 			.pipe(map(result => {
 				return result;
 			}));
+	}
+
+	signInWithGoogle() {
+		return this.auth.signInWithRedirect(new GoogleAuthProvider());
+	}
+
+	signInWithApple() {
+		return this.auth.signInWithRedirect(new OAuthProvider('apple.com'));
+	}
+
+	signInWithFacebook() {
+		return this.auth.signInWithRedirect(new FacebookAuthProvider());
+	}
+
+	getRedirectResult() {
+		return this.auth.getRedirectResult();
 	}
 
 	logout(): Observable<any> {
