@@ -2,6 +2,13 @@
 
 ## ng-core
 
+### 8.1.0
+- Add option for clean dialog (full height and full width)
+
+### 8.0.1
+- Fix table loading styles
+- Fix table clickable styles
+
 ### 8.0.0
 - Remove `numeric` validator from form validators
 - Remove `validator` package peer dependency.
