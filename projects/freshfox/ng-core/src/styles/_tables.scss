@@ -16,7 +16,7 @@
 		border-spacing: 0;
 		table-layout: fixed;
 
-		&.table--clickable-items {
+		&.ff-table-selectable {
 			tbody tr:hover td {
 				background: var(--ff-table-clickable-hover-background);
 			}

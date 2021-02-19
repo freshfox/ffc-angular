@@ -7,7 +7,7 @@ import {SortEvent} from './sort-event';
 @Component({
 	selector: 'ff-table',
 	template: `
-        <table [class.ff-table--selectable]="options.itemsClickable">
+        <table [class.ff-table-selectable]="options.itemsClickable">
             <tr>
                 <th ff-table-header-cell *ngFor="let column of options.columns" [column]="column"
                     (click)="sortHeaderClicked(column)"></th>
