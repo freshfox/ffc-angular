@@ -2,6 +2,17 @@
 	padding: 0 !important;
 }
 
+.ff-dialog-clean {
+	max-width: none !important;
+	width: 100% !important;
+	height: 100% !important;
+
+	.mat-dialog-container {
+		background: transparent !important;
+		box-shadow: none !important;
+	}
+}
+
 .ff-dialog-header {
 	font-size: 18px;
 	background: var(--ff-modal-header-background);

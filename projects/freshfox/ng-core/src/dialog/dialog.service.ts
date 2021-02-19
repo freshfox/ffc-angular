@@ -76,6 +76,10 @@ export class DialogService {
 
 		(options.panelClass as string[]).push('ff-dialog-no-padding');
 
+		if (options.clean) {
+			(options.panelClass as string[]).push('ff-dialog-clean');
+		}
+
 		if (!options.width) {
 			switch (options.size) {
 				case DialogSize.Small:
@@ -120,6 +124,7 @@ export enum DialogSize {
 export interface DialogOptions<T> extends MatDialogConfig {
 	parameters?: Partial<T>;
 	size?: DialogSize;
+	clean?: boolean;
 }
 
 export class DialogRef<T> {
