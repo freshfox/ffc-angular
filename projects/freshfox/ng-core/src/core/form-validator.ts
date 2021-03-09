@@ -30,3 +30,21 @@ export function formValidatorEqual(group: FormGroup): ValidationErrors {
 
 	return null;
 }
+
+function isNumeric(n) {
+	return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+export function formValidatorNumeric(control: AbstractControl) {
+	let value = control.value;
+	if (value) {
+		value = `${value}`;
+		if (!isNumeric(value)) {
+			return {
+				notNumeric: true
+			};
+		}
+	}
+
+	return null;
+}
