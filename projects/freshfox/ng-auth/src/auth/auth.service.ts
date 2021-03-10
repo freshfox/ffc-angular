@@ -34,6 +34,10 @@ export class AuthService {
 			}));
 	}
 
+	loginWithCustomToken(token: string) {
+		return fromPromise(this.auth.signInWithCustomToken(token));
+	}
+
 	signUp(email: string, password: string): Observable<UserCredential> {
 		return fromPromise(this.auth.createUserWithEmailAndPassword(email, password));
 	}
