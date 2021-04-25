@@ -65,7 +65,7 @@ import {InputValidationMessageProvider} from '../validation-message/index';
 					  [disabled]="disabled"></textarea>
 
 			<mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
-			<mat-hint *ngIf="hint"></mat-hint>
+			<mat-hint *ngIf="hint">{{ hint }}</mat-hint>
 		</mat-form-field>
 	`,
 	providers: [
