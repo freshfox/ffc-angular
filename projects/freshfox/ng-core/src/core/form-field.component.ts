@@ -31,6 +31,7 @@ export class FFFormFieldComponent implements OnInit, ControlValueAccessor, OnCha
 	@Input() size: 'default' | 'large' = 'default';
 	@Input() placeholder: string;
 	@Input() label: string;
+	@Input() hint: string;
 	@Input() formControl: FormControl;
 	@Input() disabled = false;
 	@Input() readonly = false;

@@ -64,6 +64,7 @@ export class FFOptionComponent {
 			</mat-select>
 
 			<mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
+			<mat-hint *ngIf="hint"></mat-hint>
 		</mat-form-field>
 	`,
 	providers: [
