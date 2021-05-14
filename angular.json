@@ -22,7 +22,6 @@
             "main": "projects/ffc-angular-test/src/main.ts",
             "polyfills": "projects/ffc-angular-test/src/polyfills.ts",
             "tsConfig": "projects/ffc-angular-test/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ffc-angular-test/src/favicon.ico",
               "projects/ffc-angular-test/src/assets"
@@ -30,7 +29,13 @@
             "styles": [
               "projects/ffc-angular-test/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
