@@ -2,6 +2,10 @@
 
 ## ng-core
 
+### 9.0.0
+- Support Angular 12
+- Drop support for Angular 11 and below
+
 ### 8.3.0
 - (input, select) Add option for field hint 
 
