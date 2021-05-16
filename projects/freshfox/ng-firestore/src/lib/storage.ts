@@ -196,7 +196,7 @@ export class FirestoreStorage {
 	deleteIndexedDB() {
 		return new Promise((resolve, reject) => {
 			if (!window.indexedDB) {
-				resolve();
+				resolve(null);
 			}
 
 			const request = window.indexedDB.deleteDatabase(`firestore/[DEFAULT]/${this.config.firebase.projectId}/main`);
