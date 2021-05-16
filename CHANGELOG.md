@@ -40,6 +40,9 @@
 - Minimum `@freshfox/ng-core` requirement is now `^8.0.0`
 
 ## ng-firestore
+### 3.0.1
+- Fix build error due to missing promise resolve argument
+
 ### 3.0.0
 - Support Angular 12
 - Drop support for Angular 11 and below
