@@ -28,6 +28,9 @@
 - Export `formValidatorEqual` as function instead of within class.
 
 ## ng-auth
+### 5.1.0
+- Update public component layout to support small screens
+
 ### 5.0.0
 - Support Angular 12
 - Drop support for Angular 11
