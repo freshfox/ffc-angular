@@ -13,7 +13,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 	template: `
 		<form class="ff-auth__default-form" [formGroup]="form" (ngSubmit)="onSubmit()">
 			<ng-container *ngIf="token$ | async">
-				<h2 class="ff-auth__form-title">{{ 'ff-auth.reset-confirm.title' | translate }}</h2>
+				<h2 class="ff-auth__form-title text-white">{{ 'ff-auth.reset-confirm.title' | translate }}</h2>
 				<ff-input type="password"
 						  [placeholder]="'ff-auth.password' | translate"
 						  [size]="'large'"

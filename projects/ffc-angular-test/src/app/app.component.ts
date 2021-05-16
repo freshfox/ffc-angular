@@ -5,11 +5,14 @@ import {NavGroup} from '../../../freshfox/ng-core/src/sidenav';
 import { of } from 'rxjs';
 import {delay} from 'rxjs/operators';
 import {DialogConfirmComponent, DialogService } from 'projects/freshfox/ng-core/src/dialog';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
+
+import authEn from '../../../freshfox/ng-auth/src/i18n/en.json';
 
 @Component({
 	selector: 'app-root',
 	template: `
-		<mat-sidenav-container>
+		<!-- <mat-sidenav-container>
 			<mat-sidenav [opened]="true" [mode]="'side'">
 				<ff-sidenav [navGroups]="navGroups"
 							[userName]="'Alexander Ott'"
@@ -27,11 +30,11 @@ import {DialogConfirmComponent, DialogService } from 'projects/freshfox/ng-core/
 					</ff-option>
 				</ff-select>
 			</mat-card>
-		</mat-sidenav-container>
+		</mat-sidenav-container> -->
 
-		<!-- <ff-public [routerMode]="false">
-			<ff-password-reset-confirm></ff-password-reset-confirm>
-		</ff-public> -->
+		<ff-public [routerMode]="false">
+			<ff-login></ff-login>
+		</ff-public>
 	`,
 	styleUrls: ['./app.component.scss']
 })
@@ -90,8 +93,12 @@ export class AppComponent implements OnInit, AfterViewInit {
 		}
 	];
 
-	constructor(private snackbar: SnackBarService, private dialog: DialogService) {
+	constructor(private snackbar: SnackBarService,
+				private translate: TranslateService,
+				private dialog: DialogService) {
 
+		this.translate.setDefaultLang('en');
+		this.translate.setTranslation('en', authEn);
 	}
 
 	ngOnInit() {
