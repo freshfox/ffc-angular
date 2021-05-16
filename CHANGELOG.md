@@ -28,6 +28,11 @@
 - Export `formValidatorEqual` as function instead of within class.
 
 ## ng-auth
+### 5.0.0
+- Support Angular 12
+- Drop support for Angular 11
+- Require @freshfox/ng-core ^9.0.0
+
 ### 4.1.0
 - Add ability to sign in with custom token
 
