@@ -12,10 +12,12 @@ import {Observable} from 'rxjs';
 			<div>
 				<ng-content select="[ffPublicTop]"></ng-content>
 				<img class="mx-auto h-auto w-[var(--ff-auth-logo-size)]" [src]="logoPath" alt="Logo">
-				<div class="my-8 h-px">
-					<h2 class="text-center text-2xl xl:text-3xl font-medium text-white" *ngIf="tagline$ | async as tagline">
-						{{ tagline }}
-					</h2>
+				<div class="mb-12 mt-4">
+					<div>
+						<h2 class="text-center text-2xl xl:text-3xl font-medium text-white" *ngIf="tagline$ | async as tagline">
+							{{ tagline }}
+						</h2>
+					</div>
 				</div>
 			</div>
 			<router-outlet *ngIf="routerMode"></router-outlet>
