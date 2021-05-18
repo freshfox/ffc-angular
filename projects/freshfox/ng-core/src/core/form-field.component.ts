@@ -29,7 +29,7 @@ export class FFFormFieldComponent implements OnInit, ControlValueAccessor, OnCha
 	@HostBinding('class.ff-form-field') clazz = true;
 
 	@Input() size: 'default' | 'large' = 'default';
-	@Input() placeholder: string;
+	@Input() placeholder = '';
 	@Input() label: string;
 	@Input() hint: string;
 	@Input() formControl: FormControl;
